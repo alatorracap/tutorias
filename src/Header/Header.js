@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin, userLogout } from "../store";
 import Login from "../Login/Login";
+import Singup from "../Login/Signup";
 
 function Header() {
   const user = useSelector((s) => s.user);
@@ -21,7 +22,7 @@ function Header() {
          <Login />
         </div>
          <div>
-         <Login />
+         <Singup />
         </div>
         </>
       )}
