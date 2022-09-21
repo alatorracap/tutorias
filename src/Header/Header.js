@@ -7,16 +7,26 @@ function Header() {
   const dispatch = useDispatch();
 
   return (
-    <div>
-      <h1>Tutorias</h1>
-      {user && (
+    <>
+       <h1>Tutorias</h1>
+       {user && (
         <div>
-          {user.email}
+          {user.data.email}
           <button onClick={() => dispatch(userLogout())}>Salir</button>
         </div>
       )}
-      {!user && <Login />}
-    </div>
+      {!user && (
+        <>
+        <div>
+         <Login />
+        </div>
+         <div>
+         <Login />
+        </div>
+        </>
+      )}
+    </>  
+   
   );
 }
 
