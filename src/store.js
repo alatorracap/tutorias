@@ -17,6 +17,5 @@ const store = configureStore({
   },
 });
 
-const useUser ()
 
 export default store;
