@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin, userLogout } from "../store";
-import useLocalStorage from "../hooks/useLocalStorage";
 
 function Login() {
   const dispatch = useDispatch();
@@ -10,7 +9,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3000/users/login/", {
+    const res = await fetch("http://localhost:3003/users/login/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -22,9 +21,11 @@ function Login() {
     if (!res.ok) {
       // TODO: Manejar error
     } else {
-      const [user, setUser] = useLocalStorage("session");
       const data = await res.json();
+      console.log('data', data)
       dispatch(userLogin(data));
+      localStorage.setItem('session', data.data.token)
+
       // setUser(data)
     }
     /* e.preventDefault();

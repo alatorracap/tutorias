@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { userLogin, userLogout } from "../store";
+import { userLogout } from "../store";
 import Login from "../Login/Login";
 import Singup from "../SignUp/Signup";
 import { NavLink } from "react-router-dom";
@@ -23,7 +23,7 @@ function Header() {
             <Login />
           </div>
           <div>
-            {/* <NavLink to="/signup">Registrate</NavLink> */}
+            { <NavLink to="/signup">Registrate</NavLink> }
             <Singup />
           </div>
         </>
