@@ -16,7 +16,7 @@ function App() {
       <ErrorBoundary key={location.pathname} fallback={<h1>Sección rota...</h1>}>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/answers/:id" element={<Answers />} />
+        {/* <Route path="/answers/:id" element={<Answers />} /> */}
         <Route path="/questions" element={<Question />} />
         <Route path="/signup" element={<Singup />} />
       </Routes>
