@@ -1,8 +1,9 @@
 import useFetch from 'fetch-suspense'
+import { Link } from 'react-router-dom';
 
 
 function Question() {
-  const questions = useFetch('http://localhost:3001/questions/')
+  const questions = useFetch('http://localhost:3003/questions/')
 
   console.log('Questions', questions)
 
@@ -12,7 +13,7 @@ function Question() {
      <>
      {console.log('q', q)}
       <ul>
-      <li>{q.Title}</li>
+      <li><Link to={`/answers/${q.ID}`} > {q.Title}</Link></li>
       </ul>
       </>)
       }
