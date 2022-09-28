@@ -1,20 +1,16 @@
-import { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import useApi from '../hooks/useApi'
+import { useAnswers } from '../hooks/api'
 
 
 function Answers () {
   const { id } = useParams()
-  const [url,setUrl] = useState("http://localhost:3001/answers/"+id)
-  console.log('url', url)
-  const [metodo,setMetodo] = useState("GET")
-  const Answers = useApi(url,metodo)
+  const Answers = useAnswers(id)
   
-  const handleEvendDelete=(id)=>{
+ /*  const handleEvendDelete=(id)=>{
     setMetodo("DELETE")
     setUrl('http://localhost:3001/answers/'+id) 
     console.log('url2', url)
-  }
+  } */
 
     return (
       <div>
@@ -25,7 +21,7 @@ function Answers () {
           <>
           {console.log('q', q)}
             <ul>
-              <li key={index}>{q.Answer}<button onClick={()=>handleEvendDelete(q.ID)}>Borrar</button></li>
+              <li key={index}>{q.Answer}</li>
             </ul>
           </>)
           }   
