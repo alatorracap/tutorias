@@ -9,7 +9,7 @@ function Login() {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:3003/users/login/", {
+    const res = await fetch("http://localhost:3000/users/login/", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -22,9 +22,9 @@ function Login() {
       // TODO: Manejar error
     } else {
       const data = await res.json();
-      console.log('data', data)
+      console.log("data", data);
       dispatch(userLogin(data));
-      localStorage.setItem('session', data.data.token)
+      localStorage.setItem("session", data.data.token);
 
       // setUser(data)
     }

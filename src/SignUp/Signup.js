@@ -13,7 +13,7 @@ function Singup() {
   
   const handleLogin = async e => {
     e.preventDefault()
-    const res = await fetch('http://localhost:3000/users/', {
+    const res = await fetch('http://localhost:3003/users/', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
