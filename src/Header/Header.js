@@ -1,16 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store";
 import Login from "../Login/Login";
-import Singup from "../SignUp/Signup";
 import { NavLink } from "react-router-dom";
+import "./Header.css";
 
 function Header() {
   const user = useSelector((s) => s.user);
   const dispatch = useDispatch();
 
   return (
-    <>
-      <h1>Tutorias</h1>
+    <div className="appHeader">
+      <h1>
+        {" "}
+        <NavLink className="headerName" to="/">
+          Tutorias
+        </NavLink>{" "}
+      </h1>
       {user && (
         <div>
           {user.data.email}
@@ -23,12 +28,15 @@ function Header() {
             <Login />
           </div>
           <div>
-            { <NavLink to="/signup">Registrate</NavLink> }
-            <Singup />
+            {
+              <NavLink className="signupNav" to="/signup">
+                Registrate
+              </NavLink>
+            }
           </div>
         </>
       )}
-    </>
+    </div>
   );
 }
 
