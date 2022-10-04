@@ -11,3 +11,5 @@ export const useUser = (id) =>
 
 export const useAnswers = (id) =>
   useApi("http://localhost:3000/answers/" + id, "GET");
+export const useNewQuestion = () =>
+  useApi("http://localhost:3001/questions/", "POST");

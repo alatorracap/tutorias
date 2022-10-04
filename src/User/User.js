@@ -18,14 +18,12 @@ function User() {
   const User = data.data.result[0];
 
   return (
-    <div className="UserCard">
+    <div class="card" className="UserCard">
       User
       {User && (
-        <div>
-          <div>
-            User ID: {User.ID}
-            <div>Username: {User.Username}</div>
-          </div>
+        <div class="card-body">
+          <h5 class="card-title">User ID: {User.ID}</h5>
+          <p>Username: {User.Username}</p>
         </div>
       )}
     </div>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin, userLogout } from "../store";
+import { handleLogin } from "../Login/Login";
 import "./Signup.css";
 
 function Singup() {
@@ -10,38 +11,6 @@ function Singup() {
   const [password, setPassword] = useState("");
   const [userRole, setUserRole] = useState("");
   const [technology, setTechnology] = useState("");
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    const res = await fetch("http://localhost:3000/users/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        username,
-        email,
-        password,
-        userRole,
-        technology,
-      }),
-    });
-
-    if (!res.ok) {
-      // TODO: Manejar error
-    } else {
-      const data = await res.json();
-      console.log("data", data);
-      //dispatch(userLogin(data))
-      // setUser(data)
-    }
-    /* e.preventDefault();
-    console.log("e", e);
-
-    const user = {
-      email: email,
-      token: password,
-    };
-    dispatch(userLogin(user)); */
-  };
 
   return (
     <form className="formSignup">
@@ -87,6 +56,7 @@ function Singup() {
           name="technology"
         ></input>
       </label>
+      {/* esto de abajo funciona???? */}
       <button on onClick={handleLogin}>
         Registrarse
       </button>
