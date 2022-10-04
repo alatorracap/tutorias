@@ -1,6 +1,7 @@
 import "./User.css";
 import useFetch from "fetch-suspense";
-import { Link } from "react-router-dom";
+import { json, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 function Users() {
   // const users = useUsers();

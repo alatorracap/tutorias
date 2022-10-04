@@ -34,6 +34,8 @@ function ModalLogin() {
       console.log("data", data);
       dispatch(userLogin(data));
       localStorage.setItem("session", data.data.token);
+
+      // localStorage.setItem("session", data.data.id);
     }
 
     // if (data.error) {
