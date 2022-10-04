@@ -13,19 +13,17 @@ function Users() {
   return (
     <div className="allusers">
       users
-      {users.data.result.map((u) => (
-        <>
-          <ul className="Users">
-            <li>
-              <div id="username">
-                <Link to={`/users/${u.ID}`}>{u.Username}</Link>
-              </div>
-              <div id="role">{u.UserRole}</div>
-              <div id="tech"> {u.Technology}</div>
-            </li>
-          </ul>
-        </>
-      ))}
+      <ul className="Users">
+        {users.data.result.map((u) => (
+          <li key={u.ID}>
+            <div id="username">
+              <Link to={`/users/${u.ID}`}>{u.Username}</Link>
+            </div>
+            <div id="role">{u.UserRole}</div>
+            <div id="tech"> {u.Technology}</div>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

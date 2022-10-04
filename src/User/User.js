@@ -1,31 +1,58 @@
 import { useParams } from "react-router-dom";
 import useFetch from "fetch-suspense";
 import { useEffect } from "react";
+import { useUser } from "../hooks/api";
 
 const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkV4cGVydCIsImlhdCI6MTY2NDU1NTI5NywiZXhwIjoxNjY0NjQxNjk3fQ.llJkwFC4O9pVVNRLJiKuKdS-S5VOl46OcqYAZDeXJh8";
-
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkV4cGVydCIsImlhdCI6MTY2NDc4ODU2NCwiZXhwIjoxNjY0ODc0OTY0fQ.rQ3DI1IxtXNpX9V-vE1R9hwboJImngl-uE8BYhPMd10";
 function User() {
-  const { id } = useParams();
+  let { id } = useParams();
+
   console.log("id", id);
-  const user = useFetch("http://localhost:3000/users/" + id, {
+  //const User = useUser(id)
+  const data = useFetch("http://localhost:3000/users/" + id, {
     headers: { Authorization: token },
   });
 
-  const newOne = user.data.result[0];
-  console.log("newOne", newOne);
-  useEffect(() => {});
+  console.log("data", data);
+  const User = data.data.result[0];
+
   return (
-    <>
-      {/*
-      <div>{user}</div>
-       <div>{newOne.Username}</div>
-      <div>{newOne.Email}</div>
-      <div>{newOne.userRole}</div>
-      <div>{newOne.Technology}</div> */}
-      {newOne && <div>{newOne.username}</div>}
-    </>
+    <div className="UserCard">
+      User
+      {User && (
+        <div>
+          <div>
+            User ID: {User.ID}
+            <div>Username: {User.Username}</div>
+          </div>
+        </div>
+      )}
+    </div>
   );
 }
+
+// function User() {
+//   const { id } = useParams();
+//   console.log("id", id);
+//   const user = useFetch("http://localhost:3000/users/" + id, {
+//     headers: { Authorization: token },
+//   });
+
+//   const newOne = user.data.result[0];
+//   console.log("newOne", newOne);
+//   useEffect(() => {});
+//   return (
+//     <>
+//       {/*
+//       <div>{user}</div>
+//        <div>{newOne.Username}</div>
+//       <div>{newOne.Email}</div>
+//       <div>{newOne.userRole}</div>
+//       <div>{newOne.Technology}</div> */}
+//       {newOne && <div>{newOne.username}</div>}
+//     </>
+//   );
+// }
 
 export default User;
