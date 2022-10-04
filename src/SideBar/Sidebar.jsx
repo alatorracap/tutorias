@@ -11,6 +11,7 @@ import {
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
 import SidebarMenu from "react-bootstrap-sidebar-menu";
+import "./Sidebar.css";
 
 // const Sidebar = () => {
 //   return (
@@ -78,8 +79,11 @@ import SidebarMenu from "react-bootstrap-sidebar-menu";
 
 const Sidebar = () => {
   return (
-    <div
-      style={{ display: "flex", height: "95vh", overflow: "scroll initial" }}
+    <aside
+      className="ourSidebar"
+      style={{
+        overflow: "scroll initial",
+      }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
@@ -140,7 +144,7 @@ const Sidebar = () => {
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
-    </div>
+    </aside>
   );
 };
 
