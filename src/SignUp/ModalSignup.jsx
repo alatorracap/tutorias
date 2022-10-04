@@ -45,7 +45,10 @@ function ModalSignup() {
     // }
     /* e.preventDefault();
     console.log("e", e);
+<<<<<<< HEAD
 
+=======
+>>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
     const user = {
       email: email,
       token: password,

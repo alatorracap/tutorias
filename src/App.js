@@ -7,7 +7,11 @@ import Answers from "./Answers/Answers";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
+<<<<<<< HEAD
 import QuestionList from "./Question/QuestionList";
+=======
+import Question from "./Question/Question";
+>>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
 import NewQuestion from "./Question/NewQuestion";
 import Sidebar from "./SideBar/Sidebar";
 
@@ -28,7 +32,11 @@ function App(props) {
           <Routes>
             {/* <Route path="/" element={<Home />} /> */}
             <Route path="/answers/:id" element={<Answers />} />
+<<<<<<< HEAD
             <Route path="/questions" element={<QuestionList />} />
+=======
+            <Route path="/questions" element={<Question />} />
+>>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
             <Route path="/questions/new" element={<NewQuestion />} />
             {/* <Route path="/signup" element={<Singup />} /> */}
           </Routes>

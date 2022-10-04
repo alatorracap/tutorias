@@ -8,7 +8,11 @@ function newQuestion() {
         setUrl('http://localhost:3001/questions/'+id)
 
     return(
+<<<<<<< HEAD
 
+=======
+<div>nada</div>
+>>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
     )
 }
   let connection;
@@ -34,4 +38,8 @@ function newQuestion() {
   );
 };
 
+<<<<<<< HEAD
 export default newQuestion;
+=======
+export default newQuestion;
+>>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
