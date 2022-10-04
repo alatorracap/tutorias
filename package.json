@@ -26,10 +26,6 @@
     "react-suspense-fetch": "^0.6.0",
     "redux": "^4.2.0",
     "redux-localstorage-simple": "^2.5.1",
-<<<<<<< HEAD
-    "scss": "^0.2.4",
-=======
->>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
     "suspense": "^0.0.1",
     "web-vitals": "^2.1.4"
   },
