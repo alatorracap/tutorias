@@ -11,6 +11,9 @@ import Question from "./Question/Question";
 import NewQuestion from "./Question/NewQuestion";
 import Sidebar from "./SideBar/Sidebar";
 import Users from "./User/Users";
+import User from "./User/User";
+import { Col, Container, Row, Stack } from "react-bootstrap";
+import Sidebar2 from "./SideBar/SideBar2";
 
 function App(props) {
   const location = useLocation();
@@ -19,26 +22,34 @@ function App(props) {
   return (
     <div className="App">
       <Header />
-      <main>
-        {/* <div className="sidebar"> */}
-        <Sidebar style="grid-area: sidebar " />
-        {/* </div> */}
-        <div className="main-content">
-          <ErrorBoundary
-            key={location.pathname}
-            fallback={<h1>Sección rota...</h1>}
-          >
-            <Routes>
-              {/* <Route path="/" element={<Home />} /> */}
-              <Route path="/answers/:id" element={<Answers />} />
-              <Route path="/questions" element={<Question />} />
-              <Route path="/users" element={<Users />} />
-              <Route path="/questions/new" element={<NewQuestion />} />
-              {/* <Route path="/signup" element={<Singup />} /> */}
-            </Routes>
-          </ErrorBoundary>
-        </div>
-      </main>
+      <div className="Main">
+        <Container fluid>
+          <Row>
+            <Col
+              md="auto"
+              style={{ display: "contents", height: "max-content" }}
+            >
+              <Sidebar />
+            </Col>
+            <Col md={10}>
+              <ErrorBoundary
+                key={location.pathname}
+                fallback={<h1>Sección rota...</h1>}
+              >
+                <Routes>
+                  {/* <Route path="/" element={<Home />} /> */}
+                  <Route path="/answers/:id" element={<Answers />} />
+                  <Route path="/questions" element={<Question />} />
+                  <Route path="/users" element={<Users />} />
+                  <Route path="/users/:id" element={<User />} />
+                  <Route path="/questions/new" element={<NewQuestion />} />
+                  {/* <Route path="/signup" element={<Singup />} /> */}
+                </Routes>
+              </ErrorBoundary>
+            </Col>
+          </Row>
+        </Container>
+      </div>
     </div>
   );
 }

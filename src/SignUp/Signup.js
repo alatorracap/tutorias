@@ -1,10 +1,7 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin, userLogout } from "../store";
-<<<<<<< HEAD
-=======
 import { handleLogin } from "../Login/Login";
->>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
 import "./Signup.css";
 
 function Singup() {
@@ -59,10 +56,7 @@ function Singup() {
           name="technology"
         ></input>
       </label>
-<<<<<<< HEAD
-=======
       {/* esto de abajo funciona???? */}
->>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
       <button on onClick={handleLogin}>
         Registrarse
       </button>

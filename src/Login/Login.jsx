@@ -18,14 +18,17 @@ function ModalLogin() {
     e.preventDefault();
     setStatus("loading");
 
-    const res = await fetch("http://localhost:3000/users/login/", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
+    const res = await fetch(
+      "http://localhost:" + process.env.REACT_APP_PORT + "/users/login/",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
     //* Mantiene la sesion guardada en el local storage
     if (!res.ok) {
       // TODO: Manejar error

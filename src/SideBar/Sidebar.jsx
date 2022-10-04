@@ -10,7 +10,6 @@ import {
   CDBSidebarSubMenu,
 } from "cdbreact";
 import { NavLink } from "react-router-dom";
-import SidebarMenu from "react-bootstrap-sidebar-menu";
 import "./Sidebar.css";
 
 // const Sidebar = () => {
@@ -80,9 +79,10 @@ import "./Sidebar.css";
 const Sidebar = () => {
   return (
     <aside
-      className="ourSidebar"
+      className="sidebar"
       style={{
         overflow: "scroll initial",
+        // position: "fixed",
       }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#333">

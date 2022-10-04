@@ -45,10 +45,6 @@ function ModalSignup() {
     // }
     /* e.preventDefault();
     console.log("e", e);
-<<<<<<< HEAD
-
-=======
->>>>>>> f3670bfd32f586424c78429e4ccb83fb8165586e
     const user = {
       email: email,
       token: password,
@@ -122,12 +118,6 @@ function ModalSignup() {
         <Button variant="primary" type="submit">
           Sign up
         </Button>
-        {/* <Button
-          variant="outline-primary"
-          // onClick={() => setShowLogin(false) && setShowSignUp(true)}
-        >
-          Sign up
-        </Button> */}
       </Stack>
     </Form>
   );

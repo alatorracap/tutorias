@@ -29,10 +29,10 @@ function AlejandriaNavbar(props) {
             />
           )}
           {user && (
-            <>
+            <Stack direction="horizontal" gap={3}>
               {user.data.email}
-              <Button onClick={() => dispatch(userLogout())}>Salir</Button>
-            </>
+              <Button onClick={() => dispatch(userLogout())}>Log out</Button>
+            </Stack>
           )}
         </Navbar.Collapse>
       </Container>

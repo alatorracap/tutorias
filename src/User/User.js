@@ -8,14 +8,17 @@ const token =
 function User() {
   let { id } = useParams();
 
-  console.log("id", id);
-  //const User = useUser(id)
-  const data = useFetch("http://localhost:3000/users/" + id, {
-    headers: { Authorization: token },
-  });
+  // console.log("id", id);
+  // //const User = useUser(id)
+  // const data = useFetch(
+  //   "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
+  //   {
+  //     headers: { Authorization: token },
+  //   }
+  // );
 
-  console.log("data", data);
-  const User = data.data.result[0];
+  // console.log("data", data);
+  // const User = data.data.result[0];
 
   return (
     <div class="card" className="UserCard">

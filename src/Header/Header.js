@@ -12,6 +12,7 @@ import AlejandriaNavbar from "../Navbar/Navbar";
 import AlejandriaModal from "../Components/AlejandriaModal";
 import { Button } from "react-bootstrap";
 import { userLogout } from "../store";
+import Sidebar from "../SideBar/Sidebar";
 
 function Header() {
   const user = useSelector((s) => s.user);
@@ -35,6 +36,7 @@ function Header() {
             setShowLogin={setShowLogin}
             setShowSignUp={setShowSignUp}
           />
+
           <AlejandriaModal
             title="Log in"
             show={showLogin}
