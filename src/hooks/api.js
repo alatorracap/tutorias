@@ -1,15 +1,29 @@
 import useApi from "./useApi";
+//const dotenv = require("dotenv");
 
 // const { PORT } = process.env;
 
 export const useQuestions = () =>
-  useApi(`http://localhost:3000/questions/`, "GET");
+  useApi(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",
+    "GET"
+  );
 
-export const useUsers = () => useApi("http://localhost:3000/users/", "GET");
+export const useUsers = () =>
+  useApi("http://localhost:" + process.env.REACT_APP_PORT + "/users/", "GET");
 export const useUser = (id) =>
-  useApi("http://localhost:3000/users/" + id, "GET");
+  useApi(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
+    "GET"
+  );
 
 export const useAnswers = (id) =>
-  useApi("http://localhost:3000/answers/" + id, "GET");
+  useApi(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/answers/" + id,
+    "GET"
+  );
 export const useNewQuestion = () =>
-  useApi("http://localhost:3000/questions/", "POST");
+  useApi(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",
+    "POST"
+  );

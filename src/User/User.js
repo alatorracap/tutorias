@@ -3,39 +3,27 @@ import useFetch from "fetch-suspense";
 import { useEffect } from "react";
 import { useUser } from "../hooks/api";
 
+const token =
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkV4cGVydCIsImlhdCI6MTY2NDc4ODU2NCwiZXhwIjoxNjY0ODc0OTY0fQ.rQ3DI1IxtXNpX9V-vE1R9hwboJImngl-uE8BYhPMd10";
 function User() {
-  //* se trae el token del local storage
-  const newData = JSON.parse(
-    localStorage.getItem("redux_localstorage_simple_user")
-  );
-
-  const token = newData.data.token;
-  //*agarra el parametro pasado al enlace
   let { id } = useParams();
 
-  console.log("id", id);
-  //const User = useUser(id)
-  const data = useFetch("http://localhost:3000/users/" + id, {
-    headers: { Authorization: token },
-  });
+  // console.log("id", id);
+  // //const User = useUser(id)
+  // const data = useFetch(
+  //   "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
+  //   {
+  //     headers: { Authorization: token },
+  //   }
+  // );
 
-  const User = data.data.result[0];
-  console.log("User", User);
+  // console.log("data", data);
+  // const User = data.data.result[0];
 
-  //* confirma si el usuario actual es el mismo que el que se esta visitando
-  const own = User.ID === newData.data.info.id ? true : false;
-  console.log("own", own);
   return (
     <div class="card" className="UserCard">
       User
-      {own && (
-        <div class="card-body">
-          <h5 class="card-title">User ID: {User.ID}</h5>
-          <p>Username: {User.Username}</p>
-          <p>date {User.CreationDate}</p>
-        </div>
-      )}
-      {!own && (
+      {User && (
         <div class="card-body">
           <h5 class="card-title">User ID: {User.ID}</h5>
           <p>Username: {User.Username}</p>
