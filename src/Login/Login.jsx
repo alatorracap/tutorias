@@ -1,20 +1,23 @@
 import { useState } from "react";
 import { Button, Form, Stack } from "react-bootstrap";
-import { Navigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 import { useSetUser } from "../UserContext";
 import { userLogin, userLogout } from "../store";
 
-function ModalLogin() {
+function Login(props) {
+  const { setShow } = props;
   const dispatch = useDispatch();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [status, setStatus] = useState("");
-  const [user, setUser] = useState("");
 
   const handleLogin = async (e) => {
+    // Call sethShow from parent(setShowLogin) function and set to false for close the modal
+    setShow(false);
+
     e.preventDefault();
     setStatus("loading");
 
@@ -90,15 +93,12 @@ function ModalLogin() {
           <Button variant="primary" type="submit" onClick={handleLogin}>
             Log in
           </Button>
-          {/* <Button
-          variant="link"
-          // onClick={() => setShowLogin(false) && setShowSignUp(true)}
-        >
-          Sign up
-        </Button> */}
+          <p class="text-center , text-muted">
+            Please register if you haven't already done so.
+          </p>
         </Stack>
       </Form>
     </form>
   );
 }
-export default ModalLogin;
+export default Login;

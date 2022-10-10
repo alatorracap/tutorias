@@ -8,12 +8,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import Question from "./Question/Question";
-import NewQuestion from "./Question/NewQuestion";
 import Sidebar from "./SideBar/Sidebar";
 import Users from "./User/Users";
 import User from "./User/User";
 import { Col, Container, Row, Stack } from "react-bootstrap";
-import Sidebar2 from "./SideBar/SideBar2";
 
 function App(props) {
   const location = useLocation();
@@ -42,7 +40,7 @@ function App(props) {
                   <Route path="/questions" element={<Question />} />
                   <Route path="/users" element={<Users />} />
                   <Route path="/users/:id" element={<User />} />
-                  <Route path="/questions/new" element={<NewQuestion />} />
+                  {/* <Route path="/questions/" element={<NewQuestion />} />  Este rompe*/}
                   {/* <Route path="/signup" element={<Singup />} /> */}
                 </Routes>
               </ErrorBoundary>

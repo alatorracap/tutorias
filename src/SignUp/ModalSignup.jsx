@@ -118,6 +118,7 @@ function ModalSignup() {
         <Button variant="primary" type="submit">
           Sign up
         </Button>
+        <p class="text-center , text-muted">All fields are required.</p>
       </Stack>
     </Form>
   );
