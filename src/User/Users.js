@@ -6,7 +6,9 @@ import { useEffect, useState } from "react";
 function Users() {
   // const users = useUsers();
 
-  const users = useFetch("http://localhost:3000/users/");
+  const users = useFetch(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/users/"
+  );
 
   //console.log("us", us);
   console.log("users", users);

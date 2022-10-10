@@ -1,8 +1,6 @@
-import { useState } from "react";
 import Container from "react-bootstrap/Container";
-import { Nav, Stack } from "react-bootstrap";
+import { Stack } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import NavbarLoginSignup from "../Login/NavbarLoginSignup";
 import QuestionSearch from "./QuestionSearch";
 import { useDispatch, useSelector } from "react-redux";
@@ -13,6 +11,8 @@ function AlejandriaNavbar(props) {
   const { setShowLogin, setShowSignUp } = props;
   const user = useSelector((s) => s.user);
   const dispatch = useDispatch();
+
+  console.log(user);
 
   return (
     <Navbar bg="light" expand="xl">
@@ -29,10 +29,10 @@ function AlejandriaNavbar(props) {
             />
           )}
           {user && (
-            <>
+            <Stack direction="horizontal" gap={3}>
               {user.data.email}
-              <Button onClick={() => dispatch(userLogout())}>Salir</Button>
-            </>
+              <Button onClick={() => dispatch(userLogout())}>Log out</Button>
+            </Stack>
           )}
         </Navbar.Collapse>
       </Container>

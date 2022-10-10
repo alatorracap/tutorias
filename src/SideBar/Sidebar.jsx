@@ -7,82 +7,32 @@ import {
   CDBSidebarHeader,
   CDBSidebarMenu,
   CDBSidebarMenuItem,
+  CDBIcon,
   CDBSidebarSubMenu,
 } from "cdbreact";
-import { NavLink } from "react-router-dom";
-import SidebarMenu from "react-bootstrap-sidebar-menu";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import "./Sidebar.css";
+import ModalNewQuestion from "../Question/NewQuestion/NewQuestion";
+import MenuItemNewQuestion from "../Question/NewQuestion/MenuItemNewQuestion";
+import { useSelector } from "react-redux";
 
-// const Sidebar = () => {
-//   return (
-//     <div
-//       style={{ display: "flex", height: "100vh", overflow: "scroll initial" }}
-//     >
-//       <CDBSidebar textColor="#fff" backgroundColor="#333">
-//         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-//           <a
-//             href="/"
-//             className="text-decoration-none"
-//             style={{ color: "inherit" }}
-//           >
-//             Biblioteca
-//           </a>
-//         </CDBSidebarHeader>
+const Sidebar = (props) => {
+  const navigate = useNavigate();
+  //const { setShowModalNewQUestion } = props;
+  const user = useSelector((s) => s.user);
+  console.log(user);
 
-//         <CDBSidebarMenu prefix={<i className="fa fa-bars fa-large"></i>}>
-//           <a
-//             href="/"
-//             className="text-decoration-none"
-//             style={{ color: "inherit", justifyItems: "center" }}
-//           >
-//             Frecuently Asked Questions
-//           </a>
-//         </CDBSidebarMenu>
+  function gotoQuestions() {
+    console.log("holis");
+    return navigate("/questions");
+  }
 
-//         <CDBSidebarMenu prefix={<i className="fa fa-bars fa-large"></i>}>
-//           <a
-//             href="/"
-//             className="text-decoration-none"
-//             style={{ color: "inherit", justifyItems: "center" }}
-//           >
-//             Technologies
-//           </a>
-//         </CDBSidebarMenu>
-
-//         <CDBSidebarMenu prefix={<i className="fa fa-bars fa-large"></i>}>
-//           <a
-//             href="/"
-//             className="text-decoration-none"
-//             style={{
-//               color: "inherit",
-//               justifyItems: "center",
-//             }}
-//           >
-//             CDBSidebarMenu
-//           </a>
-//         </CDBSidebarMenu>
-
-//         <CDBSidebarFooter style={{ textAlign: "center" }}>
-//           <div
-//             className="sidebar-btn-wrapper"
-//             style={{
-//               padding: "20px 5px",
-//             }}
-//           >
-//             About us
-//           </div>
-//         </CDBSidebarFooter>
-//       </CDBSidebar>
-//     </div>
-//   );
-// };
-
-const Sidebar = () => {
   return (
     <aside
-      className="ourSidebar"
+      className="sidebar"
       style={{
         overflow: "scroll initial",
+        boxSizing: "border-box",
       }}
     >
       <CDBSidebar textColor="#fff" backgroundColor="#333">
@@ -99,38 +49,36 @@ const Sidebar = () => {
         <CDBSidebarContent>
           <CDBSidebarMenu>
             <CDBSidebarMenuItem
+              onClick={gotoQuestions}
               suffix={
-                <CDBBadge color="danger" size="small" borderType="pill">
-                  Top
+                <CDBBadge
+                  margin-left="2px"
+                  color="danger"
+                  size="small"
+                  borderType="pill"
+                >
+                  ★
                 </CDBBadge>
               }
               icon="th-large"
             >
-              Frecuently Asked
+              Top Questions
             </CDBSidebarMenuItem>
-            <CDBSidebarMenuItem
-              icon="sticky-note"
-              suffix={
-                <CDBBadge color="secondary" size="small" borderType="pill">
-                  new
-                </CDBBadge>
-              }
-            >
-              Profile
-            </CDBSidebarMenuItem>
-          </CDBSidebarMenu>
-          <CDBSidebarMenu>
-            <CDBSidebarMenu title="Sidemenu" icon="th">
-              <NavLink exact to="/sub1" activeClassName="activeClicked">
-                <CDBSidebarMenuItem>submenu 1</CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/sub2" activeClassName="activeClicked">
-                <CDBSidebarMenuItem>submenu 2</CDBSidebarMenuItem>
-              </NavLink>
-              <NavLink exact to="/sub3" activeClassName="activeClicked">
-                <CDBSidebarMenuItem>submenu 3</CDBSidebarMenuItem>
-              </NavLink>
-            </CDBSidebarMenu>
+            <>
+              {user && (
+                <>
+                  <MenuItemNewQuestion />
+
+                  <CDBSidebarMenuItem icon="bookmark">
+                    My Questions
+                  </CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="check">
+                    My Answers
+                  </CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
+                </>
+              )}
+            </>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 

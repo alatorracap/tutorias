@@ -118,12 +118,7 @@ function ModalSignup() {
         <Button variant="primary" type="submit">
           Sign up
         </Button>
-        {/* <Button
-          variant="outline-primary"
-          // onClick={() => setShowLogin(false) && setShowSignUp(true)}
-        >
-          Sign up
-        </Button> */}
+        <p class="text-center , text-muted">All fields are required.</p>
       </Stack>
     </Form>
   );

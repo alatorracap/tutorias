@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useQuestions } from "../hooks/api";
+import ListGroup from "react-bootstrap/ListGroup";
+import { ListGroupItem } from "react-bootstrap";
 
 function Question() {
   const questions = useQuestions();
@@ -10,13 +12,13 @@ function Question() {
     <div className="questionDiv">
       Questions
       {questions && (
-        <ul>
-          {questions.data.map((q) => (
-            <li>
+        <ListGroup>
+          {questions.data.map((q, index) => (
+            <ListGroupItem key={index} action variant="light">
               <Link to={`/answers/${q.ID}`}> {q.Title}</Link>
-            </li>
+            </ListGroupItem>
           ))}
-        </ul>
+        </ListGroup>
       )}
     </div>
   );
