@@ -17,6 +17,12 @@ import MenuItemNewQuestion from "../Question/NewQuestion/MenuItemNewQuestion";
 import { useSelector } from "react-redux";
 
 const Sidebar = (props) => {
+  //* se trae el id del usuario del local storage
+  const newData = JSON.parse(
+    localStorage.getItem("redux_localstorage_simple_user")
+  );
+  const userID = newData.data.info.id;
+
   const navigate = useNavigate();
   //const { setShowModalNewQUestion } = props;
   const user = useSelector((s) => s.user);
@@ -26,7 +32,10 @@ const Sidebar = (props) => {
     console.log("holis");
     return navigate("/questions");
   }
-
+  function gotoProfile() {
+    console.log("holis");
+    return navigate(`/users/${userID}`);
+  }
   return (
     <aside
       className="sidebar"
@@ -75,7 +84,9 @@ const Sidebar = (props) => {
                   <CDBSidebarMenuItem icon="check">
                     My Answers
                   </CDBSidebarMenuItem>
-                  <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="user" onClick={gotoProfile}>
+                    Profile
+                  </CDBSidebarMenuItem>
                 </>
               )}
             </>

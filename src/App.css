@@ -24,8 +24,10 @@
 .main-content {
   grid-area: main-content;
 }
-
-main {
+.sidebar {
+  grid-area: sidebar;
+}
+.Main {
   display: grid;
   grid-template-columns: 10vw 80vw;
   grid-template: "sidebar main-content";

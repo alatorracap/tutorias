@@ -2,58 +2,60 @@ import { useParams } from "react-router-dom";
 import useFetch from "fetch-suspense";
 import { useEffect } from "react";
 import { useUser } from "../hooks/api";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import { Link } from "react-router-dom";
 
-const token =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkV4cGVydCIsImlhdCI6MTY2NDc4ODU2NCwiZXhwIjoxNjY0ODc0OTY0fQ.rQ3DI1IxtXNpX9V-vE1R9hwboJImngl-uE8BYhPMd10";
 function User() {
+  console.log("entro al user");
+  //* se trae el token del local storage
+  const newData = JSON.parse(
+    localStorage.getItem("redux_localstorage_simple_user")
+  );
+
+  const token = newData.data.token;
+  //*agarra el parametro pasado al enlace
   let { id } = useParams();
 
-  // console.log("id", id);
-  // //const User = useUser(id)
-  // const data = useFetch(
-  //   "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
-  //   {
-  //     headers: { Authorization: token },
-  //   }
-  // );
+  console.log("id", id);
+  // const data = useUser(id, token);
+  const data = useFetch(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
+    {
+      headers: { Authorization: token },
+    }
+  );
+  console.log("data", data);
 
-  // console.log("data", data);
-  // const User = data.data.result[0];
+  const User = data.data.result[0];
+
+  // console.log("User", User);
+
+  //* confirma si el usuario actual es el mismo que el que se esta visitando
+  const own = User.ID === newData.data.info.id ? true : false;
+  console.log("own", own);
 
   return (
-    <div class="card" className="UserCard">
+    <Card className="UserCard">
       User
-      {User && (
-        <div class="card-body">
+      {own && (
+        <Card.Body>
           <h5 class="card-title">User ID: {User.ID}</h5>
           <p>Username: {User.Username}</p>
-        </div>
+          <p>date {User.CreationDate}</p>
+          <Button variant="link">
+            <Link to={`/user/${User.ID}`}>Edit</Link>
+          </Button>
+        </Card.Body>
       )}
-    </div>
+      {!own && (
+        <Card.Body>
+          <h5 class="card-title">User ID: {User.ID}</h5>
+          <p>Username: {User.Username}</p>
+        </Card.Body>
+      )}
+    </Card>
   );
 }
-
-// function User() {
-//   const { id } = useParams();
-//   console.log("id", id);
-//   const user = useFetch("http://localhost:3000/users/" + id, {
-//     headers: { Authorization: token },
-//   });
-
-//   const newOne = user.data.result[0];
-//   console.log("newOne", newOne);
-//   useEffect(() => {});
-//   return (
-//     <>
-//       {/*
-//       <div>{user}</div>
-//        <div>{newOne.Username}</div>
-//       <div>{newOne.Email}</div>
-//       <div>{newOne.userRole}</div>
-//       <div>{newOne.Technology}</div> */}
-//       {newOne && <div>{newOne.username}</div>}
-//     </>
-//   );
-// }
 
 export default User;

@@ -11,7 +11,7 @@
     "bootstrap": "^5.2.1",
     "cdbreact": "^1.5.3",
     "dotenv": "^16.0.3",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "fetch-suspense": "^1.2.2",
     "i": "^0.3.7",
     "npm": "^8.19.2",
