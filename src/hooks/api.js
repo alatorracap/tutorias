@@ -11,6 +11,7 @@ export const useQuestions = () =>
 
 export const useUsers = () =>
   useApi("http://localhost:" + process.env.REACT_APP_PORT + "/users/", "GET");
+
 export const useUser = (id) =>
   useApi(
     "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
@@ -24,6 +25,6 @@ export const useAnswers = (id) =>
   );
 export const useNewQuestion = () =>
   useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",
+    "http://localhost:" + process.env.REACT_APP_PORT + "/question/",
     "POST"
   );

@@ -25,7 +25,7 @@
   grid-area: main-content;
 }
 
-main {
+.Main {
   display: grid;
   grid-template-columns: 10vw 80vw;
   grid-template: "sidebar main-content";

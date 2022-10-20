@@ -20,11 +20,23 @@ const Sidebar = (props) => {
   const navigate = useNavigate();
   //const { setShowModalNewQUestion } = props;
   const user = useSelector((s) => s.user);
+  const newData = JSON.parse(
+    localStorage.getItem("redux_localstorage_simple_user")
+  );
+  const userID = newData.data.info.id;
   console.log(user);
 
   function gotoQuestions() {
-    console.log("holis");
     return navigate("/questions");
+  }
+
+  function gotoNewQuestion() {
+    return navigate("/question");
+  }
+
+  function gotoProfile() {
+    console.log("holis");
+    return navigate(`/users/${userID}`);
   }
 
   return (
@@ -67,7 +79,21 @@ const Sidebar = (props) => {
             <>
               {user && (
                 <>
-                  <MenuItemNewQuestion />
+                  <CDBSidebarMenuItem
+                    icon="question"
+                    suffix={
+                      <CDBBadge
+                        color="secondary"
+                        size="small"
+                        borderType="pill"
+                      >
+                        new
+                      </CDBBadge>
+                    }
+                    onClick={gotoNewQuestion}
+                  >
+                    New Question
+                  </CDBSidebarMenuItem>
 
                   <CDBSidebarMenuItem icon="bookmark">
                     My Questions
@@ -75,7 +101,9 @@ const Sidebar = (props) => {
                   <CDBSidebarMenuItem icon="check">
                     My Answers
                   </CDBSidebarMenuItem>
-                  <CDBSidebarMenuItem icon="user">Profile</CDBSidebarMenuItem>
+                  <CDBSidebarMenuItem icon="user" onClick={gotoProfile}>
+                    Profile
+                  </CDBSidebarMenuItem>
                 </>
               )}
             </>

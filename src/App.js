@@ -12,6 +12,8 @@ import Sidebar from "./SideBar/Sidebar";
 import Users from "./User/Users";
 import User from "./User/User";
 import { Col, Container, Row, Stack } from "react-bootstrap";
+import NewQuestion from "./Question/NewQuestion/NewQuestion";
+import EditUser from "./User/EditUser";
 
 function App(props) {
   const location = useLocation();
@@ -40,7 +42,8 @@ function App(props) {
                   <Route path="/questions" element={<Question />} />
                   <Route path="/users" element={<Users />} />
                   <Route path="/users/:id" element={<User />} />
-                  {/* <Route path="/questions/" element={<NewQuestion />} />  Este rompe*/}
+                  <Route path="/question/" element={<NewQuestion />} />
+                  <Route path="/user/:id" element={<EditUser />} />
                   {/* <Route path="/signup" element={<Singup />} /> */}
                 </Routes>
               </ErrorBoundary>

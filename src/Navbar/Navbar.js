@@ -15,7 +15,7 @@ function AlejandriaNavbar(props) {
   console.log(user);
 
   return (
-    <Navbar bg="light" expand="xl">
+    <Navbar sticky="top" bg="light" expand="xl">
       <Container fluid>
         <Navbar.Brand href="#home">Alejandria</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
