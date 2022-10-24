@@ -12,7 +12,7 @@ function User() {
 
   let { id } = useParams();
 
-  // console.log("id", id);
+  console.log("newData", newData);
   // //const User = useUser(id)
   const data = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
@@ -28,12 +28,16 @@ function User() {
   console.log("own", own);
 
   return (
-    <div class="card" className="UserCard">
-      User
-      {User && (
-        <div class="card-body">
-          <h5 class="card-title">User ID: {User.ID}</h5>
-          <p>Username: {User.Username}</p>
+    <div>
+      {data !== null && (
+        <div class="card" className="UserCard">
+          User
+          {User && (
+            <div class="card-body">
+              <h5 class="card-title">User ID: {User.ID}</h5>
+              <p>Username: {User.Username}</p>
+            </div>
+          )}
         </div>
       )}
     </div>

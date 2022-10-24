@@ -14,6 +14,7 @@ import User from "./User/User";
 import { Col, Container, Row, Stack } from "react-bootstrap";
 import NewQuestion from "./Question/NewQuestion/NewQuestion";
 import EditUser from "./User/EditUser";
+import Questions from "./Question/Questions";
 
 function App(props) {
   const location = useLocation();
@@ -39,7 +40,8 @@ function App(props) {
                 <Routes>
                   {/* <Route path="/" element={<Home />} /> */}
                   <Route path="/answers/:id" element={<Answers />} />
-                  <Route path="/questions" element={<Question />} />
+                  <Route path="/questions" element={<Questions />} />
+                  <Route path="/question/:id" element={<Question />} />
                   <Route path="/users" element={<Users />} />
                   <Route path="/users/:id" element={<User />} />
                   <Route path="/question/" element={<NewQuestion />} />
