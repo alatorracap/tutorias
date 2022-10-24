@@ -17,25 +17,30 @@ import MenuItemNewQuestion from "../Question/NewQuestion/MenuItemNewQuestion";
 import { useSelector } from "react-redux";
 
 const Sidebar = (props) => {
+  let userID;
+  const navigate = useNavigate();
+  //const { setShowModalNewQUestion } = props;
+  const user = useSelector((s) => s.user);
+
   //* se trae el id del usuario del local storage
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
-  const userID = newData.data.info.id;
 
-  const navigate = useNavigate();
-  //const { setShowModalNewQUestion } = props;
-  const user = useSelector((s) => s.user);
   console.log(user);
 
   function gotoQuestions() {
     console.log("holis");
     return navigate("/questions");
   }
-  function gotoProfile() {
-    console.log("holis");
-    return navigate(`/users/${userID}`);
+  if (user) {
+    userID = newData.data.info.id;
   }
+  function gotoProfile(usid) {
+    console.log("holis");
+    return navigate(`/users/${usid}`);
+  }
+
   return (
     <aside
       className="sidebar"
@@ -84,7 +89,13 @@ const Sidebar = (props) => {
                   <CDBSidebarMenuItem icon="check">
                     My Answers
                   </CDBSidebarMenuItem>
-                  <CDBSidebarMenuItem icon="user" onClick={gotoProfile}>
+                  <CDBSidebarMenuItem
+                    icon="user"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      gotoProfile(userID);
+                    }}
+                  >
                     Profile
                   </CDBSidebarMenuItem>
                 </>

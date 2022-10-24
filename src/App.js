@@ -43,7 +43,8 @@ function App(props) {
                   <Route path="/answers/:id" element={<Answers />} />
                   <Route path="/question/:id" element={<Question />} />
                   <Route path="/questions" element={<Questions />} />
-                  <Route path="/newQuestion" element={<NewQuestion />} />
+                  <Route path="/question" element={<NewQuestion />} />
+                  {/* <Route path="/question" element={<NewQuestion />} /> */}
                   <Route path="/users" element={<Users />} />
                   <Route path="/users/:id" element={<User />} />
                   <Route path="/user/:id" element={<EditUser />} />
