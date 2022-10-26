@@ -4,6 +4,8 @@ import { ListGroupItem } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import useFetch from "fetch-suspense";
 import NewAnswer from "../Answers/NewAnswer";
+import votesTotal from "../Controllers/votesTotal";
+import answerVotes from "../Controllers/answerVotes";
 
 function Question() {
   //* se trae el token del local storage
@@ -20,15 +22,20 @@ function Question() {
   // console.log("************************Question", Question);
 
   const QuestionData = Question.data.question;
-  // const Answers = Question.data.answer;
+  const Answers = Question.data.answer;
   // const Answers = useAnswers(id);
-  // console.log("Answers", Answers);
+  console.log("Answers", Answers);
 
   const Answ = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/Answers/" + id,
     { method: "GET" }
   );
-  console.log("Answ", Answ);
+  // console.log("Answ", Answ);
+  const answer_votes = [];
+
+  //* yo intentando hacer lo de los votos
+  //* a votes se le pasa el id de la respuesta
+
   //* isAnswer confirma si la peticion por las respuesta devuelve error o no
   const isAnswer = Answ.status === "Error" ? false : true;
   /* 
@@ -67,34 +74,18 @@ function Question() {
         <Card.Text>{QuestionData.Question}</Card.Text>
       </Card>
       <NewAnswer />
-      {/* {Answers && (
+      {Answers && (
         <div>
           {Answers.map((a, index) => (
             <>
-              {console.log("a", a)}
-              <ListGroup>
-                <ListGroupItem key={index}>
-                  <div>
-                    <p className="answer"> {a.Answer}</p>
-                    <p className="votes"> votos</p>
-                  </div>
-                </ListGroupItem>
-              </ListGroup>
-            </>
-          ))}
-        </div>
-      )}
-       */}
-      {isAnswer && (
-        <div>
-          {Answ.data.map((a, index) => (
-            <>
+              {/* {console.log("answer ID*****", a.ID)} */}
+              {/* {answerVotes(a.ID)} */}
               {/* {console.log("a", a)} */}
               <ListGroup>
                 <ListGroupItem key={index}>
                   <div>
                     <p className="answer"> {a.Answer}</p>
-                    <p className="votes"> votos</p>
+                    <p className="votes"> {} media en votos</p>
                   </div>
                 </ListGroupItem>
               </ListGroup>
@@ -102,6 +93,25 @@ function Question() {
           ))}
         </div>
       )}
+      {/*        
+      {isAnswer && (
+        <div>
+          {Answ.data.map((a, index) => (
+            <>
+              
+              <ListGroup>
+                <ListGroupItem key={index}>
+                  <div>
+                    <p className="answer"> {a.Answer}</p>
+                    <p className="votes"> votos</p>
+                  </div>
+                </ListGroupItem>
+              </ListGroup>
+            </>
+          ))}
+        </div>
+      )} 
+    */}
     </div>
   );
 }

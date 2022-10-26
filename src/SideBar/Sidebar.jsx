@@ -16,7 +16,7 @@ import ModalNewQuestion from "../Question/NewQuestion/NewQuestion";
 import MenuItemNewQuestion from "../Question/NewQuestion/MenuItemNewQuestion";
 import { useSelector } from "react-redux";
 
-const Sidebar = (props) => {
+const Sidebar = () => {
   let userID;
   const navigate = useNavigate();
   //const { setShowModalNewQUestion } = props;
@@ -29,16 +29,24 @@ const Sidebar = (props) => {
 
   console.log(user);
 
-  function gotoQuestions() {
-    console.log("holis");
-    return navigate("/questions");
-  }
   if (user) {
     userID = newData.data.info.id;
   }
-  function gotoProfile(usid) {
+
+  function gotoQuestions() {
+    return navigate("/questions");
+  }
+
+  function gotoNewQuestion() {
+    return navigate("/question");
+  }
+  function gotoMyQuestion() {
+    return navigate("/myquestions");
+  }
+
+  function gotoProfile() {
     console.log("holis");
-    return navigate(`/users/${usid}`);
+    return navigate(`/users/${userID}`);
   }
 
   return (
@@ -81,9 +89,23 @@ const Sidebar = (props) => {
             <>
               {user && (
                 <>
-                  <MenuItemNewQuestion />
+                  <CDBSidebarMenuItem
+                    icon="question"
+                    suffix={
+                      <CDBBadge
+                        color="secondary"
+                        size="small"
+                        borderType="pill"
+                      >
+                        new
+                      </CDBBadge>
+                    }
+                    onClick={gotoNewQuestion}
+                  >
+                    New Question
+                  </CDBSidebarMenuItem>
 
-                  <CDBSidebarMenuItem icon="bookmark">
+                  <CDBSidebarMenuItem icon="bookmark" onClick={gotoMyQuestion}>
                     My Questions
                   </CDBSidebarMenuItem>
                   <CDBSidebarMenuItem icon="check">
