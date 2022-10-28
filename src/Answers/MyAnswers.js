@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMyQuestions, useQuestions } from "../hooks/api";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListGroupItem } from "react-bootstrap";
 import useFetch from "fetch-suspense";
 
-function MyQuestions() {
+function MyAnswers() {
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
@@ -13,26 +12,22 @@ function MyQuestions() {
   const token = newData.data.token;
   const user_id = newData.data.info.id;
 
-  const questions = useFetch(
-    "http://localhost:" +
-      process.env.REACT_APP_PORT +
-      "/questions/?User_ID=" +
-      user_id,
+  const myAnswers = useFetch(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/myanswers/" + user_id,
     {
       headers: { Authorization: token },
     }
   );
-  // const questions = useMyQuestions(user_id);
-  console.log("questions", questions);
+  console.log("myAnswers", myAnswers);
 
   return (
-    <div className="questionDiv">
-      Questions
-      {questions && (
+    <div className="myanswers">
+      User Answers
+      {myAnswers && (
         <ListGroup>
-          {questions.data.map((q, index) => (
+          {myAnswers.data.map((a, index) => (
             <ListGroupItem key={index} action variant="light">
-              <Link to={`/question/${q.ID}`}> {q.Title}</Link>
+              <Link to={`/questions/${a.Question_ID}`}> {a.Answer}</Link>
             </ListGroupItem>
           ))}
         </ListGroup>
@@ -41,4 +36,4 @@ function MyQuestions() {
   );
 }
 
-export default MyQuestions;
+export default MyAnswers;

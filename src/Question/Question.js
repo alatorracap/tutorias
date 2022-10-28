@@ -78,8 +78,8 @@ function Question() {
         <div>
           {Answers.map((a, index) => (
             <>
-              {/* {console.log("answer ID*****", a.ID)} */}
-              {/* {answerVotes(a.ID)} */}
+              {/* {console.log("********answer ID*****", a.ID)} */}
+              {/* {answerVotes(1)} */}
               {/* {console.log("a", a)} */}
               <ListGroup>
                 <ListGroupItem key={index}>

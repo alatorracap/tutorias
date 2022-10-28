@@ -5,11 +5,17 @@ function useApi(url, metodo) {
   console.log("url", url);
   const [data, setData] = useState();
 
+  const newData = JSON.parse(
+    localStorage.getItem("redux_localstorage_simple_user")
+  );
+
+  const token = newData.data.token;
+
   useEffect(() => {
     console.log("AAAAAAAAAAAAAAAAAAAAA");
     (async () => {
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkV4cGVydCIsImlhdCI6MTY2NDc4ODU2NCwiZXhwIjoxNjY0ODc0OTY0fQ.rQ3DI1IxtXNpX9V-vE1R9hwboJImngl-uE8BYhPMd10";
+      //const token =
+      //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZSI6IkV4cGVydCIsImlhdCI6MTY2NDc4ODU2NCwiZXhwIjoxNjY0ODc0OTY0fQ.rQ3DI1IxtXNpX9V-vE1R9hwboJImngl-uE8BYhPMd10";
       const res = await fetch(url, {
         headers: { Authorization: token },
         method: metodo,

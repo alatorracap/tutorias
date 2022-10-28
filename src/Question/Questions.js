@@ -16,7 +16,7 @@ function Questions() {
           {questions.data.map((q, index) => (
             <ListGroupItem key={index} action variant="light">
               {/* <Link to={`/answers/${q.ID}`}> {q.Title}</Link> */}
-              <Link to={`/question/${q.ID}`}> {q.Title} mio</Link>
+              <Link to={`/questions/${q.ID}`}> {q.Title} mio</Link>
             </ListGroupItem>
           ))}
         </ListGroup>
