@@ -26,10 +26,7 @@ function App(props) {
       <div className="Main">
         <Container fluid>
           <Row>
-            <Col
-              md="auto"
-              style={{ display: "contents", height: "max-content" }}
-            >
+            <Col md={2} style={{ display: "contents", height: "max-content" }}>
               <Sidebar />
             </Col>
             <Col md={10}>

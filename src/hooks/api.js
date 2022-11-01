@@ -3,28 +3,18 @@ import useApi from "./useApi";
 
 // const { PORT } = process.env;
 
-export const useQuestions = () =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",
-    "GET"
-  );
+let host = "http://localhost:";
+
+export const useQuestions = (filter) =>
+  useApi(host + process.env.REACT_APP_PORT + "/questions/", "GET", filter);
 
 export const useUsers = () =>
-  useApi("http://localhost:" + process.env.REACT_APP_PORT + "/users/", "GET");
+  useApi(host + process.env.REACT_APP_PORT + "/users/", "GET");
 
 export const useUser = (id) =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
-    "GET"
-  );
+  useApi(host + process.env.REACT_APP_PORT + "/users/" + id, "GET");
 
 export const useAnswers = (id) =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/answers/" + id,
-    "GET"
-  );
+  useApi(host + process.env.REACT_APP_PORT + "/answers/" + id, "GET");
 export const useNewQuestion = () =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/question/",
-    "POST"
-  );
+  useApi(host + process.env.REACT_APP_PORT + "/question/", "POST");
