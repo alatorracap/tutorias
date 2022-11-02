@@ -44,7 +44,7 @@ function App(props) {
                 fallback={<h1>Sección rota...</h1>}
               >
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<Questions />} />
                   <Route path="/answers/:id" element={<Answers />} />
                   {/* info de una pregunta */}
                   <Route path="/answer/:id" element={<AnswerEdit />} />

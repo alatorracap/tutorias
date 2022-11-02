@@ -34,6 +34,7 @@ function Login(props) {
     );
     //* Mantiene la sesion guardada en el local storage
     if (!res.ok) {
+      console.log("res", res);
       // TODO: Manejar error
     } else {
       const data = await res.json();
