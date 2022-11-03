@@ -40,28 +40,39 @@ const Sidebar = () => {
   function gotoNewQuestion() {
     return navigate("/question");
   }
-  function gotoMyQuestion() {
-    return navigate("/myquestions");
-  }
-  function gotoMyAnswers() {
-    return navigate("/myanswers");
-  }
 
   function gotoProfile() {
     console.log("holis");
     return navigate(`/users/${userID}`);
   }
 
+  function gotoMyQuestion() {
+    return navigate("/myquestions");
+  }
+  function gotoMyAnswers() {
+    return navigate("/myanswers");
+  }
   return (
-    <aside
-      className="sidebar"
+    // <aside
+    //   className="sidebar"
+    //   style={{
+    //     overflow: "scroll initial",
+    //     boxSizing: "border-box",
+    //   }}
+    // >
+    <div
       style={{
+        display: "flex",
+        height: "95vh",
         overflow: "scroll initial",
-        boxSizing: "border-box",
       }}
     >
-      <CDBSidebar textColor="#fff" backgroundColor="#333">
-        <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
+      {" "}
+      <CDBSidebar textColor="white" backgroundColor="darkcyan">
+        <CDBSidebarHeader
+          prefix={<i className="fa fa-bars fa-large"></i>}
+          style={{ borderBottom: "1px solid #ffffff85" }}
+        >
           <a
             href="/"
             className="text-decoration-none"
@@ -139,7 +150,7 @@ const Sidebar = () => {
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>
-    </aside>
+    </div>
   );
 };
 

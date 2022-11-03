@@ -8,12 +8,12 @@ import NewQuestion from "./NewQuestion";
 function MenuItemNewQuestion() {
   const dispatch = useDispatch();
 
-  const [showModal, setShowModal] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
 
-  console.log(showModal);
-  const setShowModalNewQUestion = async (e) => {
+  // console.log(showModal);
+  /* const setShowModalNewQUestion = async (e) => {
     console.log("HJOLISKFJD");
-  };
+  }; */
 
   return (
     <>
@@ -24,7 +24,7 @@ function MenuItemNewQuestion() {
             new
           </CDBBadge>
         }
-        onClick={() => setShowModal(true)}
+        //onClick={() => setShowModal(true)}
       >
         New Question
       </CDBSidebarMenuItem>
@@ -34,9 +34,9 @@ function MenuItemNewQuestion() {
         //   Title of generic modal
         title="New Question"
         // Boolean variable for show generic modal
-        show={showModal}
+        //show={showModal}
         // Function for change boolean variable for showing generic modal
-        setShow={setShowModal}
+        //setShow={setShowModal}
       >
         {/* Content of generic modal */}
         <NewQuestion />

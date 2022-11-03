@@ -55,7 +55,6 @@ function NewQuestion() {
       <div>New Question</div>
       {user && (
         <Form onSubmit={handleNewQuestion}>
-          <Form.Label>Título</Form.Label>
           <InputGroup className="mb-3">
             <Form.Control
               required
@@ -64,7 +63,6 @@ function NewQuestion() {
               onChange={(e) => setTitle(e.target.value)}
             />
           </InputGroup>
-          <Form.Label>Pregunta</Form.Label>
           <InputGroup className="mb-3">
             <Form.Control
               required
@@ -74,7 +72,7 @@ function NewQuestion() {
             />
           </InputGroup>
           <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Tecnologia</Form.Label>
+            <Form.Label>Technology</Form.Label>
             <Form.Select
               required
               onChange={(e) => setTechnology(e.target.value)}

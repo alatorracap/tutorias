@@ -1,32 +1,36 @@
 import useApi from "./useApi";
+import useFetch from "fetch-suspense";
 //const dotenv = require("dotenv");
 
 // const { PORT } = process.env;
 
-export const useQuestions = () =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",
-    "GET"
-  );
+let host = "http://localhost:";
 
-export const useMyQuestions = (id) =>
-  useApi("localhost:3000/questions/?User_ID=" + id, "GET");
+const newData = JSON.parse(
+  localStorage.getItem("redux_localstorage_simple_user")
+);
+const token = newData.data.token;
+
+export const useQuestions = (filter) =>
+  useApi(host + process.env.REACT_APP_PORT + "/questions/", "GET", filter);
 
 export const useUsers = () =>
-  useApi("http://localhost:" + process.env.REACT_APP_PORT + "/users/", "GET");
+  useApi(host + process.env.REACT_APP_PORT + "/users/", "GET");
+
 export const useUser = (id) =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
-    "GET"
-  );
+  useApi(host + process.env.REACT_APP_PORT + "/users/" + id, "GET");
 
 export const useAnswers = (id) =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/answers/" + id,
-    "GET"
-  );
+  useApi(host + process.env.REACT_APP_PORT + "/answers/" + id, "GET");
+
 export const useNewQuestion = () =>
-  useApi(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",
-    "POST"
-  );
+  useApi(host + process.env.REACT_APP_PORT + "/question/", "POST");
+
+export const useNewAnswer = (data) =>
+  useFetch("http://localhost:" + process.env.REACT_APP_PORT + "/answers/", {
+    method: "POST",
+    headers: { Authorization: token },
+    body: JSON.stringify({
+      data,
+    }),
+  });

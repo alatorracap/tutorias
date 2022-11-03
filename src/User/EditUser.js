@@ -6,13 +6,9 @@ import Form from "react-bootstrap/Form";
 // import { userEdit } from "./userEdit";
 import { useState } from "react";
 import userEdit from "../Controllers/editUser";
-import { useDispatch } from "react-redux";
-import { userLogout } from "../store";
-
 // import e from "express";
-function User() {
+function EditUser() {
   // const [userData, setUserData] = useState([]);
-  const dispatch = useDispatch();
 
   //* se trae el token del local storage
   const newData = JSON.parse(
@@ -24,12 +20,22 @@ function User() {
   //*agarra el parametro pasado al enlace
   let { id } = useParams();
 
-  const data = useFetch("http://localhost:3000/users/" + id, {
-    headers: { Authorization: token },
-    method: "GET",
-  });
-  const User = data.data.result[0];
+  //console.log("user iddd", id);
 
+  const data = useFetch(
+    "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
+    {
+      headers: { Authorization: token },
+      method: "GET",
+    }
+  );
+  //console.log("data", data);
+  const User = data.data.result[0];
+  //console.log("User", User);
+  // console.log(User.Username);
+  // console.log(User.Email);
+  // console.log(User.Password);
+  // console.log(User.Technology);
   let news = [
     User.Username,
     User.Email,
@@ -37,6 +43,18 @@ function User() {
     User.UserRole,
     User.Technology,
   ];
+  // console.log("news", news);
+
+  // setUserData(
+  //   ...userData,
+  //   User.Username,
+  //   User.Email,
+  //   User.Password,
+  //   User.Technology
+  // );
+  //console.log("userData", userData);
+
+  // setUserData(oldArray => ...oldArray, )
 
   const handleDelete = async (e) => {
     await fetch("http://localhost:" + process.env.REACT_APP_PORT + "/users/", {
@@ -44,9 +62,6 @@ function User() {
       headers: { Authorization: token },
     });
     console.log("delete DELETE deldel");
-    //~ hace logout
-    dispatch(userLogout());
-    //~ vuelve a home
   };
   return (
     <div className="editUser">
@@ -89,7 +104,6 @@ function User() {
             e.preventDefault();
             handleDelete();
           }}
-          href="/"
         >
           Borrar usuario
         </Button>
@@ -98,4 +112,4 @@ function User() {
   );
 }
 
-export default User;
+export default EditUser;

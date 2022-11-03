@@ -9,8 +9,8 @@ function ModalSignup() {
   const [userRole, setUserRole] = useState("");
   const [technology, setTechnology] = useState("");
 
-  const technologies = process.env.REACT_APP_TECHNOLOGY.split(", ");
-  const roles = process.env.REACT_APP_ROLE.split(", ");
+  const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
+  const roles = process.env.REACT_APP_ROLE.split(",");
 
   const handleSignUp = async (e) => {
     e.preventDefault();
