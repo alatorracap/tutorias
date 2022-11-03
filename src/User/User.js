@@ -28,6 +28,7 @@ function User() {
   console.log("data", data);
 
   const User = data.data.result[0];
+  const editLink = `/user/${User.ID}`;
 
   // console.log("User", User);
 
@@ -43,8 +44,9 @@ function User() {
           <h5 class="card-title">User ID: {User.ID}</h5>
           <p>Username: {User.Username}</p>
           <p>date {User.CreationDate}</p>
-          <Button variant="link">
-            <Link to={`/user/${User.ID}`}>Edit</Link>
+          <Button variant="primary" href={editLink}>
+            Editar
+            {/* <Link to={`/user/${User.ID}`}>Edit</Link> */}
           </Button>
         </Card.Body>
       )}

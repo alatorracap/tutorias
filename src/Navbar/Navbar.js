@@ -12,12 +12,12 @@ function AlejandriaNavbar(props) {
   const user = useSelector((s) => s.user);
   const dispatch = useDispatch();
 
-  console.log(user);
+  console.log("user navbar", user);
 
   return (
     <Navbar bg="light" expand="xl">
       <Container fluid>
-        <Navbar.Brand href="#home">Alejandria</Navbar.Brand>
+        <Navbar.Brand href="/">Alejandria</Navbar.Brand>
         <Navbar.Collapse className="justify-content-end">
           <QuestionSearch />
         </Navbar.Collapse>
@@ -30,7 +30,7 @@ function AlejandriaNavbar(props) {
           )}
           {user && (
             <Stack direction="horizontal" gap={3}>
-              {user.data.email}
+              {user.data.info.username}
               <Button onClick={() => dispatch(userLogout())}>Log out</Button>
             </Stack>
           )}

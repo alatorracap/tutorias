@@ -9,6 +9,9 @@ export const useQuestions = () =>
     "GET"
   );
 
+export const useMyQuestions = (id) =>
+  useApi("localhost:3000/questions/?User_ID=" + id, "GET");
+
 export const useUsers = () =>
   useApi("http://localhost:" + process.env.REACT_APP_PORT + "/users/", "GET");
 export const useUser = (id) =>

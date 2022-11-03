@@ -4,6 +4,8 @@ import { ListGroupItem } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import useFetch from "fetch-suspense";
 import NewAnswer from "../Answers/NewAnswer";
+import votesTotal from "../Controllers/votesTotal";
+import answerVotes from "../Controllers/answerVotes";
 
 function Question() {
   //* se trae el token del local storage
@@ -17,19 +19,26 @@ function Question() {
     "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
     { method: "GET" }
   );
-  console.log("************************Question", Question);
+  // console.log("************************Question", Question);
 
-  // const Answers = useAnswers(id);
   const QuestionData = Question.data.question;
   const Answers = Question.data.answer;
-  // console.log("Answers", Answers);
+  // const Answers = useAnswers(id);
+  console.log("Answers", Answers);
 
   const Answ = useFetch(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/Answer/" + id,
+    "http://localhost:" + process.env.REACT_APP_PORT + "/Answers/" + id,
     { method: "GET" }
   );
-  console.log("Answ", Answ);
+  // console.log("Answ", Answ);
+  const answer_votes = [];
 
+  //* yo intentando hacer lo de los votos
+  //* a votes se le pasa el id de la respuesta
+
+  //* isAnswer confirma si la peticion por las respuesta devuelve error o no
+  const isAnswer = Answ.status === "Error" ? false : true;
+  /* 
   const handleDeleteQuestion = async (to) => {
     await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
@@ -39,8 +48,8 @@ function Question() {
       }
     );
     console.log("question DELETE deldel");
-  };
-
+  }; */
+  /* 
   const handleDeleteAnswer = async (a_id) => {
     await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/answer/" + a_id,
@@ -50,8 +59,7 @@ function Question() {
       }
     );
     console.log("answer DELETE deldel");
-  };
-
+  }; */
   /*  const handleEvendDelete=(id)=>{
     setMetodo("DELETE")
     setUrl('http://localhost:3001/answers/'+id) 
@@ -70,7 +78,27 @@ function Question() {
         <div>
           {Answers.map((a, index) => (
             <>
-              {console.log("a", a)}
+              {/* {console.log("********answer ID*****", a.ID)} */}
+              {/* {answerVotes(1)} */}
+              {/* {console.log("a", a)} */}
+              <ListGroup>
+                <ListGroupItem key={index}>
+                  <div>
+                    <p className="answer"> {a.Answer}</p>
+                    <p className="votes"> {} media en votos</p>
+                  </div>
+                </ListGroupItem>
+              </ListGroup>
+            </>
+          ))}
+        </div>
+      )}
+      {/*        
+      {isAnswer && (
+        <div>
+          {Answ.data.map((a, index) => (
+            <>
+              
               <ListGroup>
                 <ListGroupItem key={index}>
                   <div>
@@ -82,7 +110,8 @@ function Question() {
             </>
           ))}
         </div>
-      )}
+      )} 
+    */}
     </div>
   );
 }
