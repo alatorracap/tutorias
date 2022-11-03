@@ -15,12 +15,12 @@ function AlejandriaNavbar(props) {
   console.log(user);
 
   return (
-    <Navbar sticky="top" bg="light" expand="xl">
+    <Navbar sticky="top" bg="dark" variant="dark">
       <Container fluid>
         <Navbar.Brand href="#home">Alejandria</Navbar.Brand>
-        <Navbar.Collapse className="justify-content-end">
+        {/* <Navbar.Collapse className="justify-content-end">
           <QuestionSearch />
-        </Navbar.Collapse>
+        </Navbar.Collapse> */}
         <Navbar.Collapse className="justify-content-end">
           {!user && (
             <NavbarLoginSignup
@@ -29,7 +29,7 @@ function AlejandriaNavbar(props) {
             />
           )}
           {user && (
-            <Stack direction="horizontal" gap={3}>
+            <Stack direction="horizontal" gap={3} style={{ color: "white" }}>
               {user.data.email}
               <Button onClick={() => dispatch(userLogout())}>Log out</Button>
             </Stack>

@@ -16,5 +16,6 @@ export const useUser = (id) =>
 
 export const useAnswers = (id) =>
   useApi(host + process.env.REACT_APP_PORT + "/answers/" + id, "GET");
+
 export const useNewQuestion = () =>
   useApi(host + process.env.REACT_APP_PORT + "/question/", "POST");

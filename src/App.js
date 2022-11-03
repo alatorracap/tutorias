@@ -1,6 +1,6 @@
 import ErrorBoundary from "./ErrorBoundary";
 import { Route, Routes, useLocation } from "react-router-dom";
-import "./App.css";
+//import "./App.css";
 import Header from "./Header/Header";
 import Answers from "./Answers/Answers";
 // Bootstrap CSS
@@ -18,18 +18,20 @@ import Questions from "./Question/Questions";
 
 function App(props) {
   const location = useLocation();
-  const sid = { "grid-area": "sidebar" };
+
+  console.log(window);
 
   return (
     <div className="App">
       <Header />
-      <div className="Main">
+
+      <div className="Main" style={{ background: "rgb(248, 249, 250)" }}>
         <Container fluid>
           <Row>
-            <Col md={2} style={{ display: "contents", height: "max-content" }}>
+            <Col style={{ display: "contents" }}>
               <Sidebar />
             </Col>
-            <Col md={10}>
+            <Col>
               <ErrorBoundary
                 key={location.pathname}
                 fallback={<h1>Sección rota...</h1>}

@@ -1,9 +1,13 @@
 import { useParams } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListGroupItem } from "react-bootstrap";
-import Card from "react-bootstrap/Card";
 import useFetch from "fetch-suspense";
 import NewAnswer from "../Answers/NewAnswer";
+import { Panel } from "primereact/panel";
+import { Rating } from "primereact/rating";
+
+import { OrderList } from "primereact/orderlist";
+import "./Question.css";
 
 function Question() {
   //* se trae el token del local storage
@@ -57,31 +61,63 @@ function Question() {
     setUrl('http://localhost:3001/answers/'+id) 
     console.log('url2', url)
   } */
+  console.log("Answers", Answers);
 
+  const itemTemplate = (item) => {
+    return (
+      <div className="product-item">
+        {/* <div className="image-container">
+          <img
+            src={`images/product/${item.image}`}
+            onError={(e) =>
+              (e.target.src =
+                "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
+            }
+            alt={item.name}
+          />
+        </div> */}
+        <div className="product-list-detail">
+          <h5 className="mb-2">{item.Answer}</h5>
+          <i className="pi pi-tag product-category-icon"></i>
+          <span className="product-category">{item.AnswerDate}</span>
+        </div>
+        <div className="answer-rating">
+          <Rating
+          //value={value}
+          //onChange={(e) => setValue(e.value)}
+          //stars={5}
+          />
+        </div>
+        {/* <div className="product-list-action">
+          <h6 className="mb-2">${item.price}</h6>
+          <span
+            className={`product-badge status-${item.inventoryStatus.toLowerCase()}`}
+          >
+            {item.inventoryStatus}
+          </span>
+        </div> */}
+      </div>
+    );
+  };
   return (
     <div>
-      1 Question with answers
-      <Card>
-        <Card.Title>{QuestionData.Title}</Card.Title>
-        <Card.Text>{QuestionData.Question}</Card.Text>
-      </Card>
+      <Panel header={QuestionData.Title}>
+        <p>{QuestionData.Question}</p>
+      </Panel>
+
       <NewAnswer />
+
       {Answers && (
-        <div>
-          {Answers.map((a, index) => (
-            <>
-              {console.log("a", a)}
-              <ListGroup>
-                <ListGroupItem key={index}>
-                  <div>
-                    <p className="answer"> {a.Answer}</p>
-                    <p className="votes"> votos</p>
-                  </div>
-                </ListGroupItem>
-              </ListGroup>
-            </>
-          ))}
-        </div>
+        <OrderList
+          value={Answers}
+          header="Answers"
+          dataKey="ID"
+          itemTemplate={itemTemplate}
+          showFilter={false}
+          //filter
+          //filterBy="name"
+          className="OrderList"
+        ></OrderList>
       )}
     </div>
   );

@@ -4,6 +4,8 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 
+import { Editor } from "primereact/editor";
+
 function NewAnswer() {
   //*Agarra el token del local storage
   const newData = JSON.parse(
@@ -37,15 +39,11 @@ function NewAnswer() {
   }
 
   return (
-    <Form>
-      <Form.Group>
-        <Form.Control
-          type="text"
-          placeholder="Responde..."
-          onChange={(e) => setAnswer(e.target.value)}
-        />
-      </Form.Group>
-    </Form>
+    <Editor
+      style={{ height: "320px" }}
+      value={answer}
+      onTextChange={(e) => setAnswer(e.htmlValue)}
+    />
   );
 }
 

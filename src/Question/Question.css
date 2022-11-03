@@ -1,11 +1,20 @@
-.questionDiv {
+/* .questionDiv {
   display: flex;
   justify-content: flex-end;
-}
+} */
 
 /*
 PRIMETABLE EXAMPLE CSS
 */
+
+/*HIDE CONTROL BUTTONS IN ANSWERS ORDERLIST*/
+.p-orderlist .p-orderlist-controls {
+  display: none;
+}
+
+.answer-rating {
+  flex: 1 1 0;
+}
 
 .customer-badge {
   border-radius: 2px;
@@ -31,19 +40,19 @@ PRIMETABLE EXAMPLE CSS
   color: #8a5340;
 }
 
-.customer-badge.status-React {
-  background-color: #b3e5fc;
-  color: #23547b;
-}
-
 .customer-badge.status-CSS {
-  background-color: #eccfff;
-  color: #694382;
+  background-color: #1220d8df;
+  color: #edf2f6;
 }
 
-.customer-badge.status-proposal {
+.customer-badge.status-React {
+  background-color: #51c5f3;
+  color: #171519;
+}
+
+.customer-badge.status-SQL {
   background-color: #ffd8b2;
-  color: #805b36;
+  color: #34271b;
 }
 
 /*

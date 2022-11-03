@@ -1,37 +1,52 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import "./Question.css";
 import { Link } from "react-router-dom";
 import { useQuestions } from "../hooks/api";
-import ListGroup from "react-bootstrap/ListGroup";
-import { ListGroupItem } from "react-bootstrap";
-import Table from "../Components/AlejandriaTable";
 
 // Import React Table
-import ReactTable from "react-table";
-//import "react-table/react-table.css";
 
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { classNames } from "primereact/utils";
 import "primeicons/primeicons.css";
 import { TriStateCheckbox } from "primereact/tristatecheckbox";
-import { FilterMatchMode, FilterOperator } from "primereact/api";
+import { FilterMatchMode } from "primereact/api";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
+import { Calendar } from "primereact/calendar";
 
 function Questions() {
-  const filter = {
+  const [filter, setFilter] = useState({
     search: "",
     title: "",
     technology: "",
     questionDate: "",
     answered: "",
-  };
+  });
+  const [titleValue, setTitleValue] = useState("");
   // const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
 
   const questions = useQuestions(filter);
+  //console.log(questions);
+  questions &&
+    questions.data.map((q) => {
+      //Get Questions iteration date and save in a variable
+      let dateFromQuestionsUnformated = q.QuestionDate;
+
+      //Format date from Questions from String to datetime
+      let dateFormated = new Date(dateFromQuestionsUnformated);
+
+      //Update Question.data.QuestionDate with formatted date
+      q.QuestionDate = dateFormated;
+
+      return null;
+    });
+
   const [filters, setFilters] = useState({
+    global: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    Title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
     Technology: { value: null, matchMode: FilterMatchMode.CONTAINS },
+    QuestionDate: { value: null, matchMode: FilterMatchMode.DATE_IS },
     Answered: { value: null, matchMode: FilterMatchMode.EQUALS },
   });
 
@@ -68,12 +83,24 @@ function Questions() {
     return rowData.ID;
   };
 
+  const handleTitleOnChange = (e) => {
+    setTitleValue(e.target.value);
+    console.log(e.target.value);
+    const filterCopy = { ...filter };
+    filterCopy.title = e.target.value;
+    setFilter(filterCopy);
+    console.log(filter);
+  };
+
+  const titleFilterTemplate = () => {
+    return <InputText value={titleValue} onChange={handleTitleOnChange} />;
+  };
+
   const titleBodyTemplate = (rowData) => {
-    return rowData.Title;
+    return <a href={`/question/${rowData.ID}`}> {rowData.Title}</a>;
   };
 
   const technologyBodyTemplate = (rowData) => {
-    console.log("RR", rowData.Technology);
     return (
       <span className={`customer-badge status-${rowData.Technology}`}>
         {rowData.Technology}
@@ -109,13 +136,23 @@ function Questions() {
         options={technologies}
         onChange={(e) => options.filterApplyCallback(e.value)}
         itemTemplate={technologyItemTemplate}
-        placeholder="Select a Status"
+        placeholder="Select a Technology"
         c
         lassName="p-column-filter"
         showClear
       />
     );
   };
+
+  /* const dateRowFilterTemplate = (rowData) => {
+    console.log(rowData);
+    return (
+      <input
+        value={rowData.value}
+        onChange={(e) => rowData.filterApplyCallback(e.value)}
+      />
+    );
+  }; */
 
   const answeredBodyTemplate = (rowData) => {
     return (
@@ -129,7 +166,6 @@ function Questions() {
   };
 
   const answeredRowFilterTemplate = (options) => {
-    console.log(options);
     return (
       <TriStateCheckbox
         value={options.value}
@@ -139,7 +175,6 @@ function Questions() {
   };
 
   const formatDate = (value) => {
-    console.log(value);
     return new Date(value).toLocaleDateString({
       day: "2-digit",
       month: "2-digit",
@@ -151,11 +186,22 @@ function Questions() {
     return formatDate(rowData.QuestionDate);
   };
 
+  const dateRowFilterTemplate = (options) => {
+    return (
+      <Calendar
+        value={options.value}
+        onChange={(e) => options.filterApplyCallback(e.value)}
+        dateFormat="dd/mm/yy"
+        placeholder="dd/mm/yyyy"
+        mask="99/99/9999"
+      />
+    );
+  };
+
   // console.log("questions", questions);
-  console.log(questions && questions.data);
+  //console.log(questions && questions.data);
   return (
     <div className="questionDiv">
-      Questions
       {questions && (
         <>
           {/* <ListGroup>
@@ -168,19 +214,19 @@ function Questions() {
           <DataTable
             value={questions.data}
             paginator
-            className="p-datatable-customers"
+            className="p-datatable-questions"
             rows={10}
             dataKey="id"
             filters={filters}
             filterDisplay="row"
             loading={false}
             responsiveLayout="scroll"
-            // globalFilterFields={[
-            //   "Title",
-            //   "Technology",
-            //   "QuestionDate",
-            //   "Answered",
-            // ]}
+            globalFilterFields={[
+              "Title",
+              "Technology",
+              //"QuestionDate",
+              //"Answered",
+            ]}
             header={header}
             emptyMessage="No questions found."
           >
@@ -189,13 +235,15 @@ function Questions() {
               header="ID"
               filter
               body={idBodyTemplate}
-              filterPlaceholder="Search by name"
+              filterPlaceholder="Search by ID"
               style={{ minWidth: "12rem", display: "none" }}
             />
             <Column
               header="Title"
               filterField="Title"
+              field="Title"
               style={{ minWidth: "12rem" }}
+              filterElement={titleFilterTemplate}
               body={titleBodyTemplate}
               filter
               filterPlaceholder="Search by Title"
@@ -215,11 +263,12 @@ function Questions() {
               header="Question date"
               filterField="QuestionDate"
               showFilterMenu={false}
+              filterPlaceholder="dd/m/yyyy"
               filterMenuStyle={{ width: "14rem" }}
               style={{ minWidth: "14rem" }}
               body={dateBodyTemplate}
               filter
-              //filterElement={representativeRowFilterTemplate}
+              filterElement={dateRowFilterTemplate}
             />
             <Column
               field="Answered"
