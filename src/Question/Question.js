@@ -9,13 +9,20 @@ import { Rating } from "primereact/rating";
 import { OrderList } from "primereact/orderlist";
 import "./Question.css";
 import { Column } from "primereact/column";
+import { useSelector } from "react-redux";
 
 function Question() {
+  const user = useSelector((s) => s.user);
+
   //* se trae el token del local storage
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
-  const token = newData.data.token;
+
+  let token;
+  if (newData) {
+    token = newData.data.token;
+  }
 
   const { id } = useParams();
 
@@ -157,10 +164,11 @@ function Question() {
         </Col>
       </Row>
 
-      <Row>
-        <NewAnswer />
-      </Row>
-
+      {user && (
+        <Row>
+          <NewAnswer />
+        </Row>
+      )}
       <Row>
         <Col>
           {answers && (

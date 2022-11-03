@@ -9,8 +9,12 @@ let host = "http://localhost:";
 const newData = JSON.parse(
   localStorage.getItem("redux_localstorage_simple_user")
 );
-const token = newData.data.token;
+console.log("newData", newData);
 
+let token;
+if (newData) {
+  token = newData.data.token;
+}
 export const useQuestions = (filter) =>
   useApi(host + process.env.REACT_APP_PORT + "/questions/", "GET", filter);
 

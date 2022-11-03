@@ -25,7 +25,11 @@ function useApi(url, metodo, jsonParams) {
       const newData = JSON.parse(
         localStorage.getItem("redux_localstorage_simple_user")
       );
-      const token = newData.data.token;
+
+      let token;
+      if (newData) {
+        token = newData.data.token;
+      }
       console.log("token", token);
       console.log("newData", newData);
       /* const token =
