@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ListGroupItem } from "react-bootstrap";
+import { Col, Container, ListGroupItem, Row } from "react-bootstrap";
 import useFetch from "fetch-suspense";
 import NewAnswer from "../Answers/NewAnswer";
 import { Panel } from "primereact/panel";
@@ -8,6 +8,7 @@ import { Rating } from "primereact/rating";
 
 import { OrderList } from "primereact/orderlist";
 import "./Question.css";
+import { Column } from "primereact/column";
 
 function Question() {
   //* se trae el token del local storage
@@ -17,16 +18,54 @@ function Question() {
   const token = newData.data.token;
 
   const { id } = useParams();
-  const Question = useFetch(
+
+  console.log(
+    useFetch(
+      "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
+      { method: "GET" }
+    )
+  );
+
+  const question = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
     { method: "GET" }
   );
-  console.log("************************Question", Question);
+  console.log("************************Question", question);
+  console.log("Question", question);
 
   // const Answers = useAnswers(id);
-  const QuestionData = Question.data.question;
-  const Answers = Question.data.answer;
-  // console.log("Answers", Answers);
+  const QuestionData = question.data.question;
+  const answers = question.data.answer;
+  console.log("Answers", answers);
+
+  // answers &&
+  //   answers.map((q) => {
+  //     //Get Answers iteration date and save in a variable
+  //     console.log(typeof q.AnswerDate);
+  //     if (typeof q.AnswerDate !== "string") {
+  //       console.log("soy distinto de string");
+  //     }
+  //     let dateFromAnswersUnformated = q.AnswerDate;
+  //     console.log("q.AnswerDate", q.AnswerDate);
+
+  //     //Format date from Answers from String to datetime
+  //     let dateFormated = new Date(dateFromAnswersUnformated).toLocaleDateString(
+  //       {
+  //         day: "2-digit",
+  //         month: "2-digit",
+  //         year: "numeric",
+  //       }
+  //     );
+  //     console.log("dateFormated", dateFormated);
+  //     console.log(typeof dateFormated);
+  //     console.log("dateFromAnswersUnformated", dateFromAnswersUnformated);
+
+  //     //Update Answers.data.AnswerDate with formatted date
+  //     q.AnswerDate = dateFormated;
+  //     console.log("q.AnswerDate", q.AnswerDate);
+
+  //     return null;
+  //   });
 
   const Answ = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/Answer/" + id,
@@ -61,7 +100,7 @@ function Question() {
     setUrl('http://localhost:3001/answers/'+id) 
     console.log('url2', url)
   } */
-  console.log("Answers", Answers);
+  console.log("Answers", answers);
 
   const itemTemplate = (item) => {
     return (
@@ -76,16 +115,25 @@ function Question() {
             alt={item.name}
           />
         </div> */}
-        <div className="product-list-detail">
+        <div className="answer-text">
           <h5 className="mb-2">{item.Answer}</h5>
-          <i className="pi pi-tag product-category-icon"></i>
-          <span className="product-category">{item.AnswerDate}</span>
+          <i className="pi pi-calendar answer-calendar-icon"></i>
+          <span className="product-category">
+            {new Date(item.AnswerDate).toLocaleString({
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </span>
         </div>
         <div className="answer-rating">
           <Rating
-          //value={value}
-          //onChange={(e) => setValue(e.value)}
-          //stars={5}
+            class="p-rating"
+            //value={value}
+            //onChange={(e) => setValue(e.value)}
+            //stars={5}
           />
         </div>
         {/* <div className="product-list-action">
@@ -100,26 +148,35 @@ function Question() {
     );
   };
   return (
-    <div>
-      <Panel header={QuestionData.Title}>
-        <p>{QuestionData.Question}</p>
-      </Panel>
+    <Container>
+      <Row>
+        <Col>
+          <Panel header={QuestionData.Title}>
+            <p>{QuestionData.Question}</p>
+          </Panel>
+        </Col>
+      </Row>
 
-      <NewAnswer />
+      <Row>
+        <NewAnswer />
+      </Row>
 
-      {Answers && (
-        <OrderList
-          value={Answers}
-          header="Answers"
-          dataKey="ID"
-          itemTemplate={itemTemplate}
-          showFilter={false}
-          //filter
-          //filterBy="name"
-          className="OrderList"
-        ></OrderList>
-      )}
-    </div>
+      <Row>
+        <Col>
+          {answers && (
+            <OrderList
+              value={answers}
+              header="Answers"
+              dataKey="ID"
+              itemTemplate={itemTemplate}
+              //filter
+              //filterBy="name"
+              className="OrderList"
+            ></OrderList>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
 

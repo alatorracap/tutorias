@@ -13,8 +13,34 @@ PRIMETABLE EXAMPLE CSS
 }
 
 .answer-rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.answer-text {
   flex: 1 1 0;
 }
+
+.answer-calendar-icon {
+  margin-right: 0.5rem;
+}
+
+/* .p-orderlist-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-item {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.p-rating {
+  align-items: flex-end;
+} */
 
 .customer-badge {
   border-radius: 2px;

@@ -1,9 +1,15 @@
 import useApi from "./useApi";
+import useFetch from "fetch-suspense";
 //const dotenv = require("dotenv");
 
 // const { PORT } = process.env;
 
 let host = "http://localhost:";
+
+const newData = JSON.parse(
+  localStorage.getItem("redux_localstorage_simple_user")
+);
+const token = newData.data.token;
 
 export const useQuestions = (filter) =>
   useApi(host + process.env.REACT_APP_PORT + "/questions/", "GET", filter);
@@ -19,3 +25,12 @@ export const useAnswers = (id) =>
 
 export const useNewQuestion = () =>
   useApi(host + process.env.REACT_APP_PORT + "/question/", "POST");
+
+export const useNewAnswer = (data) =>
+  useFetch("http://localhost:" + process.env.REACT_APP_PORT + "/answers/", {
+    method: "POST",
+    headers: { Authorization: token },
+    body: JSON.stringify({
+      data,
+    }),
+  });

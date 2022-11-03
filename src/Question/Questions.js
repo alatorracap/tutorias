@@ -1,6 +1,5 @@
 import { useState } from "react";
 import "./Question.css";
-import { Link } from "react-router-dom";
 import { useQuestions } from "../hooks/api";
 
 // Import React Table
@@ -110,21 +109,6 @@ function Questions() {
 
   const technologies = ["JavaScript", "CSS", "Node", "SQL", "React", "HTML"];
 
-  // const technologyFilterTemplate = (options) => {
-  //   console.log("jj", options);
-  //   return (
-  //     <Dropdown
-  //       value={options.value}
-  //       options={technologies}
-  //       onChange={(e) => options.filterCallback(e.value, options.index)}
-  //       itemTemplate={technologyItemTemplate}
-  //       placeholder="Select a technology"
-  //       className="p-column-filter"
-  //       showClear
-  //     />
-  //   );
-  // };
-
   const technologyItemTemplate = (option) => {
     return <span className={`customer-badge status-${option}`}>{option}</span>;
   };
@@ -143,16 +127,6 @@ function Questions() {
       />
     );
   };
-
-  /* const dateRowFilterTemplate = (rowData) => {
-    console.log(rowData);
-    return (
-      <input
-        value={rowData.value}
-        onChange={(e) => rowData.filterApplyCallback(e.value)}
-      />
-    );
-  }; */
 
   const answeredBodyTemplate = (rowData) => {
     return (
@@ -198,19 +172,10 @@ function Questions() {
     );
   };
 
-  // console.log("questions", questions);
-  //console.log(questions && questions.data);
   return (
     <div className="questionDiv">
       {questions && (
         <>
-          {/* <ListGroup>
-            {questions.data.map((q, index) => (
-              <ListGroupItem key={index} action variant="light">
-                <Link to={`/question/${q.ID}`}> {q.Title}</Link>
-              </ListGroupItem>
-            ))}
-          </ListGroup> */}
           <DataTable
             value={questions.data}
             paginator
