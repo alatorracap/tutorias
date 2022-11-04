@@ -58,6 +58,7 @@ function NewQuestion() {
           <InputGroup className="mb-3">
             <Form.Control
               required
+              placeholder="Title"
               aria-label="Title"
               aria-describedby="basic-addon1"
               onChange={(e) => setTitle(e.target.value)}
@@ -66,6 +67,7 @@ function NewQuestion() {
           <InputGroup className="mb-3">
             <Form.Control
               required
+              placeholder="Question text"
               aria-label="Texto"
               aria-describedby="basic-addon1"
               onChange={(e) => setQuestion(e.target.value)}

@@ -9,6 +9,7 @@ import { Rating } from "primereact/rating";
 import { OrderList } from "primereact/orderlist";
 import "./Question.css";
 import { Column } from "primereact/column";
+import { useState } from "react";
 
 function Question() {
   //* se trae el token del local storage
@@ -18,6 +19,8 @@ function Question() {
   const token = newData.data.token;
 
   const { id } = useParams();
+
+  const [ratingValue, setRatingValue] = useState();
 
   console.log(
     useFetch(
@@ -33,45 +36,36 @@ function Question() {
   console.log("************************Question", question);
   console.log("Question", question);
 
+  const onChangeRatingValue = async (e, answerID) => {
+    console.log("e.target.value", e);
+    const res = await fetch(
+      "http://localhost:" +
+        process.env.REACT_APP_PORT +
+        "/answers/" +
+        answerID +
+        "/votes",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: token },
+        body: JSON.stringify({
+          vote: e.target.value,
+        }),
+      }
+    );
+  };
   // const Answers = useAnswers(id);
   const QuestionData = question.data.question;
   const answers = question.data.answer;
   console.log("Answers", answers);
-
-  // answers &&
-  //   answers.map((q) => {
-  //     //Get Answers iteration date and save in a variable
-  //     console.log(typeof q.AnswerDate);
-  //     if (typeof q.AnswerDate !== "string") {
-  //       console.log("soy distinto de string");
-  //     }
-  //     let dateFromAnswersUnformated = q.AnswerDate;
-  //     console.log("q.AnswerDate", q.AnswerDate);
-
-  //     //Format date from Answers from String to datetime
-  //     let dateFormated = new Date(dateFromAnswersUnformated).toLocaleDateString(
-  //       {
-  //         day: "2-digit",
-  //         month: "2-digit",
-  //         year: "numeric",
-  //       }
-  //     );
-  //     console.log("dateFormated", dateFormated);
-  //     console.log(typeof dateFormated);
-  //     console.log("dateFromAnswersUnformated", dateFromAnswersUnformated);
-
-  //     //Update Answers.data.AnswerDate with formatted date
-  //     q.AnswerDate = dateFormated;
-  //     console.log("q.AnswerDate", q.AnswerDate);
-
-  //     return null;
-  //   });
 
   const Answ = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/Answer/" + id,
     { method: "GET" }
   );
   console.log("Answ", Answ);
+  const votes = Answ.votes;
+
+  console.log("Answ.votes", Answ.votes);
 
   const handleDeleteQuestion = async (to) => {
     await fetch(
@@ -102,19 +96,19 @@ function Question() {
   } */
   console.log("Answers", answers);
 
+  // Loop of answers
   const itemTemplate = (item) => {
+    console.log("item", item);
+
+    const answerVote = votes.find((vote) => vote.Answer_ID === item.ID);
+    //only if answerVote is !== undefined
+    let rating = 0;
+    if (answerVote !== undefined) {
+      rating = answerVote.Vote;
+    }
+
     return (
       <div className="product-item">
-        {/* <div className="image-container">
-          <img
-            src={`images/product/${item.image}`}
-            onError={(e) =>
-              (e.target.src =
-                "https://www.primefaces.org/wp-content/uploads/2020/05/placeholder.png")
-            }
-            alt={item.name}
-          />
-        </div> */}
         <div className="answer-text">
           <h5 className="mb-2">{item.Answer}</h5>
           <i className="pi pi-calendar answer-calendar-icon"></i>
@@ -128,22 +122,15 @@ function Question() {
             })}
           </span>
         </div>
+
         <div className="answer-rating">
           <Rating
             class="p-rating"
-            //value={value}
-            //onChange={(e) => setValue(e.value)}
-            //stars={5}
+            value={rating}
+            onChange={(e) => onChangeRatingValue(e, item.ID)}
+            stars={5}
           />
         </div>
-        {/* <div className="product-list-action">
-          <h6 className="mb-2">${item.price}</h6>
-          <span
-            className={`product-badge status-${item.inventoryStatus.toLowerCase()}`}
-          >
-            {item.inventoryStatus}
-          </span>
-        </div> */}
       </div>
     );
   };
