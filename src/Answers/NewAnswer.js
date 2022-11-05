@@ -23,23 +23,6 @@ function NewAnswer() {
   // //*agarra el parametro pasado al enlace
   let { id } = useParams();
 
-  console.log(protoAnswer);
-
-  // const newAnswer = useFetch(
-  //   "http://localhost:" + process.env.REACT_APP_PORT + "/answers/",
-  //   {
-  //     method: "POST",
-  //     headers: { Authorization: token },
-  //     body: JSON.stringify({
-  //       answer,
-  //     }),
-  //   }
-  // );
-  // if (!newAnswer.ok) {
-  //   // TODO: Manejar error
-  // } else {
-  // }
-
   async function createNewAnswer(protoAnswer) {
     let answer = protoAnswer;
     console.log(answer);
@@ -64,38 +47,7 @@ function NewAnswer() {
       .catch((error) => {
         console.log(error);
       });
-
-    // .catch((error) => {
-    //   console.log("entro en error");
-    //   console.log(error);
-    //   console.log(error.message);
-    // })
-    // .then((data) => {
-    //   console.log(data);
-    //   //window.location.reload();
-    //   console.log("he hecho cosas");
-    // });
   }
-
-  // async function createNewAnswer(protoAnswer) {
-  //   let answer = protoAnswer;
-  //   console.log(answer);
-
-  //   await fetch(
-  //     "http://localhost:" + process.env.REACT_APP_PORT + "/answers/",
-  //     {
-  //       method: "POST",
-  //       headers: { Authorization: token },
-  //       body: JSON.stringify({
-  //         answer: answer,
-  //       }),
-  //     }
-  //   )
-  //     .then("he hecho cosas")
-  //     .catch((error) => {
-  //       console.log(error.message);
-  //     });
-  // }
 
   const onClickSubmit = () => {
     setAnswer(protoAnswer);
