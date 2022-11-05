@@ -44,16 +44,19 @@ function SignUp(props) {
           technology: technology,
         }),
       }
-    );
-    if (!res.ok) {
+    ).then((response) => response.text());
+
+    const data = JSON.parse(res);
+    console.log("data", data);
+    console.log("antes del error");
+
+    if (data.Status !== "ok") {
+      console.log("entro al error");
       console.log("res", res);
+
       // TODO: Manejar error
     } else {
-      console.log("ha salido bien", res);
-      const data = await res.json();
-      console.log("data", data);
-      dispatch(userLogin(data));
-      localStorage.setItem("session", data.data.token);
+      console.log("ha salido bien", data);
     }
   };
 

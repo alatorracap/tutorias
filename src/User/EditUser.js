@@ -40,25 +40,20 @@ function EditUser() {
   // console.log(User.Email);
   // console.log(User.Password);
   // console.log(User.Technology);
+
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [repeatNewPassword, setRepeatNewPassword] = useState("");
+
   let news = [
     User.Username,
     User.Email,
-    User.Password,
     User.UserRole,
     User.Technology,
+    oldPassword,
+    newPassword,
+    repeatNewPassword,
   ];
-  // console.log("news", news);
-
-  // setUserData(
-  //   ...userData,
-  //   User.Username,
-  //   User.Email,
-  //   User.Password,
-  //   User.Technology
-  // );
-  //console.log("userData", userData);
-
-  // setUserData(oldArray => ...oldArray, )
 
   const handleDelete = async (e) => {
     await fetch("http://localhost:" + process.env.REACT_APP_PORT + "/users/", {
@@ -96,6 +91,8 @@ function EditUser() {
                   <Form.Control
                     type="password"
                     placeholder="Contraseña antigua"
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
                   />
                 </Col>
                 <Col></Col>
@@ -106,6 +103,8 @@ function EditUser() {
                   <Form.Control
                     type="password"
                     placeholder="Nueva contraseña"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </Col>
                 <Col>
@@ -113,6 +112,8 @@ function EditUser() {
                   <Form.Control
                     type="password"
                     placeholder="Repita la nueva contraseña"
+                    value={repeatNewPassword}
+                    onChange={(e) => setRepeatNewPassword(e.target.value)}
                   />
                 </Col>
               </Row>
