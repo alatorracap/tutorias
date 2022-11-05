@@ -18,10 +18,9 @@ function useApi(url, metodo, token, jsonParams) {
   }
 
   console.log(newUrl);
-  console.log(token);
+  console.log("token" + token);
 
   useEffect(() => {
-    console.log("AAAAAAAAAAAAAAAAAAAAA");
     (async () => {
       //* se trae el token del local storage
 
