@@ -1,4 +1,5 @@
 async function userEdit(token, user) {
+  console.log(user);
   const data = await fetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/users/",
     {
@@ -10,8 +11,11 @@ async function userEdit(token, user) {
       body: JSON.stringify({
         username: user[0],
         email: user[1],
-        userRole: user[3],
-        technology: user[4],
+        userRole: user[2],
+        technology: user[3],
+        oldPassword: user[4],
+        newPassword: user[5],
+        repeatNewPassword: user[6],
       }),
     }
   );
