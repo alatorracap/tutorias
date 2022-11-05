@@ -1,33 +1,24 @@
 import { useDispatch, useSelector } from "react-redux";
-import { userLogout } from "../store";
-import Login from "../Login/Login";
-import Singup from "../SignUp/Signup";
-import { NavLink } from "react-router-dom";
+import { useState } from "react";
+import ModalSignup from "../SignUp/ModalSignup";
+import AlejandriaNavbar from "../Navbar/Navbar";
+import AlejandriaModal from "../Components/AlejandriaModal";
+import ModalLogin from "../Login/ModalLogin";
 
 function Header() {
   const user = useSelector((s) => s.user);
-  const dispatch = useDispatch();
+  const [showLogin, setShowLogin] = useState(false);
+  const [showSignUp, setShowSignUp] = useState(false);
 
   return (
     <>
-      <h1>Tutorias</h1>
-      {user && (
-        <div>
-          {user.data.email}
-          <button onClick={() => dispatch(userLogout())}>Salir</button>
-        </div>
-      )}
-      {!user && (
-        <>
-          <div>
-            <Login />
-          </div>
-          <div>
-            { <NavLink to="/signup">Registrate</NavLink> }
-            <Singup />
-          </div>
-        </>
-      )}
+      <AlejandriaNavbar
+        setShowLogin={setShowLogin}
+        setShowSignUp={setShowSignUp}
+      />
+      <ModalLogin show={showLogin} setShow={setShowLogin} />
+
+      <ModalSignup show={showSignUp} setShow={setShowSignUp} />
     </>
   );
 }

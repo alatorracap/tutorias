@@ -1,0 +1,24 @@
+/* ul > li {
+  list-style: none;
+  border: 1px dotted black;
+  border-radius: 10%;
+  /* margin: 1rem; 
+}
+#username {
+  grid-area: username;
+}
+#role {
+  grid-area: role;
+}
+#tech {
+  grid-area: tech;
+}
+
+ul li {
+  display: grid;
+  grid-template:
+    "username role"
+    "username tech";
+  justify-items: center;
+  align-items: center;
+} */

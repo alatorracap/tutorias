@@ -21,7 +21,6 @@ function useApi(url, metodo, token, jsonParams) {
   console.log(token);
 
   useEffect(() => {
-    console.log("AAAAAAAAAAAAAAAAAAAAA");
     (async () => {
       //* se trae el token del local storage
 
@@ -32,7 +31,6 @@ function useApi(url, metodo, token, jsonParams) {
       console.log("res", res);
       if (res.status === 401) {
         console.log("res.status", res.status);
-        console.log("ERRORRRR");
       } else {
         const data = await res.json();
         setData(data);

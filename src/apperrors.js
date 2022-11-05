@@ -4,7 +4,7 @@ import { Route, Routes, useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 // Bootstrap Bundle JS
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { Col, Container, Row } from "react-bootstrap";
+import { Col, Container, Row, Stack } from "react-bootstrap";
 //*our code
 import Header from "./Header/Header";
 import Answers from "./Answers/Answers";
@@ -16,42 +16,34 @@ import EditUser from "./User/EditUser";
 import Question from "./Question/Question";
 import NewQuestion from "./Question/NewQuestion/NewQuestion";
 import "./App.css";
-import MyQuestions from "./Question/MyQuestions";
-import QuestionEdit from "./Question/QuestionEdit";
-import AnswerEdit from "./Answers/AnswerEdit";
-import MyAnswers from "./Answers/MyAnswers";
 
 function App(props) {
   const location = useLocation();
-
-  console.log(window);
+  const sid = { "grid-area": "sidebar" };
 
   return (
     <div className="App">
       <Header />
-
-      <div className="Main" style={{ background: "rgb(248, 249, 250)" }}>
+      <div>
         <Container fluid>
-          <Row>
-            <Col style={{ display: "contents" }}>
-              <Sidebar />
+          <Row className="Main">
+            <Col
+              md="auto"
+              style={{ display: "contents", height: "max-content" }}
+            >
+              <Sidebar className="sidebar" />
             </Col>
-            <Col>
+            <Col md={10} className="main-content">
               <ErrorBoundary
                 key={location.pathname}
                 fallback={<h1>Sección rota...</h1>}
               >
                 <Routes>
-                  <Route path="/" element={<Questions />} />
+                  {/* <Route path="/" element={<Home />} /> */}
                   <Route path="/answers/:id" element={<Answers />} />
-                  {/* info de una pregunta */}
-                  <Route path="/answer/:id" element={<AnswerEdit />} />
-                  <Route path="/questions/:id" element={<Question />} />
+                  <Route path="/question/:id" element={<Question />} />
                   <Route path="/questions" element={<Questions />} />
-                  <Route path="/question" element={<NewQuestion />} />
-                  <Route path="/question/:id" element={<QuestionEdit />} />
-                  <Route path="/myquestions" element={<MyQuestions />} />
-                  <Route path="/myanswers" element={<MyAnswers />} />
+                  <Route path="/newQuestion" element={<NewQuestion />} />
                   <Route path="/users" element={<Users />} />
                   <Route path="/users/:id" element={<User />} />
                   <Route path="/user/:id" element={<EditUser />} />

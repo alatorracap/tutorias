@@ -1,38 +1,53 @@
-import { useState } from 'react'
-import { useParams } from 'react-router-dom'
-import useApi from '../hooks/useApi'
+import { useParams } from "react-router-dom";
+import { useAnswers } from "../hooks/api";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
-
-function Answers () {
-  const { id } = useParams()
-  const [url,setUrl] = useState("http://localhost:3001/answers/"+id)
-  console.log('url', url)
-  const [metodo,setMetodo] = useState("GET")
-  const Answers = useApi(url,metodo)
-  
-  const handleEvendDelete=(id)=>{
-    setMetodo("DELETE")
-    setUrl('http://localhost:3001/answers/'+id) 
-    console.log('url2', url)
-  }
-
-    return (
-      <div>
-        
-        {Answers && 
-        <div>
-          {Answers.data.map((q,index) =>
-          <>
-          {console.log('q', q)}
-            <ul>
-              <li key={index}>{q.Answer}<button onClick={()=>handleEvendDelete(q.ID)}>Borrar</button></li>
-            </ul>
-          </>)
-          }   
-        </div>
-}</div>  
-        )
+function Answers() {
+  const { id } = useParams();
+  const Answers = useAnswers(id);
+  console.log("Answers", Answers);
+  return (
+    <div className="answersDiv">
+      {Answers && (
+        <>
+          {/* <ListGroup>
+                <ListGroupItem key={index}>{q.Answer}</ListGroupItem>
+              </ListGroup> */}
+          <DataTable
+            value={Answers.data}
+            paginator
+            className="p-datatable-answers"
+            rows={10}
+            dataKey="id"
+            //filters={filters}
+            filterDisplay="row"
+            loading={false}
+            responsiveLayout="scroll"
+            //</>globalFilterFields={[
+            //"Title",
+            //"Technology",
+            //"QuestionDate",
+            //"Answered",
+            //]}
+            //header={header}
+            emptyMessage="No answers found."
+          >
+            <Column
+              header="Answers"
+              filterField="Answer"
+              field="Answer"
+              style={{ minWidth: "12rem" }}
+              //filterElement={titleFilterTemplate}
+              filter
+              filterPlaceholder="Search by Word"
+              showFilterMenu={false}
+            />
+          </DataTable>
+        </>
+      )}
+    </div>
+  );
 }
-
 
 export default Answers;
