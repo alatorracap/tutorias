@@ -29,7 +29,7 @@ const Sidebar = () => {
 
   console.log(user);
 
-  if (user) {
+  if (user && newData && newData.data) {
     userID = newData.data.info.id;
   }
 

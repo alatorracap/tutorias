@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-function useApi(url, metodo, token, jsonParams) {
+function useApi(url, metodo, jsonParams) {
   console.log("metodo", metodo);
   console.log("url", url);
   const [data, setData] = useState();
@@ -15,6 +15,15 @@ function useApi(url, metodo, token, jsonParams) {
     ]).toString();
 
     newUrl = new URL(`${url}?${new_params}`);
+  }
+
+  const newData = JSON.parse(
+    localStorage.getItem("redux_localstorage_simple_user")
+  );
+
+  let token = "";
+  if (newData !== undefined && newData !== null && newData.data) {
+    token = newData.data.token;
   }
 
   console.log(newUrl);

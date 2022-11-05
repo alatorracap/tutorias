@@ -28,7 +28,7 @@ function AlejandriaNavbar(props) {
               setShowSignUp={setShowSignUp}
             />
           )}
-          {user && (
+          {user && user.data && (
             <Stack direction="horizontal" gap={3} style={{ color: "white" }}>
               {user.data.info.username}
               <Button onClick={() => dispatch(userLogout())}>Log out</Button>
