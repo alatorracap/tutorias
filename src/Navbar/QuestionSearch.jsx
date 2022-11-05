@@ -1,4 +1,4 @@
-import { useState } from "react";
+/* import { useState } from "react";
 import Button from "react-bootstrap/Button";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -21,3 +21,4 @@ function QuestionSearch() {
 }
 
 export default QuestionSearch;
+ */

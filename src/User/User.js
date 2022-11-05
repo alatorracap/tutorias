@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom";
 import useFetch from "fetch-suspense";
 import { useEffect } from "react";
 import { useUser } from "../hooks/api";
+import { Panel } from "primereact/panel";
 
 function User() {
   //* se trae el token del local storage
@@ -25,18 +26,18 @@ function User() {
   const User = data.data.result[0];
   //* confirma si el usuario actual es el mismo que el que se esta visitando
   const own = User.ID === newData.data.info.id ? true : false;
-  console.log("own", own);
+  console.log("user", User);
 
   return (
     <div>
       {data !== null && (
         <div class="card" className="UserCard">
-          User
           {User && (
-            <div class="card-body">
-              <h5 class="card-title">User ID: {User.ID}</h5>
-              <p>Username: {User.Username}</p>
-            </div>
+            <Panel header={User.Username}>
+              <p>Email: {User.Email}</p>
+              <p>Role: {User.UserRole}</p>
+              <p>Technology: {User.Technology}</p>
+            </Panel>
           )}
         </div>
       )}

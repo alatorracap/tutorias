@@ -1,8 +1,8 @@
-ul > li {
+/* ul > li {
   list-style: none;
   border: 1px dotted black;
   border-radius: 10%;
-  /* margin: 1rem; */
+  /* margin: 1rem; 
 }
 #username {
   grid-area: username;
@@ -21,4 +21,4 @@ ul li {
     "username tech";
   justify-items: center;
   align-items: center;
-}
+} */
