@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMyQuestions, useQuestions } from "../hooks/api";
+import { useMyQuestion, useMyQuestions, useQuestions } from "../hooks/api";
 import ListGroup from "react-bootstrap/ListGroup";
 import { ListGroupItem } from "react-bootstrap";
-import useFetch from "fetch-suspense";
+// import useFetch from "fetch-suspense";
 
 function MyQuestions() {
   const newData = JSON.parse(
@@ -13,15 +13,7 @@ function MyQuestions() {
   const token = newData.data.token;
   const user_id = newData.data.info.id;
 
-  const questions = useFetch(
-    "http://localhost:" +
-      process.env.REACT_APP_PORT +
-      "/questions/?User_ID=" +
-      user_id,
-    {
-      headers: { Authorization: token },
-    }
-  );
+  const questions = useMyQuestion(user_id);
   // const questions = useMyQuestions(user_id);
   console.log("questions", questions);
 

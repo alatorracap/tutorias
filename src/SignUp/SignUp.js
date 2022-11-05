@@ -16,6 +16,7 @@ function SignUp(props) {
 
   const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
   const roles = process.env.REACT_APP_ROLE.split(",");
+  console.log(roles);
 
   console.log("username", username);
   console.log("email", email);
@@ -26,9 +27,10 @@ function SignUp(props) {
   const handleSignUp = async (e) => {
     //*setshow false oculta el modal, recuerda activarlo cuando funcione el
     //*sign in
-    // setShow(false);
+    //setShow(false);
 
-    e.preventDefault();
+    //e.preventDefault();
+    console.log("hola");
     const res = await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/users/",
       {
@@ -47,6 +49,7 @@ function SignUp(props) {
       console.log("res", res);
       // TODO: Manejar error
     } else {
+      console.log("ha salido bien", res);
       const data = await res.json();
       console.log("data", data);
       dispatch(userLogin(data));
@@ -64,7 +67,6 @@ function SignUp(props) {
           name="username"
         />
       </Form.Group>
-
       <Form.Group className="mb-3" controlId="formBasicPassword">
         <Form.Label>Email</Form.Label>
         <Form.Control
@@ -107,6 +109,7 @@ function SignUp(props) {
           value={technology}
           onChange={(e) => setTechnology(e.target.value)}
           name="technology"
+          disabled={userRole !== "Expert"}
         >
           <option>Open this select menu</option>
           {technologies.map((technology) => (
