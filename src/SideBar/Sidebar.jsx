@@ -46,6 +46,12 @@ const Sidebar = () => {
     return navigate(`/users/${userID}`);
   }
 
+  function gotoMyQuestion() {
+    return navigate("/myquestions");
+  }
+  function gotoMyAnswers() {
+    return navigate("/myanswers");
+  }
   return (
     // <aside
     //   className="sidebar"
@@ -113,10 +119,10 @@ const Sidebar = () => {
                     New Question
                   </CDBSidebarMenuItem>
 
-                  <CDBSidebarMenuItem icon="bookmark">
+                  <CDBSidebarMenuItem icon="bookmark" onClick={gotoMyQuestion}>
                     My Questions
                   </CDBSidebarMenuItem>
-                  <CDBSidebarMenuItem icon="check">
+                  <CDBSidebarMenuItem icon="check" onClick={gotoMyAnswers}>
                     My Answers
                   </CDBSidebarMenuItem>
                   <CDBSidebarMenuItem

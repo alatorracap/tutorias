@@ -96,7 +96,7 @@ function Questions() {
   };
 
   const titleBodyTemplate = (rowData) => {
-    return <a href={`/question/${rowData.ID}`}> {rowData.Title}</a>;
+    return <a href={`/questions/${rowData.ID}`}> {rowData.Title}</a>;
   };
 
   const technologyBodyTemplate = (rowData) => {

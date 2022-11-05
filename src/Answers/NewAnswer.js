@@ -11,7 +11,11 @@ function NewAnswer() {
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
-  const token = newData.data.token;
+
+  let token;
+  if (newData) {
+    token = newData.data.token;
+  }
 
   // //* Verifica usuario
   const user = useSelector((s) => s.user);

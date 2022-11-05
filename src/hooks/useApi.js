@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
-function useApi(url, metodo, jsonParams, headerAuthorization) {
+function useApi(url, metodo, token, jsonParams) {
   console.log("metodo", metodo);
   console.log("url", url);
   const [data, setData] = useState();
@@ -18,6 +18,7 @@ function useApi(url, metodo, jsonParams, headerAuthorization) {
   }
 
   console.log(newUrl);
+  console.log(token);
 
   useEffect(() => {
     console.log("AAAAAAAAAAAAAAAAAAAAA");
@@ -25,7 +26,7 @@ function useApi(url, metodo, jsonParams, headerAuthorization) {
       //* se trae el token del local storage
 
       const res = await fetch(newUrl, {
-        headers: { headerAuthorization },
+        headers: { Authorization: token },
         method: metodo,
       });
       console.log("res", res);

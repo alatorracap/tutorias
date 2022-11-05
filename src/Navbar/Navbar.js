@@ -17,7 +17,7 @@ function AlejandriaNavbar(props) {
   return (
     <Navbar sticky="top" bg="dark" variant="dark">
       <Container fluid>
-        <Navbar.Brand href="#home">Alejandria</Navbar.Brand>
+        <Navbar.Brand href="/">Alejandria</Navbar.Brand>
         {/* <Navbar.Collapse className="justify-content-end">
           <QuestionSearch />
         </Navbar.Collapse> */}
@@ -30,7 +30,7 @@ function AlejandriaNavbar(props) {
           )}
           {user && (
             <Stack direction="horizontal" gap={3} style={{ color: "white" }}>
-              {user.data.email}
+              {user.data.info.username}
               <Button onClick={() => dispatch(userLogout())}>Log out</Button>
             </Stack>
           )}

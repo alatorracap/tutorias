@@ -34,6 +34,7 @@ function Login(props) {
     );
     //* Mantiene la sesion guardada en el local storage
     if (!res.ok) {
+      console.log("res", res);
       // TODO: Manejar error
     } else {
       const data = await res.json();
@@ -41,23 +42,7 @@ function Login(props) {
       dispatch(userLogin(data));
       localStorage.setItem("session", data.data.token);
     }
-
-    // if (data.error) {
-    //   setStatus("error");
-    // } else {
-    //   setUser(data);
-    //   setStatus("login");
-    //   // <Navigate to="/questions" />;
-    // }
   };
-
-  // if (status === "loading") {
-  //   return (
-  //     <div id="login" className="loading">
-  //       Cargando...
-  //     </div>
-  //   );
-  // }
 
   return (
     <form onSubmit={handleLogin}>
