@@ -18,13 +18,7 @@ function Header() {
       />
       <ModalLogin show={showLogin} setShow={setShowLogin} />
 
-      <AlejandriaModal
-        title="Sign up"
-        show={showSignUp}
-        setShow={setShowSignUp}
-      >
-        <ModalSignup />
-      </AlejandriaModal>
+      <ModalSignup show={showSignUp} setShow={setShowSignUp} />
     </>
   );
 }

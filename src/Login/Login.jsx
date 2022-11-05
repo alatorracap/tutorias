@@ -41,26 +41,8 @@ function Login(props) {
       console.log("data", data);
       dispatch(userLogin(data));
       localStorage.setItem("session", data.data.token);
-
-      // localStorage.setItem("session", data.data.id);
     }
-
-    // if (data.error) {
-    //   setStatus("error");
-    // } else {
-    //   setUser(data);
-    //   setStatus("login");
-    //   // <Navigate to="/questions" />;
-    // }
   };
-
-  // if (status === "loading") {
-  //   return (
-  //     <div id="login" className="loading">
-  //       Cargando...
-  //     </div>
-  //   );
-  // }
 
   return (
     <form onSubmit={handleLogin}>

@@ -10,7 +10,6 @@ async function userEdit(token, user) {
       body: JSON.stringify({
         username: user[0],
         email: user[1],
-        password: "123456789",
         userRole: user[3],
         technology: user[4],
       }),
