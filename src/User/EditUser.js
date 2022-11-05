@@ -8,9 +8,16 @@ import { useState } from "react";
 import userEdit from "../Controllers/editUser";
 import { Panel } from "primereact/panel";
 import { Col, Container, Row, Stack } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { userLogout } from "../store";
+
 // import e from "express";
 function EditUser() {
   // const [userData, setUserData] = useState([]);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
   const roles = process.env.REACT_APP_ROLE.split(",");
 
@@ -177,6 +184,8 @@ function EditUser() {
                       onClick={(e) => {
                         e.preventDefault();
                         handleDelete();
+                        dispatch(userLogout());
+                        navigate("/");
                       }}
                     >
                       Borrar usuario
