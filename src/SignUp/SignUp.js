@@ -27,9 +27,9 @@ function SignUp(props) {
   const handleSignUp = async (e) => {
     //*setshow false oculta el modal, recuerda activarlo cuando funcione el
     //*sign in
-    //setShow(false);
+    setShow(false);
 
-    //e.preventDefault();
+    e.preventDefault();
     console.log("hola");
     const res = await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/users/",
@@ -61,7 +61,7 @@ function SignUp(props) {
   };
 
   return (
-    <Form onSubmit={handleSignUp}>
+    <Form>
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Username</Form.Label>
         <Form.Control

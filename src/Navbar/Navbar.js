@@ -6,12 +6,13 @@ import QuestionSearch from "./QuestionSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store";
 import { Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 function AlejandriaNavbar(props) {
   const { setShowLogin, setShowSignUp } = props;
   const user = useSelector((s) => s.user);
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   console.log(user);
 
   return (
@@ -31,7 +32,14 @@ function AlejandriaNavbar(props) {
           {user && user.data && (
             <Stack direction="horizontal" gap={3} style={{ color: "white" }}>
               {user.data.info.username}
-              <Button onClick={() => dispatch(userLogout())}>Log out</Button>
+              <Button
+                onClick={() => {
+                  dispatch(userLogout());
+                  navigate("/");
+                }}
+              >
+                Log out
+              </Button>
             </Stack>
           )}
         </Navbar.Collapse>
