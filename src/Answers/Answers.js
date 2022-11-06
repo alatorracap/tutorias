@@ -1,20 +1,17 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useAnswers } from "../hooks/api";
-import { DataTable } from "primereact/datatable";
-import { Column } from "primereact/column";
 import {
   Alert,
   Button,
   Col,
   Container,
   Form,
-  ListGroup,
   Row,
   Stack,
 } from "react-bootstrap";
 import editAnswer from "../Controllers/editAnswer";
 import { Panel } from "primereact/panel";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useState } from "react";
 
 function Answers() {
@@ -47,7 +44,6 @@ function Answers() {
   const token = newData.data.token;
 
   const handleDeleteAnswer = async (to) => {
-    console.log(updateAnswer);
     await fetch(
       "http://localhost:" +
         process.env.REACT_APP_PORT +
@@ -58,7 +54,6 @@ function Answers() {
         headers: { Authorization: token },
       }
     ).then((res) => {
-      console.log(res);
       if (!res.ok) {
         return res.text().then((text) => {
           setAlertSeverity("danger");
@@ -67,7 +62,6 @@ function Answers() {
           setTitle("Oh snap! You got an error!");
         });
       } else {
-        console.log(res);
         res.json().then((data) => {
           setAlertSeverity("success");
           setErrorMessage(data.message);
@@ -85,7 +79,6 @@ function Answers() {
     <div className="answersDiv">
       {Answers && (
         <>
-          {console.log(Answers.data.Answer)}
           <Panel header={"Edit answer"}>
             <Container>
               <Row>
@@ -135,7 +128,6 @@ function Answers() {
                                   setShowAlert(true);
                                   setErrorMessage(text);
                                   setTitle("Oh snap! You got an error!");
-                                  //throw new Error(text);
                                 });
                               } else {
                                 res.json().then((data) => {
