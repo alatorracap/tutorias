@@ -16,13 +16,6 @@ function SignUp(props) {
 
   const technologies = process.env.REACT_APP_TECHNOLOGY.split(",", 6);
   const roles = process.env.REACT_APP_ROLE.split(",");
-  console.log(roles);
-
-  console.log("username", username);
-  console.log("email", email);
-  console.log("password", password);
-  console.log("userRole", userRole);
-  console.log("technology", technology);
 
   const handleSignUp = async (e) => {
     //*setshow false oculta el modal, recuerda activarlo cuando funcione el
@@ -30,7 +23,6 @@ function SignUp(props) {
     setShow(false);
 
     e.preventDefault();
-    console.log("hola");
     const res = await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/users/",
       {
@@ -47,11 +39,8 @@ function SignUp(props) {
     ).then((response) => response.text());
 
     const data = JSON.parse(res);
-    console.log("data", data);
-    console.log("antes del error");
 
     if (data.Status !== "ok") {
-      console.log("entro al error");
       console.log("res", res);
 
       // TODO: Manejar error

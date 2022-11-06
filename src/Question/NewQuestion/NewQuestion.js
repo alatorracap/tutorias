@@ -27,7 +27,6 @@ function NewQuestion() {
     localStorage.getItem("redux_localstorage_simple_user")
   );
   const token = newData.data.token;
-  console.log("newData", newData);
 
   //* Verifica usuario
   const user = useSelector((s) => s.user);
@@ -35,7 +34,6 @@ function NewQuestion() {
   let technologies = process.env.REACT_APP_TECHNOLOGY;
   technologies = technologies.split(",", 6);
 
-  console.log("technologies", technologies);
   const handleNewQuestion = async (e) => {
     const res = await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",

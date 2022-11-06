@@ -23,11 +23,9 @@ function TopQuestions() {
     answered: "",
   });
   const [titleValue, setTitleValue] = useState("");
-  // const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
 
   // Get questions and format date
   const questions = useQuestions(filter);
-  //console.log(questions);
   questions &&
     questions.data.map((q) => {
       //Get Questions iteration date and save in a variable
@@ -53,7 +51,6 @@ function TopQuestions() {
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const onGlobalFilterChange = (e) => {
-    console.log("holitas");
     const value = e.target.value;
     let _filters = { ...filters };
     _filters["global"].value = value;
@@ -85,11 +82,9 @@ function TopQuestions() {
 
   const handleTitleOnChange = (e) => {
     setTitleValue(e.target.value);
-    console.log(e.target.value);
     const filterCopy = { ...filter };
     filterCopy.title = e.target.value;
     setFilter(filterCopy);
-    console.log(filter);
   };
 
   const titleBodyTemplate = (rowData) => {

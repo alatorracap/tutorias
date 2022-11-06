@@ -40,13 +40,7 @@ function EditUser() {
       method: "GET",
     }
   );
-  //console.log("data", data);
   const User = data.data.result[0];
-  //console.log("User", User);
-  // console.log(User.Username);
-  // console.log(User.Email);
-  // console.log(User.Password);
-  // console.log(User.Technology);
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -69,7 +63,6 @@ function EditUser() {
       method: "DELETE",
       headers: { Authorization: token },
     });
-    console.log("delete DELETE deldel");
   };
   return (
     <div className="editUser">
@@ -85,7 +78,6 @@ function EditUser() {
                     placeholder={User.Username}
                     onChange={(e) => {
                       news[0] = e.target.value;
-                      // console.log(e.target.value);
                     }}
                   />
                 </Col>

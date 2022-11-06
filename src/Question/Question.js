@@ -37,11 +37,8 @@ function Question() {
     "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
     { method: "GET" }
   );
-  console.log("************************Question", question);
-  console.log("Question", question);
 
   const onChangeRatingValue = async (e, answerID) => {
-    console.log("e.target.value", e);
     const res = await fetch(
       "http://localhost:" +
         process.env.REACT_APP_PORT +
@@ -60,7 +57,6 @@ function Question() {
   // const Answers = useAnswers(id);
   const QuestionData = question.data.question;
   const answers = question.data.answer;
-  console.log("Answers", answers);
 
   const Answ = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/Answer/" + id,

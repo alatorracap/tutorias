@@ -26,7 +26,6 @@ function Questions() {
   // const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
 
   const questions = useQuestions(filter);
-  //console.log(questions);
   questions &&
     questions.data.map((q) => {
       //Get Questions iteration date and save in a variable
@@ -52,7 +51,6 @@ function Questions() {
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const onGlobalFilterChange = (e) => {
-    console.log("holitas");
     const value = e.target.value;
     let _filters = { ...filters };
     _filters["global"].value = value;
@@ -84,11 +82,9 @@ function Questions() {
 
   const handleTitleOnChange = (e) => {
     setTitleValue(e.target.value);
-    console.log(e.target.value);
     const filterCopy = { ...filter };
     filterCopy.title = e.target.value;
     setFilter(filterCopy);
-    console.log(filter);
   };
 
   const titleFilterTemplate = () => {

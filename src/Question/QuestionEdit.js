@@ -10,7 +10,6 @@ function QuestionEdit() {
   //*agarra el parametro pasado al enlace
   const location = useLocation();
   const { question } = location.state;
-  console.log(question);
 
   const [questionTitle, setQuestionTitle] = useState(question.Title);
   const [questionDescription, setQuestionDescription] = useState(

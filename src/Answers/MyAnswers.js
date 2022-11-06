@@ -16,8 +16,6 @@ function MyAnswers() {
 
   const myAnswers = useMyAnswers(user_id);
 
-  console.log("myAnswers", myAnswers);
-
   return (
     <div className="myanswers">
       {myAnswers && (

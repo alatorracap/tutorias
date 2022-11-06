@@ -51,10 +51,7 @@ function NewAnswer() {
 
   const onClickSubmit = () => {
     setAnswer(protoAnswer);
-    console.log(protoAnswer);
-    while (protoAnswer === undefined) {
-      console.log("soy bobo");
-    }
+    while (protoAnswer === undefined) {}
     setAnswer(protoAnswer);
   };
 
