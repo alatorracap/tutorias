@@ -1,19 +1,12 @@
-//import "./User.css";
 import useFetch from "fetch-suspense";
-import { json, Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 //*import de bootstrap
 import ListGroup from "react-bootstrap/ListGroup";
 
 function Users() {
-  // const users = useUsers();
-
   const users = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/users/"
   );
-
-  //console.log("us", us);
-  console.log("users", users);
 
   return (
     <div className="allusers">

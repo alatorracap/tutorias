@@ -8,6 +8,7 @@ import { Rating } from "primereact/rating";
 
 import { OrderList } from "primereact/orderlist";
 import "./Question.css";
+import { useSelector } from "react-redux";
 
 function Question() {
   const [showAlert, setShowAlert] = useState(false);
@@ -19,6 +20,7 @@ function Question() {
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
+  const user = useSelector((s) => s.user);
 
   let token;
   if (newData) {
@@ -26,13 +28,6 @@ function Question() {
   }
 
   const { id } = useParams();
-
-  console.log(
-    useFetch(
-      "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
-      { method: "GET" }
-    )
-  );
 
   const question = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
@@ -57,19 +52,13 @@ function Question() {
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
-            console.log(text);
             setAlertSeverity("warning");
             setShowAlert(true);
             setErrorMessage(text);
             setTitle("Oh snap! ");
-            //throw new Error(text);
           });
         } else {
-          console.log(res);
-          //window.location.reload();
           res.json().then((data) => {
-            //setShow(false);
-            console.log(data);
             setAlertSeverity("success");
             setErrorMessage(data.message);
             setShowAlert(true);
@@ -84,7 +73,6 @@ function Question() {
         console.log("caught it!", err);
       });
   };
-  // const Answers = useAnswers(id);
   const QuestionData = question.data.question;
   const answers = question.data.answer;
 
@@ -141,33 +129,36 @@ function Question() {
             </Panel>
           </Col>
         </Row>
-
-        <Row>
-          <NewAnswer
-            setShowAlert={setShowAlert}
-            setErrorMessage={setErrorMessage}
-            setTitle={setTitle}
-            setAlertSeverity={setAlertSeverity}
-          />
-        </Row>
-        <Row>
-          <Col>
-            {showAlert && (
-              <Alert
-                variant={alertSeverity}
-                onClose={() => {
-                  setShowAlert(false);
-                  window.location.reload();
-                }}
-                dismissible
-                className="alert-fixed"
-              >
-                <Alert.Heading>{title}</Alert.Heading>
-                <p>{errorMessage}</p>
-              </Alert>
-            )}
-          </Col>
-        </Row>
+        {user && (
+          <>
+            <Row>
+              <NewAnswer
+                setShowAlert={setShowAlert}
+                setErrorMessage={setErrorMessage}
+                setTitle={setTitle}
+                setAlertSeverity={setAlertSeverity}
+              />
+            </Row>
+            <Row>
+              <Col>
+                {showAlert && (
+                  <Alert
+                    variant={alertSeverity}
+                    onClose={() => {
+                      setShowAlert(false);
+                      window.location.reload();
+                    }}
+                    dismissible
+                    className="alert-fixed"
+                  >
+                    <Alert.Heading>{title}</Alert.Heading>
+                    <p>{errorMessage}</p>
+                  </Alert>
+                )}
+              </Col>
+            </Row>
+          </>
+        )}
         <Row>
           <Col>
             {answers && (

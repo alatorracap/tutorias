@@ -5,7 +5,6 @@ import { Button, Col, Form, Stack } from "react-bootstrap";
 
 function NewAnswer(props) {
   const [protoAnswer, setProtoAnswer] = useState("");
-  const [answer, setAnswer] = useState("");
   const { setAlertSeverity, setShowAlert, setErrorMessage, setTitle } = props;
   //*Agarra el token del local storage
   const newData = JSON.parse(
@@ -17,15 +16,11 @@ function NewAnswer(props) {
     token = newData.data.token;
   }
 
-  // //* Verifica usuario
-  const user = useSelector((s) => s.user);
-
   // //*agarra el parametro pasado al enlace
   let { id } = useParams();
 
   async function createNewAnswer(protoAnswer) {
     let answer = protoAnswer;
-    console.log(answer);
     await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/answers/",
       {
@@ -40,18 +35,13 @@ function NewAnswer(props) {
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
-            console.log(text);
             setAlertSeverity("warning");
             setShowAlert(true);
             setErrorMessage(text);
             setTitle("Oh snap! ");
-            //throw new Error(text);
           });
         } else {
-          console.log(res);
           res.json().then((data) => {
-            //setShow(false);
-            console.log(data);
             setAlertSeverity("success");
             setErrorMessage(data.message);
             setShowAlert(true);

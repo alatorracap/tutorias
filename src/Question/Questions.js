@@ -23,7 +23,6 @@ function Questions() {
     answered: "",
   });
   const [titleValue, setTitleValue] = useState("");
-  // const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
 
   const questions = useQuestions(filter);
   questions &&

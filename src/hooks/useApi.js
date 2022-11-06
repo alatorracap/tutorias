@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 function useApi(url, metodo, jsonParams) {
   const [data, setData] = useState();
@@ -9,7 +8,7 @@ function useApi(url, metodo, jsonParams) {
   // Add to URL jsonParams object if not undefined
   if (jsonParams !== undefined) {
     const new_params = new URLSearchParams([
-      ...Object.entries(jsonParams), // [["c","a"],["d","2"],["e","false"]]
+      ...Object.entries(jsonParams),
     ]).toString();
 
     newUrl = new URL(`${url}?${new_params}`);
@@ -31,10 +30,7 @@ function useApi(url, metodo, jsonParams) {
         headers: { Authorization: token },
         method: metodo,
       });
-      console.log("res", res);
       if (res.status === 401) {
-        console.log("res.status", res.status);
-        console.log("ERRORRRR");
       } else {
         const data = await res.json();
         setData(data);

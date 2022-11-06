@@ -15,7 +15,7 @@ function AboutUs() {
       <div>inakipf@gmail.com</div>
       <div>
         <a href="https://www.linkedin.com/in/inakiperezfernandez/">
-          <i class="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
+          <i className="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
         </a>
       </div>
     </Stack>
@@ -26,7 +26,7 @@ function AboutUs() {
       <div>alatorracap@gmail.com</div>
       <div>
         <a href="https://www.linkedin.com/in/alejandra-latorraca-poblacion/">
-          <i class="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
+          <i className="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
         </a>
       </div>
     </Stack>
@@ -36,7 +36,7 @@ function AboutUs() {
       <div>mariocollaralv@gmail.com</div>
       <div>
         <a href="https://www.linkedin.com/in/mariocollaralvarez">
-          <i class="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
+          <i className="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
         </a>
       </div>
     </Stack>

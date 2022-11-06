@@ -37,7 +37,6 @@ function SignUp(props) {
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
-            console.log(text);
             setAlertSeverity("danger");
             setShowAlert(true);
             setErrorMessage(text);
@@ -45,10 +44,7 @@ function SignUp(props) {
             //throw new Error(text);
           });
         } else {
-          console.log(res);
           res.json().then((data) => {
-            //setShow(false);
-            console.log(data);
             setAlertSeverity("warning");
             setErrorMessage(data.Message);
             setShowAlert(true);
@@ -102,9 +98,6 @@ function SignUp(props) {
             name="email"
           />
         </Form.Group>
-        {/* {status === "error" && (
-        <p className="error">Usuario o contraseña incorrectos.</p>
-      )} */}
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control

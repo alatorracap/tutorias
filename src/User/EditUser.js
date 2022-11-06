@@ -2,7 +2,6 @@ import { useParams } from "react-router-dom";
 import useFetch from "fetch-suspense";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-// import { userEdit } from "./userEdit";
 import { useState } from "react";
 import userEdit from "../Controllers/editUser";
 import { Panel } from "primereact/panel";
@@ -11,9 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogout } from "../store";
 
-// import e from "express";
 function EditUser() {
-  // const [userData, setUserData] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -33,8 +30,6 @@ function EditUser() {
 
   //*agarra el parametro pasado al enlace
   let { id } = useParams();
-
-  //console.log("user iddd", id);
 
   const data = useFetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/users/" + id,
@@ -184,21 +179,15 @@ function EditUser() {
                       variant="secondary"
                       onClick={(e) => {
                         userEdit(token, news).then((res) => {
-                          console.log(res);
                           if (!res.ok) {
                             return res.text().then((text) => {
-                              console.log(text);
                               setAlertSeverity("danger");
                               setShowAlert(true);
                               setErrorMessage(text);
                               setTitle("Oh snap! You got an error!");
-                              //throw new Error(text);
                             });
                           } else {
-                            console.log(res);
                             res.json().then((data) => {
-                              //setShow(false);
-                              console.log(data);
                               setAlertSeverity("success");
                               setErrorMessage(data.message);
                               setShowAlert(true);

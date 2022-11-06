@@ -35,7 +35,6 @@ const Sidebar = () => {
   }
 
   function gotoProfile() {
-    console.log("holis");
     return navigate(`/users/${userID}`);
   }
 
@@ -54,7 +53,6 @@ const Sidebar = () => {
         overflow: "scroll initial",
       }}
     >
-      {" "}
       <CDBSidebar textColor="white" backgroundColor="darkcyan">
         <CDBSidebarHeader
           prefix={<i className="fa fa-bars fa-large"></i>}

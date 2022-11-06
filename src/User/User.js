@@ -16,10 +16,7 @@ function User() {
 
   let { id } = useParams();
 
-  console.log("newData", newData);
-
   const data = useUser(id);
-  console.log(data);
 
   if (data && data.data) {
     const User = data && data.data.result[0];

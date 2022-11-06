@@ -177,12 +177,7 @@ function TopQuestions() {
             filterDisplay="row"
             loading={false}
             responsiveLayout="scroll"
-            globalFilterFields={[
-              "Title",
-              "Technology",
-              //"QuestionDate",
-              //"Answered",
-            ]}
+            globalFilterFields={["Title", "Technology"]}
             header={header}
             emptyMessage="No questions found."
           >
@@ -207,7 +202,6 @@ function TopQuestions() {
             <Column
               field="Technology"
               header="Technology"
-              // filterField="Technology"
               showFilterMenu={false}
               style={{ minWidth: "12rem" }}
               body={technologyBodyTemplate}

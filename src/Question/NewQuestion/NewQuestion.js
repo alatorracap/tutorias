@@ -50,7 +50,6 @@ function NewQuestion() {
       .then((res) => {
         if (!res.ok) {
           return res.text().then((text) => {
-            console.log(text);
             setAlertSeverity("danger");
             setShowAlert(true);
             setErrorMessage(text);
@@ -58,10 +57,7 @@ function NewQuestion() {
             //throw new Error(text);
           });
         } else {
-          console.log(res);
           res.json().then((data) => {
-            //setShow(false);
-            console.log(data);
             setAlertSeverity("success");
             setErrorMessage(data.message);
             setShowAlert(true);

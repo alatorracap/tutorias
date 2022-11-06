@@ -15,6 +15,11 @@ function MyQuestions() {
 
   return (
     <div className="questionDiv">
+      {!myQuestions && (
+        <Container>
+          <Panel header="My Questions">You dont have any question</Panel>
+        </Container>
+      )}
       {myQuestions && (
         <Container>
           <Panel header="My Questions">

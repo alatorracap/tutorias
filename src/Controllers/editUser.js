@@ -20,14 +20,12 @@ async function userEdit(token, user) {
     }
   )
     .then((res) => {
-      console.log(res);
       response = res;
       return res;
     })
     .catch((err) => {
       console.log("caught it!", err);
     });
-  console.log("==============inside Data of user==============", data);
   return response;
 }
 
