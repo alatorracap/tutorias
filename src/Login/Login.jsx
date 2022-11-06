@@ -1,11 +1,7 @@
 import { useState } from "react";
 import { Alert, Button, Form, Stack } from "react-bootstrap";
-import { Link, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-
-import { useSetUser } from "../UserContext";
-import { userLogin, userLogout } from "../store";
-import { text } from "@fortawesome/fontawesome-svg-core";
+import { useDispatch } from "react-redux";
+import { userLogin } from "../store";
 
 function Login(props) {
   const { setShow } = props;
