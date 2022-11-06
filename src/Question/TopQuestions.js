@@ -113,8 +113,7 @@ function TopQuestions() {
         onChange={(e) => options.filterApplyCallback(e.value)}
         itemTemplate={technologyItemTemplate}
         placeholder="Select a Technology"
-        c
-        lassName="p-column-filter"
+        className="p-column-filter"
         showClear
       />
     );
@@ -235,25 +234,6 @@ function TopQuestions() {
               filterElement={answeredRowFilterTemplate}
               showFilterMenu={false}
             />
-            {/* <Column
-                field="status"
-                header="Status"
-                showFilterMenu={false}
-                filterMenuStyle={{ width: "14rem" }}
-                style={{ minWidth: "12rem" }}
-                body={statusBodyTemplate}
-                filter
-                filterElement={statusRowFilterTemplate}
-              />
-              <Column
-                field="verified"
-                header="Verified"
-                dataType="boolean"
-                style={{ minWidth: "6rem" }}
-                body={verifiedBodyTemplate}
-                filter
-                filterElement={verifiedRowFilterTemplate}
-              /> */}
           </DataTable>
         </>
       )}
