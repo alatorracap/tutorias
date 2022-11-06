@@ -20,7 +20,12 @@ function MenuItemNewQuestion() {
       <CDBSidebarMenuItem
         icon="question"
         suffix={
-          <CDBBadge color="secondary" size="small" borderType="pill">
+          <CDBBadge
+            intensity={900}
+            color="secondary"
+            size="small"
+            borderType="pill"
+          >
             new
           </CDBBadge>
         }

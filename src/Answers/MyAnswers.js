@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ListGroupItem } from "react-bootstrap";
-import { useMyAnswer } from "../hooks/api";
+import { Container, ListGroupItem } from "react-bootstrap";
+import { useMyAnswers } from "../hooks/api";
+import { Panel } from "primereact/panel";
 // import useFetch from "fetch-suspense";
 
 function MyAnswers() {
@@ -13,21 +14,24 @@ function MyAnswers() {
   // const token = newData.data.token;
   const user_id = newData.data.info.id;
 
-  const myAnswers = useMyAnswer(user_id);
+  const myAnswers = useMyAnswers(user_id);
 
   console.log("myAnswers", myAnswers);
 
   return (
     <div className="myanswers">
-      User Answers
       {myAnswers && (
-        <ListGroup>
-          {myAnswers.data.map((a, index) => (
-            <ListGroupItem key={index} action variant="light">
-              <Link to={`/questions/${a.Question_ID}`}> {a.Answer}</Link>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
+        <Container>
+          <Panel header="My Answers">
+            <ListGroup>
+              {myAnswers.data.map((a, index) => (
+                <ListGroupItem key={index} action variant="light">
+                  <Link to={`/answers/${a.ID}`}> {a.Answer}</Link>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Panel>
+        </Container>
       )}
     </div>
   );

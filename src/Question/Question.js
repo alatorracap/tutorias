@@ -66,45 +66,11 @@ function Question() {
     "http://localhost:" + process.env.REACT_APP_PORT + "/Answer/" + id,
     { method: "GET" }
   );
-  console.log("Answ", Answ);
-  const votes = Answ.votes;
-
-  console.log("Answ.votes", Answ.votes);
-
-  const handleDeleteQuestion = async (to) => {
-    await fetch(
-      "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
-      {
-        method: "DELETE",
-        headers: { Authorization: token },
-      }
-    );
-    console.log("question DELETE deldel");
-  };
-
-  const handleDeleteAnswer = async (a_id) => {
-    await fetch(
-      "http://localhost:" + process.env.REACT_APP_PORT + "/answer/" + a_id,
-      {
-        method: "DELETE",
-        headers: { Authorization: token },
-      }
-    );
-    console.log("answer DELETE deldel");
-  };
-
-  /*  const handleEvendDelete=(id)=>{
-    setMetodo("DELETE")
-    setUrl('http://localhost:3001/answers/'+id) 
-    console.log('url2', url)
-  } */
-  console.log("Answers", answers);
 
   // Loop of answers
   const itemTemplate = (item) => {
-    console.log("item", item);
-
-    const answerVote = votes.find((vote) => vote.Answer_ID === item.ID);
+    const answerVote =
+      Answ.votes && Answ.votes.find((vote) => vote.Answer_ID === item.ID);
     //only if answerVote is !== undefined
     let rating = 0;
     if (answerVote !== undefined) {
@@ -129,7 +95,7 @@ function Question() {
 
         <div className="answer-rating">
           <Rating
-            class="p-rating"
+            className="p-rating"
             value={rating}
             onChange={(e) => onChangeRatingValue(e, item.ID)}
             stars={5}
@@ -154,7 +120,7 @@ function Question() {
 
       <Row>
         <Col>
-          {answers && (
+          {answers && Answ.votes && (
             <OrderList
               value={answers}
               header="Answers"

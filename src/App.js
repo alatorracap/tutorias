@@ -20,11 +20,11 @@ import MyQuestions from "./Question/MyQuestions";
 import QuestionEdit from "./Question/QuestionEdit";
 import AnswerEdit from "./Answers/AnswerEdit";
 import MyAnswers from "./Answers/MyAnswers";
+import AboutUs from "./SideBar/AboutUs";
+import TopQuestions from "./Question/TopQuestions";
 
 function App(props) {
   const location = useLocation();
-
-  console.log(window);
 
   return (
     <div className="App">
@@ -47,7 +47,7 @@ function App(props) {
                   {/* info de una pregunta */}
                   <Route path="/answer/:id" element={<AnswerEdit />} />
                   <Route path="/questions/:id" element={<Question />} />
-                  <Route path="/questions" element={<Questions />} />
+                  <Route path="/questions" element={<TopQuestions />} />
                   <Route path="/question" element={<NewQuestion />} />
                   <Route path="/question/:id" element={<QuestionEdit />} />
                   <Route path="/myquestions" element={<MyQuestions />} />
@@ -55,6 +55,7 @@ function App(props) {
                   <Route path="/users" element={<Users />} />
                   <Route path="/users/:id" element={<User />} />
                   <Route path="/user/:id" element={<EditUser />} />
+                  <Route path="/aboutus" element={<AboutUs />} />
                 </Routes>
               </ErrorBoundary>
             </Col>

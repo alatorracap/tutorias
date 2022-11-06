@@ -7,27 +7,20 @@ import {
   CDBSidebarHeader,
   CDBSidebarMenu,
   CDBSidebarMenuItem,
-  CDBIcon,
-  CDBSidebarSubMenu,
 } from "cdbreact";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Sidebar.css";
-import ModalNewQuestion from "../Question/NewQuestion/NewQuestion";
-import MenuItemNewQuestion from "../Question/NewQuestion/MenuItemNewQuestion";
 import { useSelector } from "react-redux";
 
 const Sidebar = () => {
   let userID;
   const navigate = useNavigate();
-  //const { setShowModalNewQUestion } = props;
   const user = useSelector((s) => s.user);
 
   //* se trae el id del usuario del local storage
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
-
-  console.log(user);
 
   if (user && newData && newData.data) {
     userID = newData.data.info.id;
@@ -52,14 +45,8 @@ const Sidebar = () => {
   function gotoMyAnswers() {
     return navigate("/myanswers");
   }
+
   return (
-    // <aside
-    //   className="sidebar"
-    //   style={{
-    //     overflow: "scroll initial",
-    //     boxSizing: "border-box",
-    //   }}
-    // >
     <div
       style={{
         display: "flex",
@@ -92,6 +79,7 @@ const Sidebar = () => {
                   color="danger"
                   size="small"
                   borderType="pill"
+                  intensity={900}
                 >
                   ★
                 </CDBBadge>
@@ -107,6 +95,7 @@ const Sidebar = () => {
                     icon="question"
                     suffix={
                       <CDBBadge
+                        intensity={900}
                         color="secondary"
                         size="small"
                         borderType="pill"
@@ -146,7 +135,9 @@ const Sidebar = () => {
               padding: "20px 5px",
             }}
           >
-            About us
+            <a className="aboutUs" href="/aboutus" color="white">
+              About us
+            </a>
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>

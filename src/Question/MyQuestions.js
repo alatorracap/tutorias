@@ -1,33 +1,35 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useMyQuestion, useMyQuestions, useQuestions } from "../hooks/api";
+import { useMyQuestions, useMyQuestionss, useQuestions } from "../hooks/api";
 import ListGroup from "react-bootstrap/ListGroup";
-import { ListGroupItem } from "react-bootstrap";
-// import useFetch from "fetch-suspense";
+import { Container, ListGroupItem } from "react-bootstrap";
+import { Panel } from "primereact/panel";
 
 function MyQuestions() {
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
 
-  const token = newData.data.token;
   const user_id = newData.data.info.id;
 
-  const questions = useMyQuestion(user_id);
-  // const questions = useMyQuestions(user_id);
-  console.log("questions", questions);
+  const myQuestions = useMyQuestions(user_id);
+  console.log("questions", myQuestions);
 
   return (
     <div className="questionDiv">
-      Questions
-      {questions && (
-        <ListGroup>
-          {questions.data.map((q, index) => (
-            <ListGroupItem key={index} action variant="light">
-              <Link to={`/question/${q.ID}`}> {q.Title}</Link>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
+      {myQuestions && (
+        <Container>
+          <Panel header="My Questions">
+            <ListGroup>
+              {myQuestions.data.map((q, index) => (
+                <ListGroupItem key={index} action variant="light">
+                  <Link to={`/question/${q.ID}`} state={{ question: q }}>
+                    {q.Title}
+                  </Link>
+                </ListGroupItem>
+              ))}
+            </ListGroup>
+          </Panel>
+        </Container>
       )}
     </div>
   );

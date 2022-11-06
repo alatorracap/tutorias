@@ -6,6 +6,7 @@ import { Panel } from "primereact/panel";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import { Link } from "react-router-dom";
+import { Container } from "react-bootstrap";
 
 function User() {
   //* se trae el token del local storage
@@ -36,19 +37,21 @@ function User() {
         {data !== null && (
           <div>
             {User && (
-              <Panel header={User.Username}>
-                <p>Role: {User.UserRole}</p>
-                <p>Technology: {User.Technology}</p>
-                {own && (
-                  <div>
-                    <p>Email: {User.Email}</p>
-                    <Button variant="primary" href={editLink}>
-                      Editar
-                      {/* <Link to={`/user/${User.ID}`}>Edit</Link> */}
-                    </Button>
-                  </div>
-                )}
-              </Panel>
+              <Container>
+                <Panel header={User.Username}>
+                  <p>Role: {User.UserRole}</p>
+                  <p>Technology: {User.Technology}</p>
+                  {own && (
+                    <div>
+                      <p>Email: {User.Email}</p>
+                      <Button variant="secondary" href={editLink}>
+                        Edit
+                        {/* <Link to={`/user/${User.ID}`}>Edit</Link> */}
+                      </Button>
+                    </div>
+                  )}
+                </Panel>
+              </Container>
             )}
           </div>
         )}
