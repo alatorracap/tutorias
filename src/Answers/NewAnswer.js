@@ -3,10 +3,10 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Button, Col, Form, Stack } from "react-bootstrap";
 
-function NewAnswer() {
+function NewAnswer(props) {
   const [protoAnswer, setProtoAnswer] = useState("");
   const [answer, setAnswer] = useState("");
-
+  const { setAlertSeverity, setShowAlert, setErrorMessage, setTitle } = props;
   //*Agarra el token del local storage
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
@@ -37,15 +37,31 @@ function NewAnswer() {
         }),
       }
     )
-      .then((data) => {
-        if (data.ok) {
-          window.location.reload();
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then((text) => {
+            console.log(text);
+            setAlertSeverity("warning");
+            setShowAlert(true);
+            setErrorMessage(text);
+            setTitle("Oh snap! ");
+            //throw new Error(text);
+          });
         } else {
-          console.log(data);
+          console.log(res);
+          res.json().then((data) => {
+            //setShow(false);
+            console.log(data);
+            setAlertSeverity("success");
+            setErrorMessage(data.Message);
+            setShowAlert(true);
+            setTitle("Nice!");
+          });
+          window.location.reload();
         }
       })
-      .catch((error) => {
-        console.log(error);
+      .catch((err) => {
+        console.log("caught it!", err);
       });
   }
 

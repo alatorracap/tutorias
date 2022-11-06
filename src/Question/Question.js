@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
-import { Col, Container, ListGroupItem, Row } from "react-bootstrap";
+import { useState } from "react";
+import { Alert, Col, Container, ListGroupItem, Row } from "react-bootstrap";
 import useFetch from "fetch-suspense";
 import NewAnswer from "../Answers/NewAnswer";
 import { Panel } from "primereact/panel";
@@ -13,6 +14,10 @@ import { useSelector } from "react-redux";
 
 function Question() {
   const user = useSelector((s) => s.user);
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("danger");
+  const [title, setTitle] = useState();
 
   //* se trae el token del local storage
   const newData = JSON.parse(
@@ -52,7 +57,36 @@ function Question() {
           vote: e.target.value,
         }),
       }
-    );
+    )
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then((text) => {
+            console.log(text);
+            setAlertSeverity("warning");
+            setShowAlert(true);
+            setErrorMessage(text);
+            setTitle("Oh snap! ");
+            //throw new Error(text);
+          });
+        } else {
+          console.log(res);
+          //window.location.reload();
+          res.json().then((data) => {
+            //setShow(false);
+            console.log(data);
+            setAlertSeverity("success");
+            setErrorMessage(data.message);
+            setShowAlert(true);
+            setTitle("Nice!");
+          });
+          setTimeout(function () {
+            window.location.reload();
+          }, 35000);
+        }
+      })
+      .catch((err) => {
+        console.log("caught it!", err);
+      });
   };
   // const Answers = useAnswers(id);
   const QuestionData = question.data.question;
@@ -95,41 +129,63 @@ function Question() {
             value={rating}
             onChange={(e) => onChangeRatingValue(e, item.ID)}
             stars={5}
+            cancel={false}
           />
         </div>
       </div>
     );
   };
   return (
-    <Container>
-      <Row>
-        <Col>
-          <Panel header={QuestionData.Title}>
-            <p>{QuestionData.Question}</p>
-          </Panel>
-        </Col>
-      </Row>
+    <>
+      <Container>
+        <Row>
+          <Col>
+            <Panel header={QuestionData.Title}>
+              <p>{QuestionData.Question}</p>
+            </Panel>
+          </Col>
+        </Row>
 
-      <Row>
-        <NewAnswer />
-      </Row>
-
-      <Row>
-        <Col>
-          {answers && Answ.votes && (
-            <OrderList
-              value={answers}
-              header="Answers"
-              dataKey="ID"
-              itemTemplate={itemTemplate}
-              //filter
-              //filterBy="name"
-              className="OrderList"
-            ></OrderList>
-          )}
-        </Col>
-      </Row>
-    </Container>
+        <Row>
+          <NewAnswer
+            setShowAlert={setShowAlert}
+            setErrorMessage={setErrorMessage}
+            setTitle={setTitle}
+            setAlertSeverity={setAlertSeverity}
+          />
+        </Row>
+        <Row>
+          <Col>
+            {showAlert && (
+              <Alert
+                variant={alertSeverity}
+                onClose={() => {
+                  setShowAlert(false);
+                }}
+                dismissible
+                className="alert-fixed"
+              >
+                <Alert.Heading>{title}</Alert.Heading>
+                <p>{errorMessage}</p>
+              </Alert>
+            )}
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            {answers && Answ.votes && (
+              <OrderList
+                value={answers}
+                header="Answers"
+                dataKey="ID"
+                itemTemplate={itemTemplate}
+                className="OrderList"
+              ></OrderList>
+            )}
+          </Col>
+        </Row>
+      </Container>
+    </>
   );
 }
 
