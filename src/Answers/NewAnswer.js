@@ -53,23 +53,19 @@ function NewAnswer(props) {
             //setShow(false);
             console.log(data);
             setAlertSeverity("success");
-            setErrorMessage(data.Message);
+            setErrorMessage(data.message);
             setShowAlert(true);
             setTitle("Nice!");
           });
-          window.location.reload();
+          setTimeout(function () {
+            if (alert) window.location.reload();
+          }, 5000);
         }
       })
       .catch((err) => {
         console.log("caught it!", err);
       });
   }
-
-  const onClickSubmit = () => {
-    setAnswer(protoAnswer);
-    while (protoAnswer === undefined) {}
-    setAnswer(protoAnswer);
-  };
 
   return (
     <>
