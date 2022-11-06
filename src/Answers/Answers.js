@@ -98,7 +98,7 @@ function Answers() {
                             navigate("/myanswers");
                           }}
                         >
-                          Delete Question
+                          Delete Answer
                         </Button>
                       </div>
                     </Stack>
