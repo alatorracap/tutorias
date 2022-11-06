@@ -24,8 +24,8 @@ function AboutUs() {
         </Col>
         <Col>
           <Card footer={footer2} header={header2}>
-            <h3>Name</h3>
-            <p>Description</p>
+            <h3>Alejandra Latorraca</h3>
+            <p>Full Stack Web Developer, Programmer & Analyst </p>
           </Card>
         </Col>
         <Col>
