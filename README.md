@@ -5,7 +5,9 @@ Plataforma donde estudiantes de programación realizan consultas concretas a exp
 tecnología. Las preguntas están disponibles para todos los usuarios, las respuestas sólo para los
 usuarios registrados.
 
-USUARIO ANÓNIMO# TUTORÍAS CON EXPERTOS
+## IMPORTANTE
+
+Si que quiere iniciar la prueba de la app con usuarios, preguntas y respuestas ya creadas por favor correr el script de la base de datos localizada en el Back llamado initDB.js o el initdbdemo.js
 
 ## DESCRIPCIÓN
 
