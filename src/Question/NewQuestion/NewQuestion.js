@@ -1,22 +1,22 @@
 import { useState } from "react";
 import {
+  Alert,
   Button,
   Col,
   Container,
   InputGroup,
-  Modal,
   Row,
   Stack,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
-import AlejandriaModal from "../../Components/AlejandriaModal";
-import { useNewQuestion } from "../../hooks/api";
 import { Panel } from "primereact/panel";
 
 function NewQuestion() {
-  // const newQuestion = useNewQuestion();
-  // const dispatch = useDispatch();
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("danger");
+  const [alertTitle, setAlertTitle] = useState();
 
   const [title, setTitle] = useState("");
   const [question, setQuestion] = useState("");
@@ -27,7 +27,6 @@ function NewQuestion() {
     localStorage.getItem("redux_localstorage_simple_user")
   );
   const token = newData.data.token;
-  console.log("newData", newData);
 
   //* Verifica usuario
   const user = useSelector((s) => s.user);
@@ -35,9 +34,8 @@ function NewQuestion() {
   let technologies = process.env.REACT_APP_TECHNOLOGY;
   technologies = technologies.split(",", 6);
 
-  console.log("technologies", technologies);
   const handleNewQuestion = async (e) => {
-    const res = await fetch(
+    await fetch(
       "http://localhost:" + process.env.REACT_APP_PORT + "/questions/",
       {
         method: "POST",
@@ -48,23 +46,60 @@ function NewQuestion() {
           technology: technology,
         }),
       }
-    );
-    window.location.reload(false);
-
-    /* if (!res.ok) {
-      // TODO: Manejar error
-    } else {
-      const data = await res.json();
-      console.log("pregunta creada", data);
-    } */
+    )
+      .then((res) => {
+        if (!res.ok) {
+          return res.text().then((text) => {
+            console.log(text);
+            setAlertSeverity("danger");
+            setShowAlert(true);
+            setErrorMessage(text);
+            setTitle("Oh snap! You got an error!");
+            //throw new Error(text);
+          });
+        } else {
+          console.log(res);
+          res.json().then((data) => {
+            //setShow(false);
+            console.log(data);
+            setAlertSeverity("success");
+            setErrorMessage(data.message);
+            setShowAlert(true);
+            setTitle("Nice!");
+          });
+          setTimeout(function () {
+            window.location.reload();
+          }, 5000);
+        }
+      })
+      .catch((err) => {
+        console.log("caught it!", err);
+      });
   };
 
   return (
     <>
       {user && (
-        <Form onSubmit={handleNewQuestion}>
+        <Form>
           <Panel header="New Question">
             <Container>
+              <Row>
+                <Col>
+                  {showAlert && (
+                    <Alert
+                      variant={alertSeverity}
+                      onClose={() => {
+                        setShowAlert(false);
+                      }}
+                      dismissible
+                      className="alert-fixed"
+                    >
+                      <Alert.Heading>{title}</Alert.Heading>
+                      <p>{errorMessage}</p>
+                    </Alert>
+                  )}
+                </Col>
+              </Row>
               <Row>
                 <Col>
                   <Form.Label>Title</Form.Label>
@@ -116,7 +151,7 @@ function NewQuestion() {
                 <Col>
                   <Stack direction="horizontal" gap={3}>
                     <div className="ms-auto">
-                      <Button variant="secondary" type="submit">
+                      <Button variant="secondary" onClick={handleNewQuestion}>
                         Publish
                       </Button>
                     </div>

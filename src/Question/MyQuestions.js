@@ -12,7 +12,6 @@ function MyQuestions() {
   const user_id = newData.data.info.id;
 
   const myQuestions = useMyQuestions(user_id);
-  console.log("questions", myQuestions);
 
   return (
     <div className="questionDiv">

@@ -21,8 +21,6 @@ function Answers() {
   const { id } = useParams();
   const Answers = useAnswers(id);
 
-  console.log("Answers", Answers);
-
   useEffect(() => {
     if (Answers) {
       setAnswer(Answers.data.Answer);
@@ -35,8 +33,6 @@ function Answers() {
     id: id,
     answer: answer,
   };
-
-  console.log(updateAnswer);
 
   //* se trae el token del local storage
   const newData = JSON.parse(

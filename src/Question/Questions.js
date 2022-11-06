@@ -26,7 +26,6 @@ function Questions() {
   // const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
 
   const questions = useQuestions(filter);
-  //console.log(questions);
   questions &&
     questions.data.map((q) => {
       //Get Questions iteration date and save in a variable
@@ -52,7 +51,6 @@ function Questions() {
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const onGlobalFilterChange = (e) => {
-    console.log("holitas");
     const value = e.target.value;
     let _filters = { ...filters };
     _filters["global"].value = value;
@@ -84,11 +82,9 @@ function Questions() {
 
   const handleTitleOnChange = (e) => {
     setTitleValue(e.target.value);
-    console.log(e.target.value);
     const filterCopy = { ...filter };
     filterCopy.title = e.target.value;
     setFilter(filterCopy);
-    console.log(filter);
   };
 
   const titleFilterTemplate = () => {
@@ -186,12 +182,7 @@ function Questions() {
             filterDisplay="row"
             loading={false}
             responsiveLayout="scroll"
-            globalFilterFields={[
-              "Title",
-              "Technology",
-              //"QuestionDate",
-              //"Answered",
-            ]}
+            globalFilterFields={["Title", "Technology"]}
             header={header}
             emptyMessage="No questions found."
           >
@@ -217,7 +208,6 @@ function Questions() {
             <Column
               field="Technology"
               header="Technology"
-              // filterField="Technology"
               showFilterMenu={false}
               style={{ minWidth: "12rem" }}
               body={technologyBodyTemplate}
@@ -244,25 +234,6 @@ function Questions() {
               filterElement={answeredRowFilterTemplate}
               showFilterMenu={false}
             />
-            {/* <Column
-                field="status"
-                header="Status"
-                showFilterMenu={false}
-                filterMenuStyle={{ width: "14rem" }}
-                style={{ minWidth: "12rem" }}
-                body={statusBodyTemplate}
-                filter
-                filterElement={statusRowFilterTemplate}
-              />
-              <Column
-                field="verified"
-                header="Verified"
-                dataType="boolean"
-                style={{ minWidth: "6rem" }}
-                body={verifiedBodyTemplate}
-                filter
-                filterElement={verifiedRowFilterTemplate}
-              /> */}
           </DataTable>
         </>
       )}

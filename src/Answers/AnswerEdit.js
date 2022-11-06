@@ -23,7 +23,6 @@ function AnswerEdit() {
       method: "GET",
     }
   );
-  console.log("data", data);
   const fetchData = data.data[0];
   const answerData = [fetchData.ID, fetchData.Answer];
 

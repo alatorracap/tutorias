@@ -23,11 +23,9 @@ function TopQuestions() {
     answered: "",
   });
   const [titleValue, setTitleValue] = useState("");
-  // const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
 
   // Get questions and format date
   const questions = useQuestions(filter);
-  //console.log(questions);
   questions &&
     questions.data.map((q) => {
       //Get Questions iteration date and save in a variable
@@ -44,7 +42,7 @@ function TopQuestions() {
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    Title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    Title: { value: null, matchMode: FilterMatchMode.CONTAINS },
     Technology: { value: null, matchMode: FilterMatchMode.CONTAINS },
     QuestionDate: { value: null, matchMode: FilterMatchMode.DATE_IS },
     Answered: { value: null, matchMode: FilterMatchMode.EQUALS },
@@ -53,7 +51,6 @@ function TopQuestions() {
   const [globalFilterValue, setGlobalFilterValue] = useState("");
 
   const onGlobalFilterChange = (e) => {
-    console.log("holitas");
     const value = e.target.value;
     let _filters = { ...filters };
     _filters["global"].value = value;
@@ -85,15 +82,9 @@ function TopQuestions() {
 
   const handleTitleOnChange = (e) => {
     setTitleValue(e.target.value);
-    console.log(e.target.value);
     const filterCopy = { ...filter };
     filterCopy.title = e.target.value;
     setFilter(filterCopy);
-    console.log(filter);
-  };
-
-  const titleFilterTemplate = () => {
-    return <InputText value={titleValue} onChange={handleTitleOnChange} />;
   };
 
   const titleBodyTemplate = (rowData) => {
@@ -209,7 +200,6 @@ function TopQuestions() {
               filterField="Title"
               field="Title"
               style={{ minWidth: "12rem" }}
-              filterElement={titleFilterTemplate}
               body={titleBodyTemplate}
               filter
               filterPlaceholder="Search by Title"

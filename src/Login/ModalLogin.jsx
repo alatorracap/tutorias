@@ -37,7 +37,6 @@ function ModalLogin(props) {
       // TODO: Manejar error
     } else {
       const data = await res.json();
-      console.log("data", data);
       dispatch(userLogin(data));
       localStorage.setItem("session", data.data.token);
     }

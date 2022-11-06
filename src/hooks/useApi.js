@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 function useApi(url, metodo, jsonParams) {
-  console.log("metodo", metodo);
-  console.log("url", url);
   const [data, setData] = useState();
 
   let newUrl = url;
@@ -26,13 +24,9 @@ function useApi(url, metodo, jsonParams) {
     token = newData.data.token;
   }
 
-  console.log(newUrl);
-  console.log("token" + token);
-
   useEffect(() => {
     (async () => {
       //* se trae el token del local storage
-      console.log("dnasdfasd");
       const res = await fetch(newUrl, {
         headers: { Authorization: token },
         method: metodo,
@@ -44,7 +38,6 @@ function useApi(url, metodo, jsonParams) {
       } else {
         const data = await res.json();
         setData(data);
-        console.log("data", data);
       }
     })();
   }, [url, metodo]);

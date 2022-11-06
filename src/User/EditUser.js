@@ -1,13 +1,12 @@
 import { useParams } from "react-router-dom";
 import useFetch from "fetch-suspense";
-import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 // import { userEdit } from "./userEdit";
 import { useState } from "react";
 import userEdit from "../Controllers/editUser";
 import { Panel } from "primereact/panel";
-import { Col, Container, Row, Stack } from "react-bootstrap";
+import { Col, Container, Row, Stack, Alert } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userLogout } from "../store";
@@ -18,6 +17,11 @@ function EditUser() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [showAlert, setShowAlert] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [alertSeverity, setAlertSeverity] = useState("danger");
+  const [title, setTitle] = useState();
+
   const technologies = process.env.REACT_APP_TECHNOLOGY.split(",", 6);
   const roles = process.env.REACT_APP_ROLE.split(",");
 
@@ -26,7 +30,6 @@ function EditUser() {
     localStorage.getItem("redux_localstorage_simple_user")
   );
   const token = newData.data.token;
-  console.log("newData", newData);
 
   //*agarra el parametro pasado al enlace
   let { id } = useParams();
@@ -40,13 +43,7 @@ function EditUser() {
       method: "GET",
     }
   );
-  //console.log("data", data);
   const User = data.data.result[0];
-  //console.log("User", User);
-  // console.log(User.Username);
-  // console.log(User.Email);
-  // console.log(User.Password);
-  // console.log(User.Technology);
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -69,12 +66,29 @@ function EditUser() {
       method: "DELETE",
       headers: { Authorization: token },
     });
-    console.log("delete DELETE deldel");
   };
   return (
     <div className="editUser">
       <Panel header={"Edit user: " + User.Username}>
         <Container>
+          <Row>
+            <Col>
+              {showAlert && (
+                <Alert
+                  variant={alertSeverity}
+                  onClose={() => {
+                    setShowAlert(false);
+                    window.location.reload();
+                  }}
+                  dismissible
+                  className="alert-fixed"
+                >
+                  <Alert.Heading>{title}</Alert.Heading>
+                  <p>{errorMessage}</p>
+                </Alert>
+              )}
+            </Col>
+          </Row>
           <Form>
             <Form.Group>
               <Row>
@@ -85,7 +99,6 @@ function EditUser() {
                     placeholder={User.Username}
                     onChange={(e) => {
                       news[0] = e.target.value;
-                      // console.log(e.target.value);
                     }}
                   />
                 </Col>
@@ -128,7 +141,7 @@ function EditUser() {
               </Row>
               <Row>
                 <Col>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Group className="mb-3">
                     <Form.Label>Role</Form.Label>
                     <Form.Select
                       value={role}
@@ -145,13 +158,12 @@ function EditUser() {
                   </Form.Group>
                 </Col>
                 <Col>
-                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                  <Form.Group className="mb-3">
                     <Form.Label>Technology</Form.Label>
                     <Form.Select
                       value={technology}
                       onChange={(e) => setTechnology(e.target.value)}
                       name="technology"
-                      // disabled={userRole !== "Expert"}
                     >
                       <option>Open this select menu</option>
                       {technologies.map((technology) => (
@@ -163,8 +175,6 @@ function EditUser() {
                   </Form.Group>
                 </Col>
               </Row>
-              {/* <Form.Label>Technology</Form.Label>
-              <Form.Control type="text" placeholder={User.Technology} /> */}
             </Form.Group>
             <Row>
               <Col>
@@ -172,9 +182,33 @@ function EditUser() {
                   <div className="ms-auto">
                     <Button
                       variant="secondary"
-                      type="submit"
                       onClick={(e) => {
-                        userEdit(token, news);
+                        userEdit(token, news).then((res) => {
+                          console.log(res);
+                          if (!res.ok) {
+                            return res.text().then((text) => {
+                              console.log(text);
+                              setAlertSeverity("danger");
+                              setShowAlert(true);
+                              setErrorMessage(text);
+                              setTitle("Oh snap! You got an error!");
+                              //throw new Error(text);
+                            });
+                          } else {
+                            console.log(res);
+                            res.json().then((data) => {
+                              //setShow(false);
+                              console.log(data);
+                              setAlertSeverity("success");
+                              setErrorMessage(data.message);
+                              setShowAlert(true);
+                              setTitle("Nice!");
+                            });
+                            setTimeout(function () {
+                              if (alert) window.location.reload();
+                            }, 5000);
+                          }
+                        });
                       }}
                     >
                       Save

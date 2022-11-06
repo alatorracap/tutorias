@@ -25,12 +25,8 @@ function User() {
     const User = data && data.data.result[0];
     const editLink = `/user/${User.ID}`;
 
-    console.log("data", data);
-    // const User = data.data.result[0];
     //* confirma si el usuario actual es el mismo que el que se esta visitando
     const own = User.ID === newData.data.info.id ? true : false;
-    console.log("own", own);
-    console.log("user", User);
 
     return (
       <div>
