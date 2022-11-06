@@ -1,18 +1,28 @@
 //import { useSelector } from "react-redux";
 import { Card } from "primereact/card";
-import { Button, Col, Container } from "react-bootstrap";
+import { Col, Container, Stack } from "react-bootstrap";
+import logo from "../Img/IMG_20220708_181445.jpg";
 
 function AboutUs() {
   //const user = useSelector((s) => s.user);
   const header1 = <img alt="Card" src="images/usercard.png" />;
   const header2 = <img alt="Card" src="images/usercard.png" />;
-  const header3 = (
-    <img alt="Card" src="/public/images/IMG_20220708_181445.jpg" />
-  );
+  const header3 = <img alt="Card" src={logo} />;
   const footer1 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
   const footer2 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
-  const footer3 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
-
+  const footer3 = (
+    <Stack>
+      <div>
+        mariocollaralv@gmail.com
+        <a href="https://www.linkedin.com/in/mariocollaralvarez">
+          <i class="GrMail" style={{ fontSize: "2rem" }}></i>
+        </a>
+        <a href="https://www.linkedin.com/in/mariocollaralvarez">
+          <i class="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
+        </a>
+      </div>
+    </Stack>
+  );
   return (
     <div>
       <Container style={{ display: "flex", flexDirection: "row" }}>
