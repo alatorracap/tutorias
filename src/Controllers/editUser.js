@@ -1,4 +1,5 @@
 async function userEdit(token, user) {
+  let response = {};
   const data = await fetch(
     "http://localhost:" + process.env.REACT_APP_PORT + "/users/",
     {
@@ -17,8 +18,17 @@ async function userEdit(token, user) {
         repeatNewPassword: user[6],
       }),
     }
-  );
+  )
+    .then((res) => {
+      console.log(res);
+      response = res;
+      return res;
+    })
+    .catch((err) => {
+      console.log("caught it!", err);
+    });
   console.log("==============inside Data of user==============", data);
+  return response;
 }
 
 // async function deleteUser(token, user) {}

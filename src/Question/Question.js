@@ -1,7 +1,6 @@
 import { useParams } from "react-router-dom";
-import ListGroup from "react-bootstrap/ListGroup";
 import { useState } from "react";
-import { Alert, Col, Container, ListGroupItem, Row } from "react-bootstrap";
+import { Alert, Col, Container, Row } from "react-bootstrap";
 import useFetch from "fetch-suspense";
 import NewAnswer from "../Answers/NewAnswer";
 import { Panel } from "primereact/panel";
@@ -9,11 +8,9 @@ import { Rating } from "primereact/rating";
 
 import { OrderList } from "primereact/orderlist";
 import "./Question.css";
-import { Column } from "primereact/column";
 import { useSelector } from "react-redux";
 
 function Question() {
-  const user = useSelector((s) => s.user);
   const [showAlert, setShowAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [alertSeverity, setAlertSeverity] = useState("danger");
@@ -81,7 +78,7 @@ function Question() {
           });
           setTimeout(function () {
             window.location.reload();
-          }, 35000);
+          }, 5000);
         }
       })
       .catch((err) => {
