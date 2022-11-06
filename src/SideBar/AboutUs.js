@@ -11,12 +11,9 @@ function AboutUs() {
   const footer1 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
   const footer2 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
   const footer3 = (
-    <Stack>
+    <Stack gap={3}>
+      <div>mariocollaralv@gmail.com</div>
       <div>
-        mariocollaralv@gmail.com
-        <a href="https://www.linkedin.com/in/mariocollaralvarez">
-          <i class="GrMail" style={{ fontSize: "2rem" }}></i>
-        </a>
         <a href="https://www.linkedin.com/in/mariocollaralvarez">
           <i class="pi pi-linkedin" style={{ fontSize: "2rem" }}></i>
         </a>
