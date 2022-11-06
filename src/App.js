@@ -18,7 +18,7 @@ import NewQuestion from "./Question/NewQuestion/NewQuestion";
 import "./App.css";
 import MyQuestions from "./Question/MyQuestions";
 import QuestionEdit from "./Question/QuestionEdit";
-import AnswerEdit from "./Answers/AnswerEdit";
+// import AnswerEdit from "./Answers/AnswerEdit";
 import MyAnswers from "./Answers/MyAnswers";
 import AboutUs from "./SideBar/AboutUs";
 import TopQuestions from "./Question/TopQuestions";
@@ -45,7 +45,7 @@ function App(props) {
                   <Route path="/" element={<Questions />} />
                   <Route path="/answers/:id" element={<Answers />} />
                   {/* info de una pregunta */}
-                  <Route path="/answer/:id" element={<AnswerEdit />} />
+                  {/* <Route path="/answer/:id" element={<AnswerEdit />} /> */}
                   <Route path="/questions/:id" element={<Question />} />
                   <Route path="/questions" element={<TopQuestions />} />
                   <Route path="/question" element={<NewQuestion />} />
