@@ -109,11 +109,11 @@ function Question() {
           </Panel>
         </Col>
       </Row>
-
-      <Row>
-        <NewAnswer />
-      </Row>
-
+      {user && (
+        <Row>
+          <NewAnswer />
+        </Row>
+      )}
       <Row>
         <Col>
           {answers && Answ.votes && (
