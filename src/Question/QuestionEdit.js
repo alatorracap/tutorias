@@ -1,57 +1,117 @@
-import useFetch from "fetch-suspense";
-import { useParams } from "react-router-dom";
-
+import { useLocation, useNavigate } from "react-router-dom";
 import Form from "react-bootstrap/Form";
+import { useState } from "react";
+import { Panel } from "primereact/panel";
+import { Button, Col, Container, Row, Stack } from "react-bootstrap";
+import editQuestion from "../Controllers/editQuestion";
 
 function QuestionEdit() {
-  //* se trae el token del local storage
+  const navigate = useNavigate();
+  //*agarra el parametro pasado al enlace
+  const location = useLocation();
+  const { question } = location.state;
+  console.log(question);
+
+  const [questionTitle, setQuestionTitle] = useState(question.Title);
+  const [questionDescription, setQuestionDescription] = useState(
+    question.Question
+  );
+
+  const questionUpdate = {
+    ID: question.ID,
+    Title: questionTitle,
+    Question: questionDescription,
+  };
+
   const newData = JSON.parse(
     localStorage.getItem("redux_localstorage_simple_user")
   );
 
-  const token = newData.data.token;
-  //*agarra el parametro pasado al enlace
-  let { id } = useParams();
+  let token = "";
+  if (newData !== undefined && newData !== null && newData.data) {
+    token = newData.data.token;
+  }
 
-  const data = useFetch(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/questions/" + id,
-    {
-      headers: { Authorization: token },
-      method: "GET",
-    }
-  );
-  const fetchData = data.data.question;
-  // console.log("fetchData", fetchData);
-  const questionData = [fetchData.ID, fetchData.Title, fetchData.Question];
-  console.log("questionData", questionData);
+  const handleDeleteQuestion = async (to) => {
+    await fetch(
+      "http://localhost:" +
+        process.env.REACT_APP_PORT +
+        "/questions/" +
+        question.ID,
+      {
+        method: "DELETE",
+        headers: { Authorization: token },
+      }
+    );
+  };
 
   return (
-    <div className="editQuestion">
-      <Form>
-        <Form.Group>
-          <Form.Label>Titulo</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder={questionData[1]}
-            // value={questionData[1]}
-            onChange={(e) => {
-              questionData[1] = e.target.value;
-              console.log(e);
-            }}
-          />
-
-          <Form.Label>Pregunta</Form.Label>
-          <Form.Control
-            type="text"
-            placeholder={questionData[2]}
-            onChange={(e) => {
-              questionData[2] = e.target.value;
-              console.log(e);
-            }}
-          />
-        </Form.Group>
-      </Form>
-    </div>
+    question && (
+      <div className="editQuestion">
+        <Panel header="Edit Question">
+          <Form>
+            <Form.Group>
+              <Container>
+                <Row>
+                  <Col>
+                    <Form.Label>Titulo</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={questionTitle}
+                      onChange={(e) => {
+                        setQuestionTitle(e.target.value);
+                      }}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Form.Label>Pregunta</Form.Label>
+                    <Form.Control
+                      type="text"
+                      value={questionDescription}
+                      onChange={(e) => {
+                        setQuestionDescription(e.target.value);
+                      }}
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Stack direction="horizontal" gap={3}>
+                      <div className="ms-auto">
+                        <Button
+                          variant="secondary"
+                          onClick={(e) => {
+                            editQuestion(questionUpdate, token);
+                            navigate("/myquestions");
+                          }}
+                        >
+                          Save
+                        </Button>
+                      </div>
+                      <div>
+                        <Button
+                          variant="outline-danger"
+                          type="submit"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleDeleteQuestion();
+                            navigate("/myquestions");
+                          }}
+                        >
+                          Delete Question
+                        </Button>
+                      </div>
+                    </Stack>
+                  </Col>
+                </Row>
+              </Container>
+            </Form.Group>
+          </Form>
+        </Panel>
+      </div>
+    )
   );
 }
 
