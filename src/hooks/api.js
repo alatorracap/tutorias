@@ -47,6 +47,15 @@ export const useMyAnswer = (user_id) =>
     "GET"
   );
 
+/* export const useMyQuestions = (user_id) =>
+  useApi(
+    "http://localhost:" +
+      process.env.REACT_APP_PORT +
+      "/myquestions/" +
+      user_id,
+    "GET"
+  ); */
+
 export const useMyQuestion = (user_id) =>
   useApi(
     "http://localhost:" +

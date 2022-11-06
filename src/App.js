@@ -20,6 +20,7 @@ import MyQuestions from "./Question/MyQuestions";
 import QuestionEdit from "./Question/QuestionEdit";
 import AnswerEdit from "./Answers/AnswerEdit";
 import MyAnswers from "./Answers/MyAnswers";
+import AboutUs from "./SideBar/AboutUs";
 
 function App(props) {
   const location = useLocation();
@@ -55,6 +56,7 @@ function App(props) {
                   <Route path="/users" element={<Users />} />
                   <Route path="/users/:id" element={<User />} />
                   <Route path="/user/:id" element={<EditUser />} />
+                  <Route path="/aboutus" element={<AboutUs />} />
                 </Routes>
               </ErrorBoundary>
             </Col>

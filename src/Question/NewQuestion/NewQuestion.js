@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Button, InputGroup, Modal } from "react-bootstrap";
+import { Button, Container, InputGroup, Modal } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import AlejandriaModal from "../../Components/AlejandriaModal";
 import { useNewQuestion } from "../../hooks/api";
+import { Panel } from "primereact/panel";
 
 function NewQuestion() {
   // const newQuestion = useNewQuestion();
@@ -52,53 +53,56 @@ function NewQuestion() {
 
   return (
     <>
-      <div>New Question</div>
       {user && (
-        <Form onSubmit={handleNewQuestion}>
-          <InputGroup className="mb-3">
-            <Form.Control
-              required
-              placeholder="Title"
-              aria-label="Title"
-              aria-describedby="basic-addon1"
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </InputGroup>
-          <InputGroup className="mb-3">
-            <Form.Control
-              required
-              placeholder="Question text"
-              aria-label="Texto"
-              aria-describedby="basic-addon1"
-              onChange={(e) => setQuestion(e.target.value)}
-            />
-          </InputGroup>
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label>Technology</Form.Label>
-            <Form.Select
-              required
-              onChange={(e) => setTechnology(e.target.value)}
-              name="technology"
-            >
-              <option>Open this select menu</option>
-              {technologies.map((technology) => (
-                <option key={technology} value={technology}>
-                  {technology}
-                </option>
-              ))}
-            </Form.Select>
-          </Form.Group>
-          <Button
-            variant="primary"
-            type="submit"
+        <Container>
+          <Panel header="New Question">
+            <Form onSubmit={handleNewQuestion}>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  required
+                  placeholder="Title"
+                  aria-label="Title"
+                  aria-describedby="basic-addon1"
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </InputGroup>
+              <InputGroup className="mb-3">
+                <Form.Control
+                  required
+                  placeholder="Question text"
+                  aria-label="Texto"
+                  aria-describedby="basic-addon1"
+                  onChange={(e) => setQuestion(e.target.value)}
+                />
+              </InputGroup>
+              <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Technology</Form.Label>
+                <Form.Select
+                  required
+                  onChange={(e) => setTechnology(e.target.value)}
+                  name="technology"
+                >
+                  <option>Open this select menu</option>
+                  {technologies.map((technology) => (
+                    <option key={technology} value={technology}>
+                      {technology}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+              <Button
+                variant="secondary"
+                type="submit"
 
-            /* onClick={(e) => {
+                /* onClick={(e) => {
             userEdit(token, news);
           }} */
-          >
-            Publicar
-          </Button>
-        </Form>
+              >
+                Publish
+              </Button>
+            </Form>
+          </Panel>
+        </Container>
       )}
       {!user && <div>Inicia sesión para preguntar</div>}
     </>

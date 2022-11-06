@@ -52,6 +52,11 @@ const Sidebar = () => {
   function gotoMyAnswers() {
     return navigate("/myanswers");
   }
+
+  function gotoAboutUs() {
+    return navigate("/aboutus");
+  }
+
   return (
     // <aside
     //   className="sidebar"
@@ -146,7 +151,9 @@ const Sidebar = () => {
               padding: "20px 5px",
             }}
           >
-            About us
+            <a className="aboutUs" href="/aboutus" color="white">
+              About us
+            </a>
           </div>
         </CDBSidebarFooter>
       </CDBSidebar>

@@ -2,7 +2,6 @@ import Container from "react-bootstrap/Container";
 import { Stack } from "react-bootstrap";
 import Navbar from "react-bootstrap/Navbar";
 import NavbarLoginSignup from "../Login/NavbarLoginSignup";
-import QuestionSearch from "./QuestionSearch";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogout } from "../store";
 import { Button } from "react-bootstrap";
@@ -18,7 +17,7 @@ function AlejandriaNavbar(props) {
   return (
     <Navbar sticky="top" bg="dark" variant="dark">
       <Container fluid>
-        <Navbar.Brand href="/">Alejandria</Navbar.Brand>
+        <Navbar.Brand href="/">Alejandría</Navbar.Brand>
         {/* <Navbar.Collapse className="justify-content-end">
           <QuestionSearch />
         </Navbar.Collapse> */}

@@ -71,7 +71,7 @@ function EditUser() {
   };
   return (
     <div className="editUser">
-      <Panel header={"Edit user " + User.Username}>
+      <Panel header={"Edit user: " + User.Username}>
         <Container>
           <Form>
             <Form.Group>
@@ -94,10 +94,10 @@ function EditUser() {
               </Row>
               <Row>
                 <Col>
-                  <Form.Label>Contraseña antigua</Form.Label>
+                  <Form.Label>Password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Contraseña antigua"
+                    placeholder="Password"
                     value={oldPassword}
                     onChange={(e) => setOldPassword(e.target.value)}
                   />
@@ -106,19 +106,19 @@ function EditUser() {
               </Row>
               <Row>
                 <Col>
-                  <Form.Label>Nueva contraseña</Form.Label>
+                  <Form.Label>New Password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Nueva contraseña"
+                    placeholder="New Password"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                   />
                 </Col>
                 <Col>
-                  <Form.Label>Repita la nueva contraseña</Form.Label>
+                  <Form.Label>Repeat new password</Form.Label>
                   <Form.Control
                     type="password"
-                    placeholder="Repita la nueva contraseña"
+                    placeholder="Repeat new password"
                     value={repeatNewPassword}
                     onChange={(e) => setRepeatNewPassword(e.target.value)}
                   />
@@ -175,7 +175,7 @@ function EditUser() {
                         userEdit(token, news);
                       }}
                     >
-                      Guardar
+                      Save
                     </Button>
                   </div>
                   <div>
@@ -189,7 +189,7 @@ function EditUser() {
                         navigate("/");
                       }}
                     >
-                      Borrar usuario
+                      Delete User
                     </Button>
                   </div>
                 </Stack>
