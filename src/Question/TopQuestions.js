@@ -44,7 +44,7 @@ function TopQuestions() {
 
   const [filters, setFilters] = useState({
     global: { value: null, matchMode: FilterMatchMode.CONTAINS },
-    Title: { value: null, matchMode: FilterMatchMode.STARTS_WITH },
+    Title: { value: null, matchMode: FilterMatchMode.CONTAINS },
     Technology: { value: null, matchMode: FilterMatchMode.CONTAINS },
     QuestionDate: { value: null, matchMode: FilterMatchMode.DATE_IS },
     Answered: { value: null, matchMode: FilterMatchMode.EQUALS },
