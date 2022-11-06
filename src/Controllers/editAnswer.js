@@ -12,7 +12,10 @@ async function editAnswer(answer, token) {
         answer: answer.answer,
       }),
     }
-  );
+  ).then((res) => {
+    return res;
+  });
+  return data;
 }
 
 export default editAnswer;

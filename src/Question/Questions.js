@@ -117,8 +117,7 @@ function Questions() {
         onChange={(e) => options.filterApplyCallback(e.value)}
         itemTemplate={technologyItemTemplate}
         placeholder="Select a Technology"
-        c
-        lassName="p-column-filter"
+        className="p-column-filter"
         showClear
       />
     );

@@ -8,7 +8,6 @@ import { Rating } from "primereact/rating";
 
 import { OrderList } from "primereact/orderlist";
 import "./Question.css";
-import { useSelector } from "react-redux";
 
 function Question() {
   const [showAlert, setShowAlert] = useState(false);
@@ -77,7 +76,7 @@ function Question() {
             setTitle("Nice!");
           });
           setTimeout(function () {
-            window.location.reload();
+            if (alert) window.location.reload();
           }, 5000);
         }
       })
@@ -158,6 +157,7 @@ function Question() {
                 variant={alertSeverity}
                 onClose={() => {
                   setShowAlert(false);
+                  window.location.reload();
                 }}
                 dismissible
                 className="alert-fixed"
@@ -170,7 +170,7 @@ function Question() {
         </Row>
         <Row>
           <Col>
-            {answers && Answ.votes && (
+            {answers && (
               <OrderList
                 value={answers}
                 header="Answers"
