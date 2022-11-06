@@ -92,10 +92,6 @@ function TopQuestions() {
     console.log(filter);
   };
 
-  const titleFilterTemplate = () => {
-    return <InputText value={titleValue} onChange={handleTitleOnChange} />;
-  };
-
   const titleBodyTemplate = (rowData) => {
     return <a href={`/questions/${rowData.ID}`}> {rowData.Title}</a>;
   };
@@ -209,7 +205,6 @@ function TopQuestions() {
               filterField="Title"
               field="Title"
               style={{ minWidth: "12rem" }}
-              filterElement={titleFilterTemplate}
               body={titleBodyTemplate}
               filter
               filterPlaceholder="Search by Title"
