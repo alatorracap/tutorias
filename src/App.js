@@ -21,11 +21,10 @@ import QuestionEdit from "./Question/QuestionEdit";
 import AnswerEdit from "./Answers/AnswerEdit";
 import MyAnswers from "./Answers/MyAnswers";
 import AboutUs from "./SideBar/AboutUs";
+import TopQuestions from "./Question/TopQuestions";
 
 function App(props) {
   const location = useLocation();
-
-  console.log(window);
 
   return (
     <div className="App">
@@ -48,7 +47,7 @@ function App(props) {
                   {/* info de una pregunta */}
                   <Route path="/answer/:id" element={<AnswerEdit />} />
                   <Route path="/questions/:id" element={<Question />} />
-                  <Route path="/questions" element={<Questions />} />
+                  <Route path="/questions" element={<TopQuestions />} />
                   <Route path="/question" element={<NewQuestion />} />
                   <Route path="/question/:id" element={<QuestionEdit />} />
                   <Route path="/myquestions" element={<MyQuestions />} />

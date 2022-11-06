@@ -1,6 +1,7 @@
 async function editAnswer(answer, token) {
+  console.log(answer);
   const data = await fetch(
-    "http://localhost:" + process.env.REACT_APP_PORT + "/answers/" + answer[0],
+    "http://localhost:" + process.env.REACT_APP_PORT + "/answers/" + answer.id,
     {
       method: "PUT",
       headers: {
@@ -8,7 +9,7 @@ async function editAnswer(answer, token) {
         Authorization: token,
       },
       body: JSON.stringify({
-        answer: answer[1],
+        answer: answer.answer,
       }),
     }
   );

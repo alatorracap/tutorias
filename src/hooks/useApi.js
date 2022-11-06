@@ -32,7 +32,7 @@ function useApi(url, metodo, jsonParams) {
   useEffect(() => {
     (async () => {
       //* se trae el token del local storage
-
+      console.log("dnasdfasd");
       const res = await fetch(newUrl, {
         headers: { Authorization: token },
         method: metodo,

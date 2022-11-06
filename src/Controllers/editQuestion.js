@@ -3,16 +3,17 @@ async function editQuestion(question, token) {
     "http://localhost:" +
       process.env.REACT_APP_PORT +
       "/questions/" +
-      question[0],
+      question.ID,
     {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: token,
+        redirect: "follow",
       },
       body: JSON.stringify({
-        Title: question[1],
-        Question: question[2],
+        title: question.Title,
+        question: question.Question,
       }),
     }
   );

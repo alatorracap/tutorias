@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+//import { useSelector } from "react-redux";
 import { Card } from "primereact/card";
 import { Button, Col, Container } from "react-bootstrap";
 
@@ -9,9 +9,9 @@ function AboutUs() {
   const header3 = (
     <img alt="Card" src="/public/images/IMG_20220708_181445.jpg" />
   );
-  const footer1 = <span class="fa fa-linkedin-square" aria-hidden="true" />;
-  const footer2 = <span class="fa fa-linkedin-square" aria-hidden="true" />;
-  const footer3 = <span class="fa fa-linkedin-square" aria-hidden="true" />;
+  const footer1 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
+  const footer2 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
+  const footer3 = <span className="fa fa-linkedin-square" aria-hidden="true" />;
 
   return (
     <div>

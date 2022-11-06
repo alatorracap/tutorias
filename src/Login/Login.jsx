@@ -78,7 +78,7 @@ function Login(props) {
           <Button variant="primary" type="submit" onClick={handleLogin}>
             Log in
           </Button>
-          <p class="text-center , text-muted">
+          <p className="text-center , text-muted">
             Please register if you haven't already done so.
           </p>
         </Stack>

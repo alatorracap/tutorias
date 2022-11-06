@@ -18,7 +18,7 @@ function EditUser() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
+  const technologies = process.env.REACT_APP_TECHNOLOGY.split(",", 6);
   const roles = process.env.REACT_APP_ROLE.split(",");
 
   //* se trae el token del local storage
@@ -51,12 +51,14 @@ function EditUser() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [repeatNewPassword, setRepeatNewPassword] = useState("");
+  const [technology, setTechnology] = useState(User.Technology);
+  const [role, setRole] = useState(User.UserRole);
 
   let news = [
     User.Username,
     User.Email,
-    User.UserRole,
-    User.Technology,
+    role,
+    technology,
     oldPassword,
     newPassword,
     repeatNewPassword,
@@ -129,8 +131,8 @@ function EditUser() {
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Role</Form.Label>
                     <Form.Select
-                      value={User.UserRole}
-                      onChange={(e) => (User.UserRole = e.target.value)}
+                      value={role}
+                      onChange={(e) => setRole(e.target.value)}
                       name="userRole"
                     >
                       <option>Open this select menu</option>
@@ -146,8 +148,8 @@ function EditUser() {
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Technology</Form.Label>
                     <Form.Select
-                      value={User.Technology}
-                      onChange={(e) => (User.Technology = e.target.value)}
+                      value={technology}
+                      onChange={(e) => setTechnology(e.target.value)}
                       name="technology"
                       // disabled={userRole !== "Expert"}
                     >

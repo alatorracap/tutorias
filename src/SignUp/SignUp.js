@@ -14,7 +14,7 @@ function SignUp(props) {
   const [userRole, setUserRole] = useState("");
   const [technology, setTechnology] = useState("");
 
-  const technologies = process.env.REACT_APP_TECHNOLOGY.split(",");
+  const technologies = process.env.REACT_APP_TECHNOLOGY.split(",", 6);
   const roles = process.env.REACT_APP_ROLE.split(",");
   console.log(roles);
 
@@ -126,7 +126,7 @@ function SignUp(props) {
         <Button variant="primary" type="submit" onClick={handleSignUp}>
           Sign up
         </Button>
-        <p class="text-center , text-muted">All fields are required.</p>
+        <p className="text-center , text-muted">All fields are required.</p>
       </Stack>
     </Form>
   );

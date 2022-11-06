@@ -1,49 +1,116 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAnswers } from "../hooks/api";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import {
+  Button,
+  Col,
+  Container,
+  Form,
+  ListGroup,
+  Row,
+  Stack,
+} from "react-bootstrap";
+import editAnswer from "../Controllers/editAnswer";
+import { Panel } from "primereact/panel";
+import { useEffect, useRef } from "react";
+import { useState } from "react";
 
 function Answers() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const Answers = useAnswers(id);
+
   console.log("Answers", Answers);
+
+  useEffect(() => {
+    if (Answers) {
+      setAnswer(Answers.data.Answer);
+    }
+  }, [Answers]);
+
+  const [answer, setAnswer] = useState();
+
+  const updateAnswer = {
+    id: id,
+    answer: answer,
+  };
+
+  console.log(updateAnswer);
+
+  //* se trae el token del local storage
+  const newData = JSON.parse(
+    localStorage.getItem("redux_localstorage_simple_user")
+  );
+  const token = newData.data.token;
+
+  const handleDeleteAnswer = async (to) => {
+    console.log(updateAnswer);
+    await fetch(
+      "http://localhost:" +
+        process.env.REACT_APP_PORT +
+        "/answers/" +
+        updateAnswer.id,
+      {
+        method: "DELETE",
+        headers: { Authorization: token },
+      }
+    );
+  };
+
   return (
     <div className="answersDiv">
       {Answers && (
         <>
-          {/* <ListGroup>
-                <ListGroupItem key={index}>{q.Answer}</ListGroupItem>
-              </ListGroup> */}
-          <DataTable
-            value={Answers.data}
-            paginator
-            className="p-datatable-answers"
-            rows={10}
-            dataKey="id"
-            //filters={filters}
-            filterDisplay="row"
-            loading={false}
-            responsiveLayout="scroll"
-            //</>globalFilterFields={[
-            //"Title",
-            //"Technology",
-            //"QuestionDate",
-            //"Answered",
-            //]}
-            //header={header}
-            emptyMessage="No answers found."
-          >
-            <Column
-              header="Answers"
-              filterField="Answer"
-              field="Answer"
-              style={{ minWidth: "12rem" }}
-              //filterElement={titleFilterTemplate}
-              filter
-              filterPlaceholder="Search by Word"
-              showFilterMenu={false}
-            />
-          </DataTable>
+          {console.log(Answers.data.Answer)}
+          <Panel header={"Edit answer"}>
+            <Container>
+              <Form>
+                <Row>
+                  <Col>
+                    <Form.Group>
+                      <Form.Label>Answer</Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={answer}
+                        onChange={(e) => {
+                          setAnswer(e.target.value);
+                        }}
+                      />
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col>
+                    <Stack direction="horizontal" gap={3}>
+                      <div className="ms-auto">
+                        <Button
+                          variant="secondary"
+                          type="submit"
+                          onClick={(e) => {
+                            editAnswer(updateAnswer, token);
+                          }}
+                        >
+                          Save
+                        </Button>
+                      </div>
+                      <div>
+                        <Button
+                          variant="outline-danger"
+                          onClick={(e) => {
+                            handleDeleteAnswer();
+                            navigate("/myanswers");
+                          }}
+                        >
+                          Delete Question
+                        </Button>
+                      </div>
+                    </Stack>
+                  </Col>
+                </Row>
+              </Form>
+            </Container>
+          </Panel>
         </>
       )}
     </div>

@@ -12,7 +12,6 @@ function AlejandriaNavbar(props) {
   const user = useSelector((s) => s.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  console.log(user);
 
   return (
     <Navbar sticky="top" bg="dark" variant="dark">

@@ -1,10 +1,7 @@
 import useApi from "./useApi";
 import useFetch from "fetch-suspense";
-//const dotenv = require("dotenv");
 
 let host = "http://localhost:";
-
-// let token = "";
 
 const newData = JSON.parse(
   localStorage.getItem("redux_localstorage_simple_user")
@@ -14,8 +11,6 @@ let token = "";
 if (newData !== undefined && newData !== null && newData.data) {
   token = newData.data.token;
 }
-
-console.log("token api" + token);
 
 export const useQuestions = (filter) =>
   useApi(host + process.env.REACT_APP_PORT + "/questions/", "GET", filter);
@@ -41,26 +36,35 @@ export const useNewAnswer = (data) =>
     }),
   });
 
-export const useMyAnswer = (user_id) =>
+export const useMyAnswers = (user_id) =>
   useApi(
     "http://localhost:" + process.env.REACT_APP_PORT + "/myanswers/" + user_id,
     "GET"
   );
 
-/* export const useMyQuestions = (user_id) =>
+export const useMyAnswer = (answer_id) =>
   useApi(
     "http://localhost:" +
       process.env.REACT_APP_PORT +
-      "/myquestions/" +
-      user_id,
+      "/myanswers/" +
+      answer_id,
     "GET"
-  ); */
+  );
 
-export const useMyQuestion = (user_id) =>
+export const useMyQuestions = (user_id) =>
   useApi(
     "http://localhost:" +
       process.env.REACT_APP_PORT +
       "/questions/?User_ID=" +
       user_id,
+    "GET"
+  );
+
+export const useMyQuestion = (question_id) =>
+  useApi(
+    "http://localhost:" +
+      process.env.REACT_APP_PORT +
+      "/questions/" +
+      question_id,
     "GET"
   );

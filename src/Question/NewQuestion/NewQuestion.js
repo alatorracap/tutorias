@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Button, Container, InputGroup, Modal } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  InputGroup,
+  Modal,
+  Row,
+  Stack,
+} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Form from "react-bootstrap/Form";
 import AlejandriaModal from "../../Components/AlejandriaModal";
@@ -54,55 +62,70 @@ function NewQuestion() {
   return (
     <>
       {user && (
-        <Container>
+        <Form onSubmit={handleNewQuestion}>
           <Panel header="New Question">
-            <Form onSubmit={handleNewQuestion}>
-              <InputGroup className="mb-3">
-                <Form.Control
-                  required
-                  placeholder="Title"
-                  aria-label="Title"
-                  aria-describedby="basic-addon1"
-                  onChange={(e) => setTitle(e.target.value)}
-                />
-              </InputGroup>
-              <InputGroup className="mb-3">
-                <Form.Control
-                  required
-                  placeholder="Question text"
-                  aria-label="Texto"
-                  aria-describedby="basic-addon1"
-                  onChange={(e) => setQuestion(e.target.value)}
-                />
-              </InputGroup>
-              <Form.Group className="mb-3" controlId="formBasicPassword">
-                <Form.Label>Technology</Form.Label>
-                <Form.Select
-                  required
-                  onChange={(e) => setTechnology(e.target.value)}
-                  name="technology"
-                >
-                  <option>Open this select menu</option>
-                  {technologies.map((technology) => (
-                    <option key={technology} value={technology}>
-                      {technology}
-                    </option>
-                  ))}
-                </Form.Select>
-              </Form.Group>
-              <Button
-                variant="secondary"
-                type="submit"
-
-                /* onClick={(e) => {
-            userEdit(token, news);
-          }} */
-              >
-                Publish
-              </Button>
-            </Form>
+            <Container>
+              <Row>
+                <Col>
+                  <Form.Label>Title</Form.Label>
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      required
+                      placeholder="Title"
+                      aria-label="Title"
+                      aria-describedby="basic-addon1"
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </InputGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Label>Description</Form.Label>
+                  <InputGroup className="mb-3">
+                    <Form.Control
+                      required
+                      placeholder="Question text"
+                      aria-label="Texto"
+                      aria-describedby="basic-addon1"
+                      onChange={(e) => setQuestion(e.target.value)}
+                    />
+                  </InputGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Technology</Form.Label>
+                    <Form.Select
+                      required
+                      onChange={(e) => setTechnology(e.target.value)}
+                      name="technology"
+                    >
+                      <option>Open this select menu</option>
+                      {technologies.map((technology) => (
+                        <option key={technology} value={technology}>
+                          {technology}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Stack direction="horizontal" gap={3}>
+                    <div className="ms-auto">
+                      <Button variant="secondary" type="submit">
+                        Publish
+                      </Button>
+                    </div>
+                  </Stack>
+                </Col>
+              </Row>
+            </Container>
           </Panel>
-        </Container>
+        </Form>
       )}
       {!user && <div>Inicia sesión para preguntar</div>}
     </>
