@@ -182,12 +182,7 @@ function Questions() {
             filterDisplay="row"
             loading={false}
             responsiveLayout="scroll"
-            globalFilterFields={[
-              "Title",
-              "Technology",
-              //"QuestionDate",
-              //"Answered",
-            ]}
+            globalFilterFields={["Title", "Technology"]}
             header={header}
             emptyMessage="No questions found."
           >
@@ -213,7 +208,6 @@ function Questions() {
             <Column
               field="Technology"
               header="Technology"
-              // filterField="Technology"
               showFilterMenu={false}
               style={{ minWidth: "12rem" }}
               body={technologyBodyTemplate}
@@ -240,25 +234,6 @@ function Questions() {
               filterElement={answeredRowFilterTemplate}
               showFilterMenu={false}
             />
-            {/* <Column
-                field="status"
-                header="Status"
-                showFilterMenu={false}
-                filterMenuStyle={{ width: "14rem" }}
-                style={{ minWidth: "12rem" }}
-                body={statusBodyTemplate}
-                filter
-                filterElement={statusRowFilterTemplate}
-              />
-              <Column
-                field="verified"
-                header="Verified"
-                dataType="boolean"
-                style={{ minWidth: "6rem" }}
-                body={verifiedBodyTemplate}
-                filter
-                filterElement={verifiedRowFilterTemplate}
-              /> */}
           </DataTable>
         </>
       )}
